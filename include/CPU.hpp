@@ -22,6 +22,15 @@ struct Instruction
     uint32_t addr() { return ins & 0x3ffffff; } // Bits 25-0
 };
 
+struct LoadDelay
+{
+    uint32_t reg;
+    uint32_t data;
+
+    LoadDelay() {}
+    LoadDelay(uint32_t a, uint32_t b) {reg = a; data = b;}
+};
+
 class CPU
 {
 public:
@@ -39,27 +48,53 @@ private:
 private:
     Bus* bus;
 
+    LoadDelay pending_load;
+
     uint32_t pc = 0; // Program counter
     uint32_t ir = 0;
     uint32_t ir_next = 0;
     Instruction ins;
-    uint32_t gpreg[32] = {0xdeaddeed}; // General purpose registers
+    uint32_t gpreg_in[32] = {0xdeaddeed}; // General purpose registers (input - for load delay slot)
+    uint32_t gpreg_out[32] = {0xdeaddeed}; // General purpose registers (output - for load delay slot)
     uint32_t hi = 0; // Mult/Div registers (higher 32 bits)
     uint32_t lo = 0; // Mult/Div registers (lower 32 bits)
+
+    //COP0 registers
+    uint32_t cop0_status;
 
 private:
     std::map<uint8_t, void (CPU::*)()> lookup_op; // Lookup table for instructions
     std::map<uint8_t, void (CPU::*)()> lookup_special; // Lookup table for special instructions
+    std::map<uint8_t, void (CPU::*)()> lookup_cop0; // Lookup table for cop0 instructions
+    std::map<uint8_t, void (CPU::*)()> lookup_cop2; // Lookup table for cop1 instructions
 
     void LUI();
     void ORI();
     void SW();
     void ADDIU();
     void J();
+    void BNE();
+    void ADDI();
+    void LW();
 
     void SPECIAL();
     void SLL();
     void OR();
+
+    void COP0();
+    void MTC0();
+
+    void COP1();
+
+    void COP2();
+
+    void COP3();
+
+    //Help
+    void branch(uint32_t offset);
+    void set_reg(uint8_t reg, uint32_t data);
+    uint32_t get_reg(uint8_t reg);
+    void copy_regs();
 };
 
 #endif

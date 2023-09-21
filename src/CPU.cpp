@@ -6,18 +6,31 @@
 
 CPU::CPU()
 {
-    gpreg[0] = 0; // $zero register
+    gpreg_in[0] = 0; // $zero register
+    gpreg_out[0] = 0; //$zero register
     pc = 0xbfc00000; // Program counter
+
+    pending_load = LoadDelay(0, 0);
+
+    lookup_op[0b000000] = &CPU::SPECIAL;
+    lookup_op[0b010000] = &CPU::COP0;
+    lookup_op[0b010001] = &CPU::COP1;
+    lookup_op[0b010010] = &CPU::COP2;
+    lookup_op[0b010011] = &CPU::COP3;
 
     lookup_op[0b001111] = &CPU::LUI;
     lookup_op[0b001101] = &CPU::ORI;
     lookup_op[0b101011] = &CPU::SW;
-    lookup_op[0b000000] = &CPU::SPECIAL;
     lookup_op[0b001001] = &CPU::ADDIU;
     lookup_op[0b000010] = &CPU::J;
+    lookup_op[0b000101] = &CPU::BNE;
+    lookup_op[0b001000] = &CPU::ADDI;
+    lookup_op[0b100011] = &CPU::LW;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
+
+    lookup_cop0[0b00100] = &CPU::MTC0;
 }
 
 void CPU::load_next_ins()
@@ -53,12 +66,71 @@ void CPU::decode_and_execute()
 
 void CPU::clock()
 {
+    //All the reg data req by the instruction is "read already" : Implementation with 2 sets of registers
     load_next_ins();
+    set_reg(pending_load.reg, pending_load.data);
+    pending_load = LoadDelay(0, 0);
     decode_and_execute();
-    gpreg[0] = 0; // $zero register
+    gpreg_in[0] = 0;
+    gpreg_out[0] = 0; // $zero register
+    copy_regs();
+    //All the reg data to write is written : Implementation with 2 sets of registers
+}
+
+void CPU::branch(uint32_t offset)
+{
+    pc -= 4; //undo pc increment to point to current instruction
+    pc += offset << 2;
+}
+
+void CPU::set_reg(uint8_t reg, uint32_t data)
+{
+    gpreg_out[reg] = data;
+    gpreg_out[0] = 0; // $zero register
+}
+
+uint32_t CPU::get_reg(uint8_t reg)
+{
+    return gpreg_in[reg];
+}
+
+void CPU::copy_regs()
+{
+    //copy output registers to input
+    for(int i = 0; i < 32; i++)
+    {
+        gpreg_in[i] = gpreg_out[i];
+    }
 }
 
 //INSTRUCTIONS
+
+void CPU::COP0()
+{
+    if(lookup_cop0.find(ins.rs()) != lookup_cop0.end())
+    {
+        (this->*lookup_cop0[ins.rs()])();
+        return;
+    }
+    //throw unhandled instruction error
+    std::stringstream ss;
+    ss << "Unhandled instruction (COP0): " << std::hex << ir;
+    throw std::runtime_error(ss.str());
+}
+
+void CPU::COP1()
+{
+    //Not used in PSX
+}
+
+void CPU::COP2()
+{
+}   
+
+void CPU::COP3()
+{
+    //Not used in PSX
+}
 
 void CPU::SPECIAL()
 {
@@ -75,33 +147,41 @@ void CPU::SPECIAL()
 
 void CPU::LUI() //Load Upper Immediate
 {
-    gpreg[ins.rt()] = ins.imm() << 16;
+    set_reg(ins.rt(), ins.imm() << 16);
 }
 
 void CPU::ORI() //Bitwise OR Immediate
 {
-    gpreg[ins.rt()] = gpreg[ins.rs()] | ins.imm();
+    set_reg(ins.rt(), get_reg(ins.rs()) | ins.imm());
 }
 
 void CPU::SW() //Store Word
 {
+    //if cache is isolated
+    if(cop0_status & 0x00010000)
+    {
+        //TODO: Implement Cache
+        std::cout << "Ignoring SW as cache is isolated.\n";
+        return;
+    }
+
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
     if(offset & 0x8000)
     {
         offset |= 0xffff0000;
     }
-    write32(gpreg[ins.rs()] + offset, gpreg[ins.rt()]);
+    write32(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
 }
 
 void CPU::SLL() //Shift Left Logical
 {
-    gpreg[ins.rd()] = gpreg[ins.rt()] << ins.shamt();
+    set_reg(ins.rd(), get_reg(ins.rt()) << ins.shamt());
 }
 
 void CPU::ADDIU() //Add Immediate Unsigned
 {
-    gpreg[ins.rt()] = gpreg[ins.rs()] + ins.imm();
+    set_reg(ins.rt(), get_reg(ins.rs()) + ins.imm());
 }
 
 void CPU::J() //Unconditional Jump
@@ -111,5 +191,61 @@ void CPU::J() //Unconditional Jump
 
 void CPU::OR() //Bitwise OR
 {
-    gpreg[ins.rd()] = gpreg[ins.rs()] | gpreg[ins.rt()];
+    set_reg(ins.rd(), get_reg(ins.rs()) | get_reg(ins.rt()));
+}
+
+void CPU::MTC0() //Move to Coprocessor 0
+{
+    switch(ins.rd())
+    {
+        case 12:
+            cop0_status = get_reg(ins.rt());
+            break;
+        default:
+            //throw unhandled instruction error
+            std::stringstream ss;
+            ss << "Unhandled COP0 register (MTC0): " << ins.rd();
+            throw std::runtime_error(ss.str());
+    }
+}
+
+void CPU::BNE() //Branch on Not Equal
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    if(get_reg(ins.rs()) != get_reg(ins.rt()))
+    {
+        branch(offset);
+    }
+}
+
+void CPU::ADDI() //Add Immediate
+{
+    uint32_t extended_imm = ins.imm();
+    //pad offset with bit at 16th position
+    if(extended_imm & 0x8000)
+    {
+        extended_imm |= 0xffff0000;
+    }
+    //check for signed overflow
+    //TODO: Handle signed overflow exception
+    if(((extended_imm & 0x80000000) && (get_reg(ins.rs()) & 0x80000000) && ((get_reg(ins.rs()) + extended_imm) & 0x80000000 == 0))
+        || ((extended_imm & 0x80000000 == 0) && (get_reg(ins.rs()) & 0x80000000 == 0) && ((get_reg(ins.rs()) + extended_imm) & 0x80000000)))
+    {
+        //throw signed overflow error
+        std::stringstream ss;
+        ss << "Signed overflow in ADDI: " << std::hex << ir;
+        throw std::runtime_error(ss.str());
+    }
+
+    set_reg(ins.rt(), get_reg(ins.rs()) + extended_imm);
+}
+
+void CPU::LW() // Load Word
+{
+    pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + ins.imm()));
 }

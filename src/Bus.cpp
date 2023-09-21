@@ -46,9 +46,9 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
         throw std::runtime_error(ss.str());
     }
 
-    if(mem_ctrl.contains(addr))
+    if(mem_ctrl_range.contains(addr))
     {
-        switch(mem_ctrl.offset(addr))
+        switch(mem_ctrl_range.offset(addr))
         {
             case 0:
                 if(data != 0x1f000000)
@@ -68,15 +68,20 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
                 break;
             default:
                 std::stringstream ss;
-                ss << "Unhandled write to MEM_CTRL register: 0x" << std::hex << data;
-                throw std::runtime_error(ss.str());
+                ss << "Unhandled write to MEM_CTRL register: " << mem_ctrl_range.offset(addr);
+                // throw std::runtime_error(ss.str());
                 break;
         }
         return;
     }
-    else if(ram_size.contains(addr))
+    else if(ram_size_range.contains(addr))
     {
         //TODO: implement RAM size register
+        return;
+    }
+    else if(cache_ctrl_range.contains(addr))
+    {
+        //TODO: implement cache control register
         return;
     }
 
