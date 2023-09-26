@@ -26,9 +26,13 @@ uint32_t Bus::read32_cpu(uint32_t addr)
         throw std::runtime_error(ss.str());
     }
 
-    if (bios_range.contains(addr))
+    if(bios_range.contains(addr))
     {
         return bios->read32_cpu(bios_range.offset(addr));
+    }
+    else if(ram_range.contains(addr))
+    {
+        return ram->read32_cpu(ram_range.offset(addr));
     }
 
     //throw a runtime error with the unmapped address converted to hex
@@ -84,6 +88,11 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
     else if(cache_ctrl_range.contains(addr))
     {
         //TODO: implement cache control register
+        return;
+    }
+    else if(ram_range.contains(addr))
+    {
+        ram->write32_cpu(ram_range.offset(addr), data);
         return;
     }
 

@@ -10,6 +10,14 @@ CPU::CPU()
     gpreg_out[0] = 0; //$zero register
     pc = 0xbfc00000; // Program counter
 
+    cop0_bda = 0x00000000;
+    cop0_bpcm = 0x00000000;
+    cop0_bpc = 0x00000000;
+    cop0_dcic = 0x00000000;
+    cop0_bdam = 0x00000000;
+    cop0_status = 0x00000000;
+    cop0_cause = 0x00000000;
+
     pending_load = LoadDelay(0, 0);
 
     lookup_op[0b000000] = &CPU::SPECIAL;
@@ -200,6 +208,30 @@ void CPU::MTC0() //Move to Coprocessor 0
     {
         case 12:
             cop0_status = get_reg(ins.rt());
+            break;
+        case 3:
+        case 5:
+        case 6:
+        case 7:
+        case 9:
+        case 11:
+            //Throw runtime error if value other than 0 is written
+            if(get_reg(ins.rt()) != 0)
+            {
+                std::stringstream ss;
+                ss << "Unhandled nonzero write to COP0 register (MTC0): " << ins.rd();
+                throw std::runtime_error(ss.str());
+            }
+            break;
+        case 13:
+            cop0_cause = get_reg(ins.rt());
+            //if nonzero value written, throw error
+            if(get_reg(ins.rt()) != 0)
+            {
+                std::stringstream ss;
+                ss << "Unhandled nonzero write to COP0 CAUSE register (MTC0): " << ins.rd();
+                throw std::runtime_error(ss.str());
+            }
             break;
         default:
             //throw unhandled instruction error

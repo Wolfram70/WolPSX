@@ -61,6 +61,12 @@ private:
 
     //COP0 registers
     uint32_t cop0_status;
+    uint32_t cop0_bpc;
+    uint32_t cop0_bda;
+    uint32_t cop0_dcic;
+    uint32_t cop0_bdam;
+    uint32_t cop0_bpcm;
+    uint32_t cop0_cause;
 
 private:
     std::map<uint8_t, void (CPU::*)()> lookup_op; // Lookup table for instructions

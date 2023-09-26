@@ -8,6 +8,7 @@
 #define MEM_CTRL_RANGE 0x1f801000, 0x1f801023
 #define RAM_SIZE_RANGE 0x1f801060, 0x1f801063
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
+#define RAM_RANGE 0xa0000000, 0xa01fffff
 
 class CPU;
 class BIOS;
@@ -48,6 +49,7 @@ private:
     Range mem_ctrl_range = Range(MEM_CTRL_RANGE);
     Range ram_size_range = Range(RAM_SIZE_RANGE);
     Range cache_ctrl_range = Range(CACHE_CTRL_RANGE);
+    Range ram_range = Range(RAM_RANGE);
 };
 
 #endif
