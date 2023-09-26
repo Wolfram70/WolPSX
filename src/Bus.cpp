@@ -4,11 +4,13 @@
 #include "../include/Bus.hpp"
 #include "../include/BIOS.hpp"
 #include "../include/CPU.hpp"
+#include "../include/RAM.hpp"
 
 Bus::Bus(std::string bios_path)
 {
     cpu = new CPU();
     bios = new BIOS(bios_path);
+    ram = new RAM(2 * 1024 * 1024);
 
     cpu->connectBus(this);
 }

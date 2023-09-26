@@ -11,6 +11,7 @@
 
 class CPU;
 class BIOS;
+class RAM;
 
 struct Range
 {
@@ -41,6 +42,7 @@ public:
 private:
     CPU* cpu;
     BIOS* bios;
+    RAM *ram;
 
     Range bios_range = Range(BIOS_RANGE);
     Range mem_ctrl_range = Range(MEM_CTRL_RANGE);
