@@ -43,6 +43,7 @@ CPU::CPU()
     lookup_special[0b100101] = &CPU::OR;
     lookup_special[0b101011] = &CPU::STLU;
     lookup_special[0b100001] = &CPU::ADDU;
+    lookup_special[0b001000] = &CPU::JR;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
 }
@@ -366,4 +367,9 @@ void CPU::SB() //Store Byte
         offset |= 0xffff0000;
     }
     write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
+}
+
+void CPU::JR() //Jump Register
+{
+    pc = get_reg(ins.rs());
 }

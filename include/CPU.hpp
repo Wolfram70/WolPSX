@@ -96,6 +96,7 @@ private:
     void OR();
     void STLU();
     void ADDU();
+    void JR();
 
     void COP0();
     void MTC0();
