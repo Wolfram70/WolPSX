@@ -9,6 +9,7 @@
 #define RAM_SIZE_RANGE 0x1f801060, 0x1f801063
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
 #define RAM_RANGE 0x00000000, 0x001fffff
+#define SPU_RANGE 0x1f801c00, 0x1f801c39
 
 class CPU;
 class BIOS;
@@ -38,6 +39,9 @@ public:
     uint32_t read32_cpu(uint32_t addr);
     void write32_cpu(uint32_t addr, uint32_t data);
 
+    uint16_t read16_cpu(uint32_t addr);
+    void write16_cpu(uint32_t addr, uint16_t data);
+
     void clock();
 
 private:
@@ -50,6 +54,7 @@ private:
     Range ram_size_range = Range(RAM_SIZE_RANGE);
     Range cache_ctrl_range = Range(CACHE_CTRL_RANGE);
     Range ram_range = Range(RAM_RANGE);
+    Range spu_range = Range(SPU_RANGE);
 };
 
 #endif

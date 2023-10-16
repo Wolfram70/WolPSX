@@ -103,7 +103,7 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
                 break;
             default:
                 std::stringstream ss;
-                ss << "Unhandled write to MEM_CTRL register: " << mem_ctrl_range.offset(addr);
+                ss << "Unhandled write to MEM_CTRL register: " << addr;
                 // throw std::runtime_error(ss.str());
                 break;
         }
@@ -128,6 +128,54 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
     ss << "Unmapped address for write32_cpu: 0x" << std::hex << addr;
+    throw std::runtime_error(ss.str());
+}
+
+uint16_t Bus::read16_cpu(uint32_t addr)
+{
+    //catch unaligned accesses
+    if (addr % 2 != 0)
+    {
+        //throw a runtime error with the unaligned address converted to hex
+        std::stringstream ss;
+        ss << "Unaligned read16_cpu: 0x" << std::hex << addr;
+        throw std::runtime_error(ss.str());
+    }
+
+    //throw a runtime error with the unmapped address converted to hex
+    std::stringstream ss;
+    ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr;
+    throw std::runtime_error(ss.str());
+}
+
+void Bus::write16_cpu(uint32_t addr, uint16_t data)
+{
+    //catch unaligned accesses
+    if (addr % 2 != 0)
+    {
+        //throw a runtime error with the unaligned address converted to hex
+        std::stringstream ss;
+        ss << "Unaligned write16_cpu: 0x" << std::hex << addr;
+        throw std::runtime_error(ss.str());
+    }
+
+    if(spu_range.contains(addr))
+    {
+        switch(spu_range.offset(addr))
+        {
+            default:
+                std::stringstream ss;
+                ss << "Unhandled write16 to SPU register: " << addr;
+                // throw std::runtime_error(ss.str());
+                break;
+        }
+
+        return;
+    }
+
+    //throw a runtime error with the unmapped address converted to hex
+    std::stringstream ss;
+    ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr;
     throw std::runtime_error(ss.str());
 }
 
