@@ -90,6 +90,7 @@ private:
     void JAL();
     void ANDI();
     void SB();
+    void LB();
 
     void SPECIAL();
     void SLL();

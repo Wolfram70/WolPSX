@@ -38,6 +38,7 @@ CPU::CPU()
     lookup_op[0b000011] = &CPU::JAL;
     lookup_op[0b001100] = &CPU::ANDI;
     lookup_op[0b101000] = &CPU::SB;
+    lookup_op[0b100000] = &CPU::LB;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -372,4 +373,14 @@ void CPU::SB() //Store Byte
 void CPU::JR() //Jump Register
 {
     pc = get_reg(ins.rs());
+}
+
+void CPU::LB() //Load Byte
+{
+    uint32_t data_s = read8(get_reg(ins.rs()) + ins.imm());
+    if(data_s & 0b10000000)
+    {
+        data_s |= 0xffffff00;
+    }
+    pending_load = LoadDelay(ins.rt(), data_s);
 }
