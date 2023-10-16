@@ -46,8 +46,11 @@ CPU::CPU()
     lookup_special[0b101011] = &CPU::STLU;
     lookup_special[0b100001] = &CPU::ADDU;
     lookup_special[0b001000] = &CPU::JR;
+    lookup_special[0b100100] = &CPU::AND;
+    lookup_special[0b100000] = &CPU::ADD;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
+    lookup_cop0[0b00000] = &CPU::MFC0;
 }
 
 void CPU::load_next_ins()
@@ -398,4 +401,52 @@ void CPU::BEQ() //Branch on Equal
     {
         branch(offset);
     }
+}
+
+void CPU::MFC0() //Move from Coprocessor 0
+{
+    switch(ins.rd())
+    {
+        case 12: //Status
+            pending_load = LoadDelay(ins.rt(), cop0_status);
+            break;
+        case 13: //Cause
+            pending_load = LoadDelay(ins.rt(), cop0_cause);
+            break;
+        default:
+            //throw unhandled instruction error
+            std::stringstream ss;
+            ss << "Unhandled COP0 register (MFC0): " << ins.rd();
+            throw std::runtime_error(ss.str());
+    }
+}
+
+void CPU::AND() //Bitwise AND
+{
+    set_reg(ins.rd(), get_reg(ins.rs()) & get_reg(ins.rt()));
+}
+
+void CPU::ADD() //Add
+{
+    uint32_t extended_op1 = get_reg(ins.rt());
+    uint32_t extended_op2 = get_reg(ins.rs());
+
+    //pad offset with bit at 16th position
+    if(extended_op1 & 0x8000)
+        extended_op1 |= 0xffff0000;
+    if(extended_op2 & 0x8000)
+        extended_op2 |= 0xffff0000;
+    
+    //check for signed overflow
+    //TODO: Handle signed overflow exception
+    if(((extended_op1 & 0x80000000) && (extended_op2 & 0x80000000) && ((extended_op1 + extended_op2) & 0x80000000 == 0))
+        || ((extended_op1 & 0x80000000 == 0) && (extended_op2 & 0x80000000 == 0) && ((extended_op1 + extended_op2) & 0x80000000)))
+    {
+        //throw signed overflow error
+        std::stringstream ss;
+        ss << "Signed overflow in ADD: " << std::hex << ir;
+        throw std::runtime_error(ss.str());
+    }
+
+    set_reg(ins.rd(), extended_op1 + extended_op2);
 }

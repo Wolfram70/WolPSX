@@ -99,9 +99,12 @@ private:
     void STLU();
     void ADDU();
     void JR();
+    void AND();
+    void ADD();
 
     void COP0();
     void MTC0();
+    void MFC0();
 
     void COP1();
 
