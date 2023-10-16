@@ -12,6 +12,7 @@ class BIOS
 public:
     BIOS(std::string path);
     uint32_t read32_cpu(uint32_t offset);
+    uint8_t read8_cpu(uint32_t offset);
 
 private:
     std::vector<uint8_t> data;

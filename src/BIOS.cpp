@@ -31,3 +31,8 @@ uint32_t BIOS::read32_cpu(uint32_t offset)
 
     //TODO: add compatibility for big endian systems
 }
+
+uint8_t BIOS::read8_cpu(uint32_t offset)
+{
+    return data[offset];
+}
