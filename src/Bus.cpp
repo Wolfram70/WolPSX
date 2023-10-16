@@ -187,6 +187,11 @@ uint8_t Bus::read8_cpu(uint32_t addr)
 {
     addr &= region_mask(addr);
 
+    if(bios_range.contains(addr))
+    {
+        return bios->read32_cpu(bios_range.offset(addr));
+    }
+
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
     ss << "Unmapped address for read8_cpu: 0x" << std::hex << addr;
