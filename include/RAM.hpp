@@ -11,7 +11,7 @@ public:
     uint32_t read32_cpu(uint32_t offset);
     void write32_cpu(uint32_t offset, uint32_t data);
 private:
-     std::vector<uint8_t> data;
+    std::vector<uint8_t> data;
 };
 
 #endif
