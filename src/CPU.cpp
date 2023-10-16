@@ -37,6 +37,8 @@ CPU::CPU()
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
+    lookup_special[0b101011] = &CPU::STLU;
+    lookup_special[0b100001] = &CPU::ADDU;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
 }
@@ -280,4 +282,14 @@ void CPU::ADDI() //Add Immediate
 void CPU::LW() // Load Word
 {
     pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + ins.imm()));
+}
+
+void CPU::STLU() //Set on Less Than Unsigned
+{
+    set_reg(ins.rd(), get_reg(ins.rs()) < get_reg(ins.rt()));
+}
+
+void CPU::ADDU() //Add Unsigned
+{
+    set_reg(ins.rd(), get_reg(ins.rs()) + get_reg(ins.rt()));
 }

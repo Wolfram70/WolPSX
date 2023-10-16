@@ -86,6 +86,8 @@ private:
     void SPECIAL();
     void SLL();
     void OR();
+    void STLU();
+    void ADDU();
 
     void COP0();
     void MTC0();
