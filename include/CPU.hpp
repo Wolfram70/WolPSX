@@ -85,6 +85,7 @@ private:
     void ADDI();
     void LW();
     void SH();
+    void JAL();
 
     void SPECIAL();
     void SLL();

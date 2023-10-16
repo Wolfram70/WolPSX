@@ -35,6 +35,7 @@ CPU::CPU()
     lookup_op[0b001000] = &CPU::ADDI;
     lookup_op[0b100011] = &CPU::LW;
     lookup_op[0b101001] = &CPU::SH;
+    lookup_op[0b000011] = &CPU::JAL;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -322,4 +323,11 @@ void CPU::SH() //Store Halfword
         offset |= 0xffff0000;
     }
     write16(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
+}
+
+void CPU::JAL() //Jump and Link
+{
+    uint32_t ra = pc;
+    pc = (pc & 0xf0000000) | (ins.addr() << 2);
+    set_reg(31, ra);
 }
