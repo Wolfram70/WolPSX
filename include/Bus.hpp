@@ -4,11 +4,11 @@
 #include <stdint.h>
 #include <string>
 
-#define BIOS_RANGE 0xbfc00000, 0xbfc7ffff
+#define BIOS_RANGE 0x1fc00000, 0x1fc7ffff
 #define MEM_CTRL_RANGE 0x1f801000, 0x1f801023
 #define RAM_SIZE_RANGE 0x1f801060, 0x1f801063
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
-#define RAM_RANGE 0xa0000000, 0xa01fffff
+#define RAM_RANGE 0x00000000, 0x001fffff
 
 class CPU;
 class BIOS;

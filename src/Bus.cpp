@@ -15,6 +15,31 @@ Bus::Bus(std::string bios_path)
     cpu->connectBus(this);
 }
 
+uint32_t region_mask(uint32_t addr)
+{
+    switch(addr >> 29)
+    {
+        case 0:
+            return 0x7fffffff; //KUSEG
+        case 1:
+            return 0x7fffffff; //KUSEG
+        case 2:
+            return 0x7fffffff; //KUSEG
+        case 3:
+            return 0x7fffffff; //KUSEG
+        case 4:
+            return 0x1fffffff; //KSEG0
+        case 5:
+            return 0x1fffffff; //KSEG1
+        case 6:
+            return 0xffffffff; //KSEG2
+        case 7:
+            return 0xffffffff; //KSEG2
+        default:
+            return 0x00000000; //Should never happen
+    }
+}
+
 uint32_t Bus::read32_cpu(uint32_t addr)
 {
     //catch unaligned accesses
@@ -25,6 +50,8 @@ uint32_t Bus::read32_cpu(uint32_t addr)
         ss << "Unaligned read32_cpu: 0x" << std::hex << addr;
         throw std::runtime_error(ss.str());
     }
+
+    addr &= region_mask(addr);
 
     if(bios_range.contains(addr))
     {
@@ -51,6 +78,8 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
         ss << "Unaligned write32_cpu: 0x" << std::hex << addr;
         throw std::runtime_error(ss.str());
     }
+
+    addr &= region_mask(addr);
 
     if(mem_ctrl_range.contains(addr))
     {
