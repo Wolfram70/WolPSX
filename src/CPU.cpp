@@ -37,6 +37,7 @@ CPU::CPU()
     lookup_op[0b101001] = &CPU::SH;
     lookup_op[0b000011] = &CPU::JAL;
     lookup_op[0b001100] = &CPU::ANDI;
+    lookup_op[0b101000] = &CPU::SB;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -72,6 +73,16 @@ uint16_t CPU::read16(uint32_t addr)
 void CPU::write16(uint32_t addr, uint16_t data)
 {
     return bus->write16_cpu(addr, data);
+}
+
+uint8_t CPU::read8(uint32_t addr)
+{
+    return bus->read8_cpu(addr);
+}
+
+void CPU::write8(uint32_t addr, uint8_t data)
+{
+    return bus->write8_cpu(addr, data);
 }
 
 void CPU::decode_and_execute()
@@ -336,4 +347,23 @@ void CPU::JAL() //Jump and Link
 void CPU::ANDI() //Bitwise AND Immediate
 {
     set_reg(ins.rt(), get_reg(ins.rs()) & ins.imm());
+}
+
+void CPU::SB() //Store Byte
+{
+    //if cache is isolated
+    if(cop0_status & 0x00010000)
+    {
+        //TODO: Implement Cache
+        std::cout << "Ignoring SB as cache is isolated.\n";
+        return;
+    }
+
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
 }
