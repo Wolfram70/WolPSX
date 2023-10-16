@@ -44,6 +44,8 @@ private:
 
     uint32_t read32(uint32_t addr);
     void write32(uint32_t addr, uint32_t data);
+    uint16_t read16(uint32_t addr);
+    void write16(uint32_t addr, uint16_t data);
 
 private:
     Bus* bus;
@@ -82,6 +84,7 @@ private:
     void BNE();
     void ADDI();
     void LW();
+    void SH();
 
     void SPECIAL();
     void SLL();

@@ -34,6 +34,7 @@ CPU::CPU()
     lookup_op[0b000101] = &CPU::BNE;
     lookup_op[0b001000] = &CPU::ADDI;
     lookup_op[0b100011] = &CPU::LW;
+    lookup_op[0b101001] = &CPU::SH;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -59,6 +60,16 @@ uint32_t CPU::read32(uint32_t addr)
 void CPU::write32(uint32_t addr, uint32_t data)
 {
     bus->write32_cpu(addr, data);
+}
+
+uint16_t CPU::read16(uint32_t addr)
+{
+    return bus->read16_cpu(addr);
+}
+
+void CPU::write16(uint32_t addr, uint16_t data)
+{
+    return bus->write16_cpu(addr, data);
 }
 
 void CPU::decode_and_execute()
@@ -292,4 +303,23 @@ void CPU::STLU() //Set on Less Than Unsigned
 void CPU::ADDU() //Add Unsigned
 {
     set_reg(ins.rd(), get_reg(ins.rs()) + get_reg(ins.rt()));
+}
+
+void CPU::SH() //Store Halfword
+{
+    //if cache is isolated
+    if(cop0_status & 0x00010000)
+    {
+        //TODO: Implement Cache
+        std::cout << "Ignoring SH as cache is isolated.\n";
+        return;
+    }
+
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    write16(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
 }
