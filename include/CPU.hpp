@@ -91,6 +91,7 @@ private:
     void ANDI();
     void SB();
     void LB();
+    void BEQ();
 
     void SPECIAL();
     void SLL();

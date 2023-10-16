@@ -39,6 +39,7 @@ CPU::CPU()
     lookup_op[0b001100] = &CPU::ANDI;
     lookup_op[0b101000] = &CPU::SB;
     lookup_op[0b100000] = &CPU::LB;
+    lookup_op[0b000100] = &CPU::BEQ;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -383,4 +384,18 @@ void CPU::LB() //Load Byte
         data_s |= 0xffffff00;
     }
     pending_load = LoadDelay(ins.rt(), data_s);
+}
+
+void CPU::BEQ() //Branch on Equal
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    if(get_reg(ins.rs()) == get_reg(ins.rt()))
+    {
+        branch(offset);
+    }
 }
