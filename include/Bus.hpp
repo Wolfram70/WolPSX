@@ -10,7 +10,8 @@
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
 #define RAM_RANGE 0x00000000, 0x007fffff
 #define SPU_RANGE 0x1f801c00, 0x1f801ffc
-#define EXPANSION2_RANGE 0x1f802000, 0x1f802fff
+#define EXPANSION2_RANGE 0x1f802000, 0x1f803fff
+#define EXPANSION1_RANGE 0x1f000000, 0x1f7fffff
 
 class CPU;
 class BIOS;
@@ -60,6 +61,7 @@ private:
     Range ram_range = Range(RAM_RANGE);
     Range spu_range = Range(SPU_RANGE);
     Range expansion2_range = Range(EXPANSION2_RANGE);
+    Range expansion1_range = Range(EXPANSION1_RANGE);
 };
 
 #endif

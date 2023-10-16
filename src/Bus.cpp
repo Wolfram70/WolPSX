@@ -191,6 +191,15 @@ uint8_t Bus::read8_cpu(uint32_t addr)
     {
         return bios->read32_cpu(bios_range.offset(addr));
     }
+    else if(expansion1_range.contains(addr))
+    {
+        //TODO: Implement Expansion Region 1
+        return 0xff;
+    }
+    else if(ram_range.contains(addr))
+    {
+        return ram->read8_cpu(ram_range.offset(addr) & 0x001fffff);
+    }
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
@@ -206,6 +215,10 @@ void Bus::write8_cpu(uint32_t addr, uint8_t data)
     {
         std::cout << "Ignoring write8 to Expansion 2" << std::endl;
         return;
+    }
+    else if(ram_range.contains(addr))
+    {
+        return ram->write8_cpu(ram_range.offset(addr) & 0x001fffff, data);
     }
 
     //throw a runtime error with the unmapped address converted to hex
