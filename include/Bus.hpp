@@ -12,6 +12,7 @@
 #define SPU_RANGE 0x1f801c00, 0x1f801ffc
 #define EXPANSION2_RANGE 0x1f802000, 0x1f803fff
 #define EXPANSION1_RANGE 0x1f000000, 0x1f7fffff
+#define INTERRUPT_RANGE 0x1f801070, 0x1f801077
 
 class CPU;
 class BIOS;
@@ -62,6 +63,7 @@ private:
     Range spu_range = Range(SPU_RANGE);
     Range expansion2_range = Range(EXPANSION2_RANGE);
     Range expansion1_range = Range(EXPANSION1_RANGE);
+    Range interrupt_range = Range(INTERRUPT_RANGE);
 };
 
 #endif

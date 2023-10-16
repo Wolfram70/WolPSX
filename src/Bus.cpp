@@ -124,6 +124,12 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
         ram->write32_cpu(ram_range.offset(addr) & 0x001fffff, data);
         return;
     }
+    else if(interrupt_range.contains(addr))
+    {
+        //Implement peripherals and interrupts
+        std::cout << "Ignoring write32 to Interrupt Register" << std::endl;
+        return;
+    }
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;

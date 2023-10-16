@@ -92,6 +92,8 @@ private:
     void SB();
     void LB();
     void BEQ();
+    void BGTZ();
+    void BLEZ();
 
     void SPECIAL();
     void SLL();

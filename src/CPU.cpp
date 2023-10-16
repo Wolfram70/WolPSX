@@ -40,6 +40,8 @@ CPU::CPU()
     lookup_op[0b101000] = &CPU::SB;
     lookup_op[0b100000] = &CPU::LB;
     lookup_op[0b000100] = &CPU::BEQ;
+    lookup_op[0b000111] = &CPU::BGTZ;
+    lookup_op[0b000110] = &CPU::BLEZ;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -120,7 +122,12 @@ void CPU::clock()
 void CPU::branch(uint32_t offset)
 {
     pc -= 4; //undo pc increment to point to current instruction
-    pc += offset << 2;
+    uint32_t multiplied = offset << 2;
+    if(multiplied & 0x80000000 != offset & 0x80000000)
+    {
+        std::cout << "MISTAKE!";
+    }
+    pc += multiplied;
 }
 
 void CPU::set_reg(uint8_t reg, uint32_t data)
@@ -430,12 +437,6 @@ void CPU::ADD() //Add
 {
     uint32_t extended_op1 = get_reg(ins.rt());
     uint32_t extended_op2 = get_reg(ins.rs());
-
-    //pad offset with bit at 16th position
-    if(extended_op1 & 0x8000)
-        extended_op1 |= 0xffff0000;
-    if(extended_op2 & 0x8000)
-        extended_op2 |= 0xffff0000;
     
     //check for signed overflow
     //TODO: Handle signed overflow exception
@@ -449,4 +450,32 @@ void CPU::ADD() //Add
     }
 
     set_reg(ins.rd(), extended_op1 + extended_op2);
+}
+
+void CPU::BGTZ() //Branch on Greater Than Zero
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    if(int32_t(get_reg(ins.rs())) > 0)
+    {
+        branch(offset);
+    }
+}
+
+void CPU::BLEZ() //Branch on Less Than or Equal to Zero
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    if(int32_t(get_reg(ins.rs())) <= 0)
+    {
+        branch(offset);
+    }
 }
