@@ -36,6 +36,7 @@ CPU::CPU()
     lookup_op[0b100011] = &CPU::LW;
     lookup_op[0b101001] = &CPU::SH;
     lookup_op[0b000011] = &CPU::JAL;
+    lookup_op[0b001100] = &CPU::ANDI;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -330,4 +331,9 @@ void CPU::JAL() //Jump and Link
     uint32_t ra = pc;
     pc = (pc & 0xf0000000) | (ins.addr() << 2);
     set_reg(31, ra);
+}
+
+void CPU::ANDI() //Bitwise AND Immediate
+{
+    set_reg(ins.rt(), get_reg(ins.rs()) & ins.imm());
 }

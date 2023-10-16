@@ -86,6 +86,7 @@ private:
     void LW();
     void SH();
     void JAL();
+    void ANDI();
 
     void SPECIAL();
     void SLL();
