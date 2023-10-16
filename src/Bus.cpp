@@ -20,13 +20,13 @@ uint32_t region_mask(uint32_t addr)
     switch(addr >> 29)
     {
         case 0:
-            return 0x7fffffff; //KUSEG
+            return 0x1fffffff; //KUSEG
         case 1:
-            return 0x7fffffff; //KUSEG
+            return 0x1fffffff; //KUSEG
         case 2:
-            return 0x7fffffff; //KUSEG
+            return 0x1fffffff; //KUSEG
         case 3:
-            return 0x7fffffff; //KUSEG
+            return 0x1fffffff; //KUSEG
         case 4:
             return 0x1fffffff; //KSEG0
         case 5:
@@ -59,7 +59,7 @@ uint32_t Bus::read32_cpu(uint32_t addr)
     }
     else if(ram_range.contains(addr))
     {
-        return ram->read32_cpu(ram_range.offset(addr));
+        return ram->read32_cpu(ram_range.offset(addr) & 0x001fffff);
     }
 
     //throw a runtime error with the unmapped address converted to hex
@@ -121,7 +121,7 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
     }
     else if(ram_range.contains(addr))
     {
-        ram->write32_cpu(ram_range.offset(addr), data);
+        ram->write32_cpu(ram_range.offset(addr) & 0x001fffff, data);
         return;
     }
 
@@ -175,7 +175,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for write16_cpu: 0x" << std::hex << addr;
     throw std::runtime_error(ss.str());
 }
 

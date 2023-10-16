@@ -8,8 +8,8 @@
 #define MEM_CTRL_RANGE 0x1f801000, 0x1f801023
 #define RAM_SIZE_RANGE 0x1f801060, 0x1f801063
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
-#define RAM_RANGE 0x00000000, 0x001fffff
-#define SPU_RANGE 0x1f801c00, 0x1f801c39
+#define RAM_RANGE 0x00000000, 0x007fffff
+#define SPU_RANGE 0x1f801c00, 0x1f801ffc
 
 class CPU;
 class BIOS;
