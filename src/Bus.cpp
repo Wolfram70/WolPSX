@@ -142,6 +142,8 @@ uint16_t Bus::read16_cpu(uint32_t addr)
         throw std::runtime_error(ss.str());
     }
 
+    addr &= region_mask(addr);
+
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
     ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr;
@@ -158,6 +160,8 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
         ss << "Unaligned write16_cpu: 0x" << std::hex << addr;
         throw std::runtime_error(ss.str());
     }
+
+    addr &= region_mask(addr);
 
     if(spu_range.contains(addr))
     {
@@ -176,6 +180,32 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
     ss << "Unmapped address for write16_cpu: 0x" << std::hex << addr;
+    throw std::runtime_error(ss.str());
+}
+
+uint8_t Bus::read8_cpu(uint32_t addr)
+{
+    addr &= region_mask(addr);
+
+    //throw a runtime error with the unmapped address converted to hex
+    std::stringstream ss;
+    ss << "Unmapped address for read8_cpu: 0x" << std::hex << addr;
+    throw std::runtime_error(ss.str());
+}
+
+void Bus::write8_cpu(uint32_t addr, uint8_t data)
+{
+    addr &= region_mask(addr);
+
+    if(expansion2_range.contains(addr))
+    {
+        std::cout << "Ignoring write8 to Expansion 2" << std::endl;
+        return;
+    }
+
+    //throw a runtime error with the unmapped address converted to hex
+    std::stringstream ss;
+    ss << "Unmapped address for write8_cpu: 0x" << std::hex << addr;
     throw std::runtime_error(ss.str());
 }
 

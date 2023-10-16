@@ -10,6 +10,7 @@
 #define CACHE_CTRL_RANGE 0xfffe0130, 0xfffe0133
 #define RAM_RANGE 0x00000000, 0x007fffff
 #define SPU_RANGE 0x1f801c00, 0x1f801ffc
+#define EXPANSION2_RANGE 0x1f802000, 0x1f802fff
 
 class CPU;
 class BIOS;
@@ -42,6 +43,9 @@ public:
     uint16_t read16_cpu(uint32_t addr);
     void write16_cpu(uint32_t addr, uint16_t data);
 
+    uint8_t read8_cpu(uint32_t addr);
+    void write8_cpu(uint32_t addr, uint8_t data);
+
     void clock();
 
 private:
@@ -55,6 +59,7 @@ private:
     Range cache_ctrl_range = Range(CACHE_CTRL_RANGE);
     Range ram_range = Range(RAM_RANGE);
     Range spu_range = Range(SPU_RANGE);
+    Range expansion2_range = Range(EXPANSION2_RANGE);
 };
 
 #endif
