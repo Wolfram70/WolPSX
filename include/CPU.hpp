@@ -104,6 +104,7 @@ private:
     void JR();
     void AND();
     void ADD();
+    void JALR();
 
     void COP0();
     void MTC0();

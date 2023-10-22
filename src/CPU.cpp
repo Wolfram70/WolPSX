@@ -51,6 +51,7 @@ CPU::CPU()
     lookup_special[0b001000] = &CPU::JR;
     lookup_special[0b100100] = &CPU::AND;
     lookup_special[0b100000] = &CPU::ADD;
+    lookup_special[0b001001] = &CPU::JALR;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
@@ -110,7 +111,9 @@ void CPU::decode_and_execute()
 void CPU::clock()
 {
     //All the reg data req by the instruction is "read already" : Implementation with 2 sets of registers
+    // std::cout << "PC: " << std::hex << pc << "\n";
     load_next_ins();
+    // std::cout << "Instruction: " << std::hex << ir << "\n";
     set_reg(pending_load.reg, pending_load.data);
     pending_load = LoadDelay(0, 0);
     decode_and_execute();
@@ -229,7 +232,13 @@ void CPU::SLL() //Shift Left Logical
 
 void CPU::ADDIU() //Add Immediate Unsigned
 {
-    set_reg(ins.rt(), get_reg(ins.rs()) + ins.imm());
+    uint32_t data_se = ins.imm();
+    //pad offset with bit at 16th position
+    if(data_se & 0x8000)
+    {
+        data_se |= 0xffff0000;
+    }
+    set_reg(ins.rt(), get_reg(ins.rs()) + data_se);
 }
 
 void CPU::J() //Unconditional Jump
@@ -319,7 +328,14 @@ void CPU::ADDI() //Add Immediate
 
 void CPU::LW() // Load Word
 {
-    pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + ins.imm()));
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+
+    pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + offset));
 }
 
 void CPU::STLU() //Set on Less Than Unsigned
@@ -348,7 +364,7 @@ void CPU::SH() //Store Halfword
     {
         offset |= 0xffff0000;
     }
-    write16(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
+    write16(get_reg(ins.rs()) + offset, get_reg(ins.rt()) & 0xffff);
 }
 
 void CPU::JAL() //Jump and Link
@@ -379,7 +395,7 @@ void CPU::SB() //Store Byte
     {
         offset |= 0xffff0000;
     }
-    write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
+    write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()) & 0xff);
 }
 
 void CPU::JR() //Jump Register
@@ -389,7 +405,13 @@ void CPU::JR() //Jump Register
 
 void CPU::LB() //Load Byte
 {
-    uint32_t data_s = read8(get_reg(ins.rs()) + ins.imm());
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    uint32_t data_s = read8(get_reg(ins.rs()) + offset);
     if(data_s & 0b10000000)
     {
         data_s |= 0xffffff00;
@@ -483,5 +505,19 @@ void CPU::BLEZ() //Branch on Less Than or Equal to Zero
 
 void CPU::LBU() //Load Byte Unsigned
 {
-    pending_load = LoadDelay(ins.rt(), (uint32_t) read8(get_reg(ins.rs()) + ins.imm()));
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+    {
+        offset |= 0xffff0000;
+    }
+    uint32_t data = read8(get_reg(ins.rs()) + offset);
+    pending_load = LoadDelay(ins.rt(), data);
+}
+
+void CPU::JALR() //Jump and Link Register
+{
+    uint32_t ra = pc;
+    pc = get_reg(ins.rs());
+    set_reg(ins.rd(), ra);
 }
