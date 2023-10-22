@@ -51,6 +51,7 @@ uint32_t Bus::read32_cpu(uint32_t addr)
         throw std::runtime_error(ss.str());
     }
 
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     if(bios_range.contains(addr))
@@ -64,7 +65,7 @@ uint32_t Bus::read32_cpu(uint32_t addr)
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for read32_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for read32_cpu: 0x" << std::hex << addr_og;
     throw std::runtime_error(ss.str());
 }
 
@@ -79,6 +80,7 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
         throw std::runtime_error(ss.str());
     }
 
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     if(mem_ctrl_range.contains(addr))
@@ -133,7 +135,7 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for write32_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for write32_cpu: 0x" << std::hex << addr_og;
     throw std::runtime_error(ss.str());
 }
 
@@ -148,11 +150,12 @@ uint16_t Bus::read16_cpu(uint32_t addr)
         throw std::runtime_error(ss.str());
     }
 
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for read16_cpu: 0x" << std::hex << addr_og;
     throw std::runtime_error(ss.str());
 }
 
@@ -167,6 +170,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
         throw std::runtime_error(ss.str());
     }
 
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     if(spu_range.contains(addr))
@@ -175,7 +179,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
         {
             default:
                 std::stringstream ss;
-                ss << "Unhandled write16 to SPU register: " << addr;
+                ss << "Unhandled write16 to SPU register: " << addr_og;
                 // throw std::runtime_error(ss.str());
                 break;
         }
@@ -191,6 +195,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
 
 uint8_t Bus::read8_cpu(uint32_t addr)
 {
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     if(bios_range.contains(addr))
@@ -209,12 +214,13 @@ uint8_t Bus::read8_cpu(uint32_t addr)
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for read8_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for read8_cpu: 0x" << std::hex << addr_og;
     throw std::runtime_error(ss.str());
 }
 
 void Bus::write8_cpu(uint32_t addr, uint8_t data)
 {
+    uint32_t addr_og = addr;
     addr &= region_mask(addr);
 
     if(expansion2_range.contains(addr))
@@ -229,7 +235,7 @@ void Bus::write8_cpu(uint32_t addr, uint8_t data)
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
-    ss << "Unmapped address for write8_cpu: 0x" << std::hex << addr;
+    ss << "Unmapped address for write8_cpu: 0x" << std::hex << addr_og;
     throw std::runtime_error(ss.str());
 }
 
