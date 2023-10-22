@@ -42,6 +42,7 @@ CPU::CPU()
     lookup_op[0b000100] = &CPU::BEQ;
     lookup_op[0b000111] = &CPU::BGTZ;
     lookup_op[0b000110] = &CPU::BLEZ;
+    lookup_op[0b100100] = &CPU::LBU;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -478,4 +479,9 @@ void CPU::BLEZ() //Branch on Less Than or Equal to Zero
     {
         branch(offset);
     }
+}
+
+void CPU::LBU() //Load Byte Unsigned
+{
+    pending_load = LoadDelay(ins.rt(), (uint32_t) read8(get_reg(ins.rs()) + ins.imm()));
 }
