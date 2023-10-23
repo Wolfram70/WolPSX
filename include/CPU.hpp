@@ -95,16 +95,19 @@ private:
     void BGTZ();
     void BLEZ();
     void LBU();
+    void SLTI();
 
     void SPECIAL();
     void SLL();
     void OR();
-    void STLU();
+    void SLTU();
     void ADDU();
     void JR();
     void AND();
     void ADD();
     void JALR();
+    void SRA();
+    void SUBU();
 
     void BLGE();
     void BLTZ();

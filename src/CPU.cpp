@@ -44,15 +44,18 @@ CPU::CPU()
     lookup_op[0b000110] = &CPU::BLEZ;
     lookup_op[0b100100] = &CPU::LBU;
     lookup_op[0b000001] = &CPU::BLGE;
+    lookup_op[0b001010] = &CPU::SLTI;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
-    lookup_special[0b101011] = &CPU::STLU;
+    lookup_special[0b101011] = &CPU::SLTU;
     lookup_special[0b100001] = &CPU::ADDU;
     lookup_special[0b001000] = &CPU::JR;
     lookup_special[0b100100] = &CPU::AND;
     lookup_special[0b100000] = &CPU::ADD;
     lookup_special[0b001001] = &CPU::JALR;
+    lookup_special[0b000011] = &CPU::SRA;
+    lookup_special[0b100011] = &CPU::SUBU;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
@@ -339,7 +342,7 @@ void CPU::LW() // Load Word
     pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + offset));
 }
 
-void CPU::STLU() //Set on Less Than Unsigned
+void CPU::SLTU() //Set on Less Than Unsigned
 {
     set_reg(ins.rd(), get_reg(ins.rs()) < get_reg(ins.rt()));
 }
@@ -590,4 +593,32 @@ void CPU::BGEZAL() //Branch on Greater Than or Equal to Zero And Link
         branch(offset);
         set_reg(31, ra);
     }
+}
+
+void CPU::SLTI() //Set on Less Than Immediate
+{
+    uint32_t imm_se = ins.imm();
+    //pad offset with bit at 16th position
+    if(imm_se & 0x8000)
+        imm_se |= 0xffff0000;
+    uint32_t val = int32_t(get_reg(ins.rs())) < int32_t(imm_se);
+    set_reg(ins.rt(), val);
+}
+
+void CPU::SRA() //Shift Right Arithmetic
+{
+    uint32_t data = get_reg(ins.rt());
+    uint32_t shamt = ins.shamt();
+    uint32_t sign_bit = data & 0x80000000;
+    for(int i = 0; i < shamt; i++)
+    {
+        data >>= 1;
+        data |= sign_bit;
+    }
+    set_reg(ins.rd(), data);
+}
+
+void CPU::SUBU() //Subtract Unsigned
+{
+    set_reg(ins.rd(), get_reg(ins.rs()) - get_reg(ins.rt()));
 }
