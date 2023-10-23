@@ -43,6 +43,7 @@ CPU::CPU()
     lookup_op[0b000111] = &CPU::BGTZ;
     lookup_op[0b000110] = &CPU::BLEZ;
     lookup_op[0b100100] = &CPU::LBU;
+    lookup_op[0b000001] = &CPU::BLGE;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -520,4 +521,73 @@ void CPU::JALR() //Jump and Link Register
     uint32_t ra = pc;
     pc = get_reg(ins.rs());
     set_reg(ins.rd(), ra);
+}
+
+void CPU::BLGE() //Choose between BLTZAL, BGEZAL, BLTZ, BGEZ
+{
+    //check if the 16th bit of the instruction is set
+    if(ir & 0x00010000)
+    {
+        //check if the 20th bit of the instruction is set
+        if(ir & 0x00100000)
+            BLTZAL();
+        else
+            BLTZ();
+    }
+    else
+    {
+        //check if the 20th bit of the instruction is set
+        if(ir & 0x00100000)
+            BGEZAL();
+        else
+            BGEZ();
+    }
+}
+
+void CPU::BLTZ() //Branch on Less Than Zero
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+        offset |= 0xffff0000;
+    if(int32_t(get_reg(ins.rs())) < 0)
+        branch(offset);
+}
+
+void CPU::BLTZAL() //Branch on Less Than Zero And Link
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+        offset |= 0xffff0000;
+    if(int32_t(get_reg(ins.rs())) < 0)
+    {
+        uint32_t ra = pc;
+        branch(offset);
+        set_reg(31, ra);
+    }
+}
+
+void CPU::BGEZ() //Branch on Greater Than or Equal to Zero
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+        offset |= 0xffff0000;
+    if(int32_t(get_reg(ins.rs())) >= 0)
+        branch(offset);
+}
+
+void CPU::BGEZAL() //Branch on Greater Than or Equal to Zero And Link
+{
+    uint32_t offset = ins.imm();
+    //pad offset with bit at 16th position
+    if(offset & 0x8000)
+        offset |= 0xffff0000;
+    if(int32_t(get_reg(ins.rs())) >= 0)
+    {
+        uint32_t ra = pc;
+        branch(offset);
+        set_reg(31, ra);
+    }
 }

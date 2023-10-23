@@ -106,6 +106,12 @@ private:
     void ADD();
     void JALR();
 
+    void BLGE();
+    void BLTZ();
+    void BGEZ();
+    void BGEZAL();
+    void BLTZAL();
+
     void COP0();
     void MTC0();
     void MFC0();
