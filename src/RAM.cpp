@@ -5,7 +5,7 @@
 
 RAM::RAM(uint32_t size)
 {
-    data.resize(size);
+    data = std::vector<uint8_t>(size, 0xca);
 }
 
 uint32_t RAM::read32_cpu(uint32_t offset)
