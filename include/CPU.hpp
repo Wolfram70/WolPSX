@@ -6,25 +6,90 @@
 
 class Bus;
 
+/**
+ * @brief Structure to access different parts of an instruction by value
+ * 
+ */
 struct Instruction
 {
     uint32_t ins;
 
     Instruction() {}
     Instruction(uint32_t ins) : ins(ins) {}
-    uint32_t opcode() { return ins >> 26; } // Bits 31-26
-    uint32_t rs() { return (ins >> 21) & 0x1f; } // Bits 25-21
-    uint32_t rt() { return (ins >> 16) & 0x1f; } // Bits 20-16
-    uint32_t rd() { return (ins >> 11) & 0x1f; } // Bits 15-11
-    uint32_t shamt() { return (ins >> 6) & 0x1f; } // Bits 10-6
-    uint32_t funct() { return ins & 0x3f; } // Bits 5-0
+
+    /**
+     * @brief Opcode of the instruction. Size: 6 bits [31-26]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t opcode() { return ins >> 26; }
+
+    /**
+     * @brief Source register for the instruction. Size: 5 bits [25-21]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t rs() { return (ins >> 21) & 0x1f; }
+
+    /**
+     * @brief Target register for the instruction. Size: 5 bits [20-16]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t rt() { return (ins >> 16) & 0x1f; }
+
+    /**
+     * @brief Destination register for the instruction. Size: 5 bits [15-11]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t rd() { return (ins >> 11) & 0x1f; }
+
+    /**
+     * @brief Shift amount for the instruction. Size: 5 bits [10-6]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t shamt() { return (ins >> 6) & 0x1f; }
+
+    /**
+     * @brief Function field for the instruction. Used to look up operation in the case of 'special' instructions (Opcode = 0h00). Size: 6 bits [5-0]
+     * 
+     * @return uint32_t 
+     */
+    uint32_t funct() { return ins & 0x3f; }
+
+    /**
+     * @brief Immediate value for the instruction. Size: 16 bits [15-0]
+     * 
+     * @return uint32_t 
+     */
     uint32_t imm() { return ins & 0xffff; } // Bits 15-0
+
+    /**
+     * @brief Address value for jump/branch instructions. Size: 26 bits [25-0]
+     * 
+     * @return uint32_t 
+     */
     uint32_t addr() { return ins & 0x3ffffff; } // Bits 25-0
 };
 
+/**
+ * @brief Stores details of load to implement load delay
+ * 
+ */
 struct LoadDelay
 {
+    /**
+     * @brief Register ID
+     * 
+     */
     uint32_t reg;
+
+    /**
+     * @brief Data to be loaded
+     * 
+     */
     uint32_t data;
 
     LoadDelay() {}
