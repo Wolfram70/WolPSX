@@ -58,6 +58,7 @@ CPU::CPU()
     lookup_special[0b100011] = &CPU::SUBU;
     lookup_special[0b011010] = &CPU::DIV;
     lookup_special[0b010010] = &CPU::MFLO;
+    lookup_special[0b000010] = &CPU::SRL;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
@@ -659,4 +660,9 @@ void CPU::DIV() //Division
 void CPU::MFLO()
 {
     set_reg(ins.rd(), lo);
+}
+
+void CPU::SRL()
+{
+    set_reg(ins.rd(), get_reg(ins.rt()) >> ins.shamt());
 }

@@ -110,6 +110,7 @@ private:
     void SUBU();
     void DIV();
     void MFLO();
+    void SRL();
 
     void BLGE();
     void BLTZ();
