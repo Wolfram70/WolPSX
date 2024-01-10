@@ -108,6 +108,8 @@ private:
     void JALR();
     void SRA();
     void SUBU();
+    void DIV();
+    void MFLO();
 
     void BLGE();
     void BLTZ();

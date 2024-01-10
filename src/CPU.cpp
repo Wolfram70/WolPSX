@@ -56,6 +56,8 @@ CPU::CPU()
     lookup_special[0b001001] = &CPU::JALR;
     lookup_special[0b000011] = &CPU::SRA;
     lookup_special[0b100011] = &CPU::SUBU;
+    lookup_special[0b011010] = &CPU::DIV;
+    lookup_special[0b010010] = &CPU::MFLO;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
@@ -621,4 +623,40 @@ void CPU::SRA() //Shift Right Arithmetic
 void CPU::SUBU() //Subtract Unsigned
 {
     set_reg(ins.rd(), get_reg(ins.rs()) - get_reg(ins.rt()));
+}
+
+void CPU::DIV() //Division
+{
+    uint32_t op1 = get_reg(ins.rs());
+    uint32_t op2 = get_reg(ins.rt());
+    if(op2 == 0)
+    {
+        //throw division by zero error
+        if(op1 < 0)
+        {
+            lo = 1;
+            hi = op1;
+        }
+        else
+        {
+            lo = 0xffffffff;
+            hi = op1;
+        }
+        std::stringstream ss;
+        ss << "Division by zero in DIV: " << std::hex << ir;
+        throw std::runtime_error(ss.str());
+    }
+    if(op1 == 0x80000000 && op2 == 0xffffffff)
+    {
+        lo = 0x80000000;
+        hi = 0;
+        return;
+    }
+    lo = int32_t(op1) / int32_t(op2);
+    hi = int32_t(op1) % int32_t(op2);
+}
+
+void CPU::MFLO()
+{
+    set_reg(ins.rd(), lo);
 }
