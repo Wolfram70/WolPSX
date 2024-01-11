@@ -88,6 +88,7 @@ void CPU::load_next_ins()
  * @param addr Address to read from
  * @return uint32_t Data read from the bus
  * 
+ * \b References:
  * @ref Bus::read32_cpu
  */
 uint32_t CPU::read32(uint32_t addr)
@@ -101,6 +102,7 @@ uint32_t CPU::read32(uint32_t addr)
  * @param addr Address to write to
  * @param data Data to write to the bus
  * 
+ * \b References:
  * @ref Bus::write32_cpu
  */
 void CPU::write32(uint32_t addr, uint32_t data)
@@ -114,6 +116,7 @@ void CPU::write32(uint32_t addr, uint32_t data)
  * @param addr Address to read from
  * @return uint16_t Data read from the bus
  * 
+ * \b References:
  * @ref Bus::read16_cpu
  */
 uint16_t CPU::read16(uint32_t addr)
@@ -127,6 +130,7 @@ uint16_t CPU::read16(uint32_t addr)
  * @param addr Address to write to
  * @param data Data to write to the bus
  * 
+ * \b References
  * @ref Bus::write16_cpu
  */
 void CPU::write16(uint32_t addr, uint16_t data)
@@ -140,6 +144,7 @@ void CPU::write16(uint32_t addr, uint16_t data)
  * @param addr Address to read from
  * @return uint8_t Data read from the bus
  * 
+ * \b References
  * @ref Bus::read8_cpu
  */
 uint8_t CPU::read8(uint32_t addr)
@@ -153,6 +158,7 @@ uint8_t CPU::read8(uint32_t addr)
  * @param addr Address to write to
  * @param data Data to write to the bus
  * 
+ * \b References
  * @ref Bus::write8_cpu
  */
 void CPU::write8(uint32_t addr, uint8_t data)
