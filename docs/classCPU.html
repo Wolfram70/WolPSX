@@ -80,7 +80,7 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 
-<p>Implementation of the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>.  
+<p>Class to emulate the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>&gt;</code></p>
@@ -88,13 +88,13 @@ $(function() {
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2fdd8153d0979ccad9ed8452897267f4" id="r_a2fdd8153d0979ccad9ed8452897267f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fdd8153d0979ccad9ed8452897267f4">CPU</a> ()</td></tr>
-<tr class="memdesc:a2fdd8153d0979ccad9ed8452897267f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> object.  <br /></td></tr>
+<tr class="memdesc:a2fdd8153d0979ccad9ed8452897267f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> object.  <br /></td></tr>
 <tr class="separator:a2fdd8153d0979ccad9ed8452897267f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6ad37f139c5c79987fe34c485ae7b79c" id="r_a6ad37f139c5c79987fe34c485ae7b79c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad37f139c5c79987fe34c485ae7b79c">connectBus</a> (<a class="el" href="classBus.html">Bus</a> *bus)</td></tr>
-<tr class="memdesc:a6ad37f139c5c79987fe34c485ae7b79c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects <a class="el" href="classBus.html" title="Implementation of the Bus.">Bus</a> to the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>.  <br /></td></tr>
+<tr class="memdesc:a6ad37f139c5c79987fe34c485ae7b79c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> to the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>.  <br /></td></tr>
 <tr class="separator:a6ad37f139c5c79987fe34c485ae7b79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c6f0ab00a41d6d3b3e2a94a0eee506" id="r_a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17c6f0ab00a41d6d3b3e2a94a0eee506">clock</a> ()</td></tr>
-<tr class="memdesc:a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clocks the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> once.  <br /></td></tr>
+<tr class="memdesc:a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clocks the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> once.  <br /></td></tr>
 <tr class="separator:a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
@@ -341,8 +341,8 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
 <tr class="separator:ac49e2c8d4ecd460c02c00ae88f631d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Implementation of the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>. </p>
-<p>Implements the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> of the PSX (The MIPS R3000A <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>). </p>
+<div class="textblock"><p>Class to emulate the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>. </p>
+<p>Implements the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> of the PSX (The MIPS R3000A <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>). </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2fdd8153d0979ccad9ed8452897267f4" name="a2fdd8153d0979ccad9ed8452897267f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fdd8153d0979ccad9ed8452897267f4">&#9670;&#160;</a></span>CPU()</h2>
@@ -359,7 +359,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
       </table>
 </div><div class="memdoc">
 
-<p>Construct a new <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> object. </p>
+<p>Construct a new <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> object. </p>
 <p>Sets the initial values of the registers and the initializes the opcode lookup tables. </p>
 
 </div>
@@ -413,7 +413,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
       </table>
 </div><div class="memdoc">
 
-<p>Clocks the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> once. </p>
+<p>Clocks the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> once. </p>
 <p>Executes the load_next_ins and decode_and_execute functions. Implements the load delay by copying the output registers to the input registers after the instruction is executed.</p>
 <p><b>References:</b> <a class="el" href="#a46e0c7d9dfbef53618fddaf9cdbb10fc">load_next_ins</a> <a class="el" href="#ac4a2851f95a8fbc41a6c5b8084d7983a">decode_and_execute</a> <a class="el" href="#a5042f5a33ad4cac1f0092d6c546608a7">copy_regs</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
@@ -442,8 +442,8 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
 </table>
 </div><div class="memdoc">
 
-<p>Connects <a class="el" href="classBus.html" title="Implementation of the Bus.">Bus</a> to the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>. </p>
-<p>Used by the constructor of <a class="el" href="classBus.html" title="Implementation of the Bus.">Bus</a> to connect the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a> to the <a class="el" href="classBus.html" title="Implementation of the Bus.">Bus</a>. </p><dl class="params"><dt>Parameters</dt><dd>
+<p>Connects <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> to the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>. </p>
+<p>Used by the constructor of <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> to connect the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> to the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a>. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">bus</td><td>Pointer to the bus structure </td></tr>
   </table>
@@ -607,7 +607,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t Data read from the bus</dd></dl>
-<p>Bus::read16_cpu </p>
+<p><a class="el" href="classBus.html#a4801b3d9d03e161bb18703a9d4a61cd0">Bus::read16_cpu</a> </p>
 
 </div>
 </div>
@@ -677,7 +677,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint8_t Data read from the bus</dd></dl>
-<p>Bus::read8_cpu </p>
+<p><a class="el" href="classBus.html#af50e85c6235cd848005af1753f5a3477">Bus::read8_cpu</a> </p>
 
 </div>
 </div>
@@ -754,7 +754,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
   </table>
   </dd>
 </dl>
-<p>Bus::write16_cpu </p>
+<p><a class="el" href="classBus.html#ab92c7319231ad7d39a27be51f1272d48">Bus::write16_cpu</a> </p>
 
 </div>
 </div>
@@ -832,7 +832,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
   </table>
   </dd>
 </dl>
-<p>Bus::write8_cpu </p>
+<p><a class="el" href="classBus.html#a793668a14e4a242331ab4fc2568857a8">Bus::write8_cpu</a> </p>
 
 </div>
 </div>
@@ -983,7 +983,7 @@ std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" vali
 </div><div class="memdoc">
 
 <p>COP0 status register. </p>
-<p>Used to store the status of the <a class="el" href="classCPU.html" title="Implementation of the CPU.">CPU</a>. </p>
+<p>Used to store the status of the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>. </p>
 
 </div>
 </div>

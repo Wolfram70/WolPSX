@@ -1,7 +1,7 @@
 var searchData=
 [
   ['cache_5fctrl_5frange_0',['cache_ctrl_range',['../classBus.html#a6313429b455311a2b052c5d33a4029c4',1,'Bus']]],
-  ['clock_1',['clock',['../classCPU.html#a17c6f0ab00a41d6d3b3e2a94a0eee506',1,'CPU']]],
+  ['clock_1',['clock',['../classBus.html#a04a752d7c7ce46f0f5e2f30748a59c86',1,'Bus::clock()'],['../classCPU.html#a17c6f0ab00a41d6d3b3e2a94a0eee506',1,'CPU::clock()']]],
   ['connectbus_2',['connectBus',['../classCPU.html#a6ad37f139c5c79987fe34c485ae7b79c',1,'CPU']]],
   ['contains_3',['contains',['../structRange.html#a89361f5228f180cb5ec8a32f709c9c01',1,'Range']]],
   ['cop0_5fbda_4',['cop0_bda',['../classCPU.html#a97997d70df63ddc59859c47099f3a543',1,'CPU']]],

@@ -92,21 +92,25 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00007" name="l00007"></a><span class="lineno">    7</span> </div>
 <div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span><span class="preprocessor">#define BIOS_SIZE 512 * 1024</span></div>
 <div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span> </div>
-<div class="foldopen" id="foldopen00010" data-start="{" data-end="};">
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno"><a class="line" href="classBIOS.html">   10</a></span><span class="keyword">class </span><a class="code hl_class" href="classBIOS.html">BIOS</a></div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>{</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    <a class="code hl_class" href="classBIOS.html">BIOS</a>(std::string path);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    uint32_t read32_cpu(uint32_t offset);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    uint8_t read8_cpu(uint32_t offset);</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span> </div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    std::vector&lt;uint8_t&gt; data;</div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>};</div>
+<div class="foldopen" id="foldopen00015" data-start="{" data-end="};">
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno"><a class="line" href="classBIOS.html">   15</a></span><span class="keyword">class </span><a class="code hl_class" href="classBIOS.html">BIOS</a></div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>{</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    <a class="code hl_function" href="classBIOS.html#afb60e7b997c15283e2e2fb350ff69ba3">BIOS</a>(std::string path);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    uint32_t <a class="code hl_function" href="classBIOS.html#a057ca25d68cfb358a3ed7854d6158d48">read32_cpu</a>(uint32_t offset);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span>    uint8_t <a class="code hl_function" href="classBIOS.html#ab55d8292df7e0d8273cbde83d63c8f6e">read8_cpu</a>(uint32_t offset);</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00022" name="l00022"></a><span class="lineno">   22</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno"><a class="line" href="classBIOS.html#abcd8d0a96268beb491938ca2db99cb5e">   27</a></span>    std::vector&lt;uint8_t&gt; <a class="code hl_variable" href="classBIOS.html#abcd8d0a96268beb491938ca2db99cb5e">data</a>;</div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span>};</div>
 </div>
-<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span> </div>
-<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassBIOS_html"><div class="ttname"><a href="classBIOS.html">BIOS</a></div><div class="ttdef"><b>Definition</b> BIOS.hpp:11</div></div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span> </div>
+<div class="line"><a id="l00030" name="l00030"></a><span class="lineno">   30</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassBIOS_html"><div class="ttname"><a href="classBIOS.html">BIOS</a></div><div class="ttdoc">Class to emulate the BIOS.</div><div class="ttdef"><b>Definition</b> BIOS.hpp:16</div></div>
+<div class="ttc" id="aclassBIOS_html_a057ca25d68cfb358a3ed7854d6158d48"><div class="ttname"><a href="classBIOS.html#a057ca25d68cfb358a3ed7854d6158d48">BIOS::read32_cpu</a></div><div class="ttdeci">uint32_t read32_cpu(uint32_t offset)</div><div class="ttdoc">Reads a 32-bit word from the BIOS.</div><div class="ttdef"><b>Definition</b> BIOS.cpp:40</div></div>
+<div class="ttc" id="aclassBIOS_html_ab55d8292df7e0d8273cbde83d63c8f6e"><div class="ttname"><a href="classBIOS.html#ab55d8292df7e0d8273cbde83d63c8f6e">BIOS::read8_cpu</a></div><div class="ttdeci">uint8_t read8_cpu(uint32_t offset)</div><div class="ttdoc">Reads a 8-bit word from the BIOS.</div><div class="ttdef"><b>Definition</b> BIOS.cpp:54</div></div>
+<div class="ttc" id="aclassBIOS_html_abcd8d0a96268beb491938ca2db99cb5e"><div class="ttname"><a href="classBIOS.html#abcd8d0a96268beb491938ca2db99cb5e">BIOS::data</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; data</div><div class="ttdoc">Data of the BIOS.</div><div class="ttdef"><b>Definition</b> BIOS.hpp:27</div></div>
+<div class="ttc" id="aclassBIOS_html_afb60e7b997c15283e2e2fb350ff69ba3"><div class="ttname"><a href="classBIOS.html#afb60e7b997c15283e2e2fb350ff69ba3">BIOS::BIOS</a></div><div class="ttdeci">BIOS(std::string path)</div><div class="ttdoc">Construct a new BIOS:: BIOS object.</div><div class="ttdef"><b>Definition</b> BIOS.cpp:12</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>

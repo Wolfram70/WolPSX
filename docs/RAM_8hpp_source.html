@@ -89,22 +89,29 @@ $(function() { codefold.init(0); });
 <div class="line"><a id="l00004" name="l00004"></a><span class="lineno">    4</span><span class="preprocessor">#include &lt;stdint.h&gt;</span></div>
 <div class="line"><a id="l00005" name="l00005"></a><span class="lineno">    5</span><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"><a id="l00006" name="l00006"></a><span class="lineno">    6</span> </div>
-<div class="foldopen" id="foldopen00007" data-start="{" data-end="};">
-<div class="line"><a id="l00007" name="l00007"></a><span class="lineno"><a class="line" href="classRAM.html">    7</a></span><span class="keyword">class </span><a class="code hl_class" href="classRAM.html">RAM</a></div>
-<div class="line"><a id="l00008" name="l00008"></a><span class="lineno">    8</span>{</div>
-<div class="line"><a id="l00009" name="l00009"></a><span class="lineno">    9</span><span class="keyword">public</span>:</div>
-<div class="line"><a id="l00010" name="l00010"></a><span class="lineno">   10</span>    <a class="code hl_class" href="classRAM.html">RAM</a>(uint32_t size);</div>
-<div class="line"><a id="l00011" name="l00011"></a><span class="lineno">   11</span>    uint32_t read32_cpu(uint32_t offset);</div>
-<div class="line"><a id="l00012" name="l00012"></a><span class="lineno">   12</span>    <span class="keywordtype">void</span> write32_cpu(uint32_t offset, uint32_t data);</div>
-<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>    uint8_t read8_cpu(uint32_t offset);</div>
-<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span>    <span class="keywordtype">void</span> write8_cpu(uint32_t offset, uint8_t data);</div>
-<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span><span class="keyword">private</span>:</div>
-<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    std::vector&lt;uint8_t&gt; data;</div>
-<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>};</div>
+<div class="foldopen" id="foldopen00012" data-start="{" data-end="};">
+<div class="line"><a id="l00012" name="l00012"></a><span class="lineno"><a class="line" href="classRAM.html">   12</a></span><span class="keyword">class </span><a class="code hl_class" href="classRAM.html">RAM</a></div>
+<div class="line"><a id="l00013" name="l00013"></a><span class="lineno">   13</span>{</div>
+<div class="line"><a id="l00014" name="l00014"></a><span class="lineno">   14</span><span class="keyword">public</span>:</div>
+<div class="line"><a id="l00015" name="l00015"></a><span class="lineno">   15</span>    <a class="code hl_function" href="classRAM.html#a5f1b2ae8fceb690e83e3d8a1c4a6c815">RAM</a>(uint32_t size);</div>
+<div class="line"><a id="l00016" name="l00016"></a><span class="lineno">   16</span>    uint32_t <a class="code hl_function" href="classRAM.html#aa264b5558db9db5989df0a89b461be26">read32_cpu</a>(uint32_t offset);</div>
+<div class="line"><a id="l00017" name="l00017"></a><span class="lineno">   17</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRAM.html#a3ae25b3beb7a4022937f84b70e6054dd">write32_cpu</a>(uint32_t offset, uint32_t <a class="code hl_variable" href="classRAM.html#a098c2f17fda2648045c0527ce438aa17">data</a>);</div>
+<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span>    uint8_t <a class="code hl_function" href="classRAM.html#ac99e7c10c07be06ac9045da26312baeb">read8_cpu</a>(uint32_t offset);</div>
+<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span>    <span class="keywordtype">void</span> <a class="code hl_function" href="classRAM.html#a03bc4179804dae073d37b62b7c6f8fef">write8_cpu</a>(uint32_t offset, uint8_t <a class="code hl_variable" href="classRAM.html#a098c2f17fda2648045c0527ce438aa17">data</a>);</div>
+<div class="line"><a id="l00020" name="l00020"></a><span class="lineno">   20</span><span class="keyword">private</span>:</div>
+<div class="line"><a id="l00021" name="l00021"></a><span class="lineno">   21</span> </div>
+<div class="line"><a id="l00026" name="l00026"></a><span class="lineno"><a class="line" href="classRAM.html#a098c2f17fda2648045c0527ce438aa17">   26</a></span>    std::vector&lt;uint8_t&gt; <a class="code hl_variable" href="classRAM.html#a098c2f17fda2648045c0527ce438aa17">data</a>;</div>
+<div class="line"><a id="l00027" name="l00027"></a><span class="lineno">   27</span>};</div>
 </div>
-<div class="line"><a id="l00018" name="l00018"></a><span class="lineno">   18</span> </div>
-<div class="line"><a id="l00019" name="l00019"></a><span class="lineno">   19</span><span class="preprocessor">#endif</span></div>
-<div class="ttc" id="aclassRAM_html"><div class="ttname"><a href="classRAM.html">RAM</a></div><div class="ttdef"><b>Definition</b> RAM.hpp:8</div></div>
+<div class="line"><a id="l00028" name="l00028"></a><span class="lineno">   28</span> </div>
+<div class="line"><a id="l00029" name="l00029"></a><span class="lineno">   29</span><span class="preprocessor">#endif</span></div>
+<div class="ttc" id="aclassRAM_html"><div class="ttname"><a href="classRAM.html">RAM</a></div><div class="ttdoc">Class to emulate the RAM.</div><div class="ttdef"><b>Definition</b> RAM.hpp:13</div></div>
+<div class="ttc" id="aclassRAM_html_a03bc4179804dae073d37b62b7c6f8fef"><div class="ttname"><a href="classRAM.html#a03bc4179804dae073d37b62b7c6f8fef">RAM::write8_cpu</a></div><div class="ttdeci">void write8_cpu(uint32_t offset, uint8_t data)</div><div class="ttdoc">Writes a 16-bit word to the RAM.</div><div class="ttdef"><b>Definition</b> RAM.cpp:99</div></div>
+<div class="ttc" id="aclassRAM_html_a098c2f17fda2648045c0527ce438aa17"><div class="ttname"><a href="classRAM.html#a098c2f17fda2648045c0527ce438aa17">RAM::data</a></div><div class="ttdeci">std::vector&lt; uint8_t &gt; data</div><div class="ttdoc">Data of the RAM.</div><div class="ttdef"><b>Definition</b> RAM.hpp:26</div></div>
+<div class="ttc" id="aclassRAM_html_a3ae25b3beb7a4022937f84b70e6054dd"><div class="ttname"><a href="classRAM.html#a3ae25b3beb7a4022937f84b70e6054dd">RAM::write32_cpu</a></div><div class="ttdeci">void write32_cpu(uint32_t offset, uint32_t data)</div><div class="ttdoc">Writes a 32-bit word to the RAM.</div><div class="ttdef"><b>Definition</b> RAM.cpp:53</div></div>
+<div class="ttc" id="aclassRAM_html_a5f1b2ae8fceb690e83e3d8a1c4a6c815"><div class="ttname"><a href="classRAM.html#a5f1b2ae8fceb690e83e3d8a1c4a6c815">RAM::RAM</a></div><div class="ttdeci">RAM(uint32_t size)</div><div class="ttdoc">Construct a new RAM:: RAM object.</div><div class="ttdef"><b>Definition</b> RAM.cpp:13</div></div>
+<div class="ttc" id="aclassRAM_html_aa264b5558db9db5989df0a89b461be26"><div class="ttname"><a href="classRAM.html#aa264b5558db9db5989df0a89b461be26">RAM::read32_cpu</a></div><div class="ttdeci">uint32_t read32_cpu(uint32_t offset)</div><div class="ttdoc">Reads a 32-bit word from the RAM.</div><div class="ttdef"><b>Definition</b> RAM.cpp:27</div></div>
+<div class="ttc" id="aclassRAM_html_ac99e7c10c07be06ac9045da26312baeb"><div class="ttname"><a href="classRAM.html#ac99e7c10c07be06ac9045da26312baeb">RAM::read8_cpu</a></div><div class="ttdeci">uint8_t read8_cpu(uint32_t offset)</div><div class="ttdoc">Reads a 16-bit word from the RAM.</div><div class="ttdef"><b>Definition</b> RAM.cpp:79</div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
