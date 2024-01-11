@@ -13,7 +13,7 @@ CPU::CPU()
 {
     gpreg_in[0] = 0; // $zero register
     gpreg_out[0] = 0; //$zero register
-    pc = 0xbfc00000; // Program counter
+    pc = 0xbfc00000;
 
     cop0_bda = 0x00000000;
     cop0_bpcm = 0x00000000;
