@@ -3,11 +3,27 @@
 
 #include "../include/RAM.hpp"
 
+/**
+ * @brief Construct a new RAM:: RAM object
+ * 
+ * Initializes the RAM with 0xca.
+ * 
+ * @param size Size of the RAM in bytes
+ */
 RAM::RAM(uint32_t size)
 {
     data = std::vector<uint8_t>(size, 0xca);
 }
 
+/**
+ * @brief Reads a 32-bit word from the RAM.
+ * 
+ * @param offset Offset to read from
+ * @return uint32_t Data read
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
 uint32_t RAM::read32_cpu(uint32_t offset)
 {
     if(offset >= data.size())
@@ -25,6 +41,15 @@ uint32_t RAM::read32_cpu(uint32_t offset)
     return *(uint32_t*)&data[offset];
 }
 
+/**
+ * @brief Writes a 32-bit word to the RAM.
+ * 
+ * @param offset Offset to write to
+ * @param data Data to write
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
 void RAM::write32_cpu(uint32_t offset, uint32_t data)
 {
     if(offset >= this->data.size())
@@ -42,6 +67,15 @@ void RAM::write32_cpu(uint32_t offset, uint32_t data)
     *(uint32_t*)&this->data[offset] = data;
 }
 
+/**
+ * @brief Reads a 16-bit word from the RAM.
+ * 
+ * @param offset Offset to read from
+ * @return uint16_t Data read
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
 uint8_t RAM::read8_cpu(uint32_t offset)
 {
     if(offset >= data.size())
@@ -53,6 +87,15 @@ uint8_t RAM::read8_cpu(uint32_t offset)
     return data[offset];
 }
 
+/**
+ * @brief Writes a 16-bit word to the RAM.
+ * 
+ * @param offset Offset to write to
+ * @param data Data to write
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
 void RAM::write8_cpu(uint32_t offset, uint8_t data)
 {
     if(offset >= this->data.size())

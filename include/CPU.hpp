@@ -14,68 +14,80 @@ struct Instruction
 {
     uint32_t ins;
 
+    /**
+     * @brief Construct a new Instruction object
+     * 
+     */
     Instruction() {}
+
+    /**
+     * @brief Construct a new Instruction object
+     * 
+     * @param ins Instruction in the form of a 32-bit unsigned integer
+     */
     Instruction(uint32_t ins) : ins(ins) {}
 
     /**
      * @brief Opcode of the instruction. Size: 6 bits [31-26]
      * 
-     * @return uint32_t 
+     * @return uint32_t Opcode
      */
     uint32_t opcode() { return ins >> 26; }
 
     /**
      * @brief Source register for the instruction. Size: 5 bits [25-21]
      * 
-     * @return uint32_t 
+     * @return uint32_t Register ID
      */
     uint32_t rs() { return (ins >> 21) & 0x1f; }
 
     /**
      * @brief Target register for the instruction. Size: 5 bits [20-16]
      * 
-     * @return uint32_t 
+     * @return uint32_t Register ID
      */
     uint32_t rt() { return (ins >> 16) & 0x1f; }
 
     /**
      * @brief Destination register for the instruction. Size: 5 bits [15-11]
      * 
-     * @return uint32_t 
+     * @return uint32_t Register ID
      */
     uint32_t rd() { return (ins >> 11) & 0x1f; }
 
     /**
      * @brief Shift amount for the instruction. Size: 5 bits [10-6]
      * 
-     * @return uint32_t 
+     * Used in the case of shift instructions.
+     * @return uint32_t Shift amount
      */
     uint32_t shamt() { return (ins >> 6) & 0x1f; }
 
     /**
-     * @brief Function field for the instruction. Used to look up operation in the case of 'special' instructions (Opcode = 0h00). Size: 6 bits [5-0]
+     * @brief Function field for the instruction. Size: 6 bits [5-0]
      * 
-     * @return uint32_t 
+     * Used to lookup the functions in case of 'SPECIAL' instructions where the opcode is 0b000000.
+     * @return uint32_t Function ID
      */
     uint32_t funct() { return ins & 0x3f; }
 
     /**
      * @brief Immediate value for the instruction. Size: 16 bits [15-0]
      * 
-     * @return uint32_t 
+     * @return uint32_t Immediate argument
      */
     uint32_t imm() { return ins & 0xffff; } // Bits 15-0
 
     /**
      * @brief Address value for jump/branch instructions. Size: 26 bits [25-0]
      * 
-     * @return uint32_t 
+     * @return uint32_t Address
      */
     uint32_t addr() { return ins & 0x3ffffff; } // Bits 25-0
 };
 
 /**
- * @brief Stores details of load to implement load delay
+ * @brief Struture to store details of load to implement load delay
  * 
  */
 struct LoadDelay
@@ -92,15 +104,39 @@ struct LoadDelay
      */
     uint32_t data;
 
+    /**
+     * @brief Construct a new Load Delay object
+     * 
+     */
     LoadDelay() {}
-    LoadDelay(uint32_t a, uint32_t b) {reg = a; data = b;}
+
+    /**
+     * @brief Construct a new Load Delay object
+     * 
+     * @param reg Register ID
+     * @param data Data to be loaded
+     */
+    LoadDelay(uint32_t reg, uint32_t data): reg(reg), data(data) {}
 };
 
+/**
+ * @brief Class to emulate the CPU.
+ * 
+ * Implements the CPU of the PSX (The MIPS R3000A CPU).
+ */
 class CPU
 {
 public:
     CPU();
+
+    /**
+     * @brief Connects Bus to the CPU.
+     * 
+     * Used by the constructor of Bus to connect the CPU to the Bus.
+     * @param bus Pointer to the bus structure
+     */
     void connectBus(Bus* bus) { this->bus = bus; }
+
     void clock();
 
 private:
@@ -119,29 +155,130 @@ private:
 
     LoadDelay pending_load;
 
-    uint32_t pc = 0; // Program counter
-    uint32_t ir = 0;
-    uint32_t ir_next = 0;
-    Instruction ins;
-    uint32_t gpreg_in[32] = {0xdeaddeed}; // General purpose registers (input - for load delay slot)
-    uint32_t gpreg_out[32] = {0xdeaddeed}; // General purpose registers (output - for load delay slot)
-    uint32_t hi = 0; // Mult/Div registers (higher 32 bits)
-    uint32_t lo = 0; // Mult/Div registers (lower 32 bits)
+    /**
+     * @brief Program counter
+     * 
+     */
+    uint32_t pc = 0;
 
-    //COP0 registers
+    /**
+     * @brief Instruction register
+     * 
+     */
+    uint32_t ir;
+
+    /**
+     * @brief Instruction immediately after the current instruction in the memory.
+     * 
+     */
+    uint32_t ir_next;
+
+    /**
+     * @brief Instruction in the form of the Instruction structure.
+     * 
+     */
+    Instruction ins;
+
+    /**
+     * @brief General purpose registers - input set
+     * 
+     * Used to store the input values of the general purpose registers for the current instruction. Split into two arrays to implement load delay.
+     */
+    uint32_t gpreg_in[32] = {0xdeaddeed};
+
+    /**
+     * @brief General purpose registers - output set
+     * 
+     * Used to store the output values of the general purpose registers for the current instruction. Split into two arrays to implement load delay.
+     */
+    uint32_t gpreg_out[32] = {0xdeaddeed};
+
+    /**
+     * @brief HI register.
+     * 
+     * Used to store the higher 32 bits of the result of multiplication and remainder of division.
+     */
+    uint32_t hi = 0;
+
+    /**
+     * @brief LO register.
+     * 
+     * Used to store the lower 32 bits of the result of multiplication and quotient of division.
+     */
+    uint32_t lo = 0;
+
+    /**
+     * @brief COP0 status register
+     * 
+     * Used to store the status of the CPU.
+     */
     uint32_t cop0_status;
+
+    /**
+     * @brief COP0 breakpoint exception register
+     * 
+     * Generates an exception when the value of the register is equal to the value of the PC.
+     */
     uint32_t cop0_bpc;
+
+    /**
+     * @brief COP0 breakpoint exception register (data)
+     * 
+     * Generates an exception when address is accessed as a data load/store instead of instruction fetch.
+     */
     uint32_t cop0_bda;
+
+    /**
+     * @brief COP0 breakpoint exception register (hardware)
+     * 
+     * TODO: Figure out what exactly this does.
+     */
     uint32_t cop0_dcic;
+
+    /**
+     * @brief Bitmask applied to COP0 breakpoint exception register (data)
+     * 
+     * Used to trigger exception on a range of addresses.
+     */
     uint32_t cop0_bdam;
+
+    /**
+     * @brief Bitmask applied on COP0 breakpoint exception register.
+     * 
+     */
     uint32_t cop0_bpcm;
+
+    /**
+     * @brief COP0 cause register
+     * 
+     * Used to store the cause of the exception and is read-only. Apparently only [9:8] bits are writable to force an exception.
+     */
     uint32_t cop0_cause;
 
 private:
-    std::map<uint8_t, void (CPU::*)()> lookup_op; // Lookup table for instructions
-    std::map<uint8_t, void (CPU::*)()> lookup_special; // Lookup table for special instructions
-    std::map<uint8_t, void (CPU::*)()> lookup_cop0; // Lookup table for cop0 instructions
-    std::map<uint8_t, void (CPU::*)()> lookup_cop2; // Lookup table for cop1 instructions
+    /**
+     * @brief Lookup table for instructions
+     * 
+     */
+    std::map<uint8_t, void (CPU::*)()> lookup_op;
+
+    /**
+     * @brief Lookup table for special instructions (opcode = 0b000000)
+     * 
+     */
+    std::map<uint8_t, void (CPU::*)()> lookup_special;
+
+    /**
+     * @brief Lookup table for cop0 instructions (opcode = 0b010000)
+     * 
+     */
+    std::map<uint8_t, void (CPU::*)()> lookup_cop0;
+
+    /**
+     * @brief Lookup table for cop1 instructions (opcode = 0b010001)
+     * 
+     */
+    std::map<uint8_t, void (CPU::*)()> lookup_cop2;
 
     void LUI();
     void ORI();
@@ -193,7 +330,6 @@ private:
 
     void COP3();
 
-    //Help
     void branch(uint32_t offset);
     void set_reg(uint8_t reg, uint32_t data);
     uint32_t get_reg(uint8_t reg);

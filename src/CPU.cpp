@@ -4,6 +4,11 @@
 #include "../include/CPU.hpp"
 #include "../include/Bus.hpp"
 
+/**
+ * @brief Construct a new CPU object
+ * 
+ * Sets the initial values of the registers and the initializes the opcode lookup tables.
+ */
 CPU::CPU()
 {
     gpreg_in[0] = 0; // $zero register
@@ -64,6 +69,11 @@ CPU::CPU()
     lookup_cop0[0b00000] = &CPU::MFC0;
 }
 
+/**
+ * @brief Load the next instruction into the instruction register
+ * 
+ * Executes a read32 at the address given by the program counter and increments the program counter by 4.
+ */
 void CPU::load_next_ins()
 {
     ir = ir_next;
@@ -72,36 +82,91 @@ void CPU::load_next_ins()
     pc += 4;
 }
 
+/**
+ * @brief Read a 32 bit word from the bus.
+ * 
+ * @param addr Address to read from
+ * @return uint32_t Data read from the bus
+ * 
+ * @ref Bus::read32_cpu
+ */
 uint32_t CPU::read32(uint32_t addr)
 {
     return bus->read32_cpu(addr);
 }
 
+/**
+ * @brief Write a 32 bit word to the bus.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the bus
+ * 
+ * @ref Bus::write32_cpu
+ */
 void CPU::write32(uint32_t addr, uint32_t data)
 {
     bus->write32_cpu(addr, data);
 }
 
+/**
+ * @brief Read a 16 bit word from the bus.
+ * 
+ * @param addr Address to read from
+ * @return uint16_t Data read from the bus
+ * 
+ * @ref Bus::read16_cpu
+ */
 uint16_t CPU::read16(uint32_t addr)
 {
     return bus->read16_cpu(addr);
 }
 
+/**
+ * @brief Write a 16 bit word to the bus.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the bus
+ * 
+ * @ref Bus::write16_cpu
+ */
 void CPU::write16(uint32_t addr, uint16_t data)
 {
     return bus->write16_cpu(addr, data);
 }
 
+/**
+ * @brief Read a 8 bit word from the bus.
+ * 
+ * @param addr Address to read from
+ * @return uint8_t Data read from the bus
+ * 
+ * @ref Bus::read8_cpu
+ */
 uint8_t CPU::read8(uint32_t addr)
 {
     return bus->read8_cpu(addr);
 }
 
+/**
+ * @brief Write a 8 bit word to the bus.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the bus
+ * 
+ * @ref Bus::write8_cpu
+ */
 void CPU::write8(uint32_t addr, uint8_t data)
 {
     return bus->write8_cpu(addr, data);
 }
 
+/**
+ * @brief Decodes and executes the instruction in the instruction register.
+ * 
+ * Uses the opcode to lookup the instruction in the opcode lookup table and executes the appropriate function.
+ * 
+ * @throw std::runtime_error if the instruction is not mapped in the opcode lookup table.
+ */
 void CPU::decode_and_execute()
 {
     if(lookup_op.find(ins.opcode()) != lookup_op.end())
@@ -115,6 +180,17 @@ void CPU::decode_and_execute()
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Clocks the CPU once.
+ * 
+ * Executes the load_next_ins and decode_and_execute functions. Implements the load delay by copying the output registers to the input registers after the instruction is executed.
+ * 
+ * \b References:
+ * @ref load_next_ins
+ * @ref decode_and_execute
+ * @ref copy_regs
+ * @ref set_reg
+ */
 void CPU::clock()
 {
     //All the reg data req by the instruction is "read already" : Implementation with 2 sets of registers
@@ -130,28 +206,51 @@ void CPU::clock()
     //All the reg data to write is written : Implementation with 2 sets of registers
 }
 
+/**
+ * @brief Branches to the given offset.
+ * 
+ * The offset is multiplied by 4 before branching.
+ * @param offset Offset to branch to
+ */
 void CPU::branch(uint32_t offset)
 {
     pc -= 4; //undo pc increment to point to current instruction
     uint32_t multiplied = offset << 2;
-    if(multiplied & 0x80000000 != offset & 0x80000000)
+    if((multiplied & 0x80000000) != (offset & 0x80000000))
     {
         std::cout << "MISTAKE!";
     }
     pc += multiplied;
 }
 
+/**
+ * @brief Sets the value of the given register from the general purpose registers.
+ * 
+ * @param reg Register to set
+ * @param data Value to set the register to
+ */
 void CPU::set_reg(uint8_t reg, uint32_t data)
 {
     gpreg_out[reg] = data;
     gpreg_out[0] = 0; // $zero register
 }
 
+/**
+ * @brief Gets the value of the given register from the general purpose registers.
+ * 
+ * @param reg Register to get the value of
+ * @return uint32_t Value of the register
+ */
 uint32_t CPU::get_reg(uint8_t reg)
 {
     return gpreg_in[reg];
 }
 
+/**
+ * @brief Copies the output registers to the input registers.
+ * 
+ * Used to implement the load delay.
+ */
 void CPU::copy_regs()
 {
     //copy output registers to input
@@ -321,8 +420,8 @@ void CPU::ADDI() //Add Immediate
     }
     //check for signed overflow
     //TODO: Handle signed overflow exception
-    if(((extended_imm & 0x80000000) && (get_reg(ins.rs()) & 0x80000000) && ((get_reg(ins.rs()) + extended_imm) & 0x80000000 == 0))
-        || ((extended_imm & 0x80000000 == 0) && (get_reg(ins.rs()) & 0x80000000 == 0) && ((get_reg(ins.rs()) + extended_imm) & 0x80000000)))
+    if(((extended_imm & 0x80000000) && (get_reg(ins.rs()) & 0x80000000) && (((get_reg(ins.rs()) + extended_imm) & 0x80000000) == 0))
+        || (((extended_imm & 0x80000000) == 0) && ((get_reg(ins.rs()) & 0x80000000) == 0) && ((get_reg(ins.rs()) + extended_imm) & 0x80000000)))
     {
         //throw signed overflow error
         std::stringstream ss;
@@ -470,8 +569,8 @@ void CPU::ADD() //Add
     
     //check for signed overflow
     //TODO: Handle signed overflow exception
-    if(((extended_op1 & 0x80000000) && (extended_op2 & 0x80000000) && ((extended_op1 + extended_op2) & 0x80000000 == 0))
-        || ((extended_op1 & 0x80000000 == 0) && (extended_op2 & 0x80000000 == 0) && ((extended_op1 + extended_op2) & 0x80000000)))
+    if(((extended_op1 & 0x80000000) && (extended_op2 & 0x80000000) && (((extended_op1 + extended_op2) & 0x80000000) == 0))
+        || (((extended_op1 & 0x80000000) == 0) && ((extended_op2 & 0x80000000) == 0) && ((extended_op1 + extended_op2) & 0x80000000)))
     {
         //throw signed overflow error
         std::stringstream ss;

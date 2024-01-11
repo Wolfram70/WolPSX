@@ -6,6 +6,17 @@
 #include "../include/CPU.hpp"
 #include "../include/RAM.hpp"
 
+/**
+ * @brief Construct a new Bus:: Bus object
+ * 
+ * @param bios_path Path to the BIOS file
+ * 
+ * \b References:
+ * @ref CPU::CPU
+ * @ref BIOS::BIOS
+ * @ref RAM::RAM
+ * @ref CPU::connectBus
+ */
 Bus::Bus(std::string bios_path)
 {
     cpu = new CPU();
@@ -15,7 +26,18 @@ Bus::Bus(std::string bios_path)
     cpu->connectBus(this);
 }
 
-uint32_t region_mask(uint32_t addr)
+/**
+ * @brief Returns the region mask for a given address
+ * 
+ * The regions are: \n
+ * - \b KUSEG: 0x00000000 - 0x7fffffff \n
+ * - \b KSEG0: 0x80000000 - 0x9fffffff \n
+ * - \b KSEG1: 0xa0000000 - 0xbfffffff \n
+ * - \b KSEG2: 0xc0000000 - 0xffffffff \n
+ * @param addr Address to get the region mask for
+ * @return uint32_t Region mask
+ */
+uint32_t Bus::region_mask(uint32_t addr)
 {
     switch(addr >> 29)
     {
@@ -40,6 +62,24 @@ uint32_t region_mask(uint32_t addr)
     }
 }
 
+/**
+ * @brief Reads a 32-bit word from the given address
+ * 
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to read from
+ * @return uint32_t Data read from the address
+ * 
+ * @throw std::runtime_error If the address is unaligned
+ * @throw std::runtime_error If the address is unmapped
+ * 
+ * \b References:
+ * @ref BIOS::read32_cpu
+ * @ref RAM::read32_cpu
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 uint32_t Bus::read32_cpu(uint32_t addr)
 {
     //catch unaligned accesses
@@ -69,6 +109,24 @@ uint32_t Bus::read32_cpu(uint32_t addr)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Writes a 32-bit word to the given address
+ * 
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the address
+ * 
+ * @throw std::runtime_error If the address is unaligned
+ * @throw std::runtime_error If the address is unmapped
+ * @throw std::runtime_error If the data written to any of the MEM_CTRL registers is invalid
+ * 
+ * \b References:
+ * @ref RAM::write32_cpu
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 void Bus::write32_cpu(uint32_t addr, uint32_t data)
 {
     //catch unaligned accesses
@@ -139,6 +197,22 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Reads a 16-bit word from the given address
+ * 
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to read from
+ * @return uint16_t Data read from the address
+ * 
+ * @throw std::runtime_error If the address is unaligned
+ * @throw std::runtime_error If the address is unmapped
+ * 
+ * \b References:
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 uint16_t Bus::read16_cpu(uint32_t addr)
 {
     //catch unaligned accesses
@@ -159,6 +233,22 @@ uint16_t Bus::read16_cpu(uint32_t addr)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Writes a 16-bit word to the given address
+ * 
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the address
+ * 
+ * @throw std::runtime_error If the address is unaligned
+ * @throw std::runtime_error If the address is unmapped
+ * 
+ * \b References:
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 void Bus::write16_cpu(uint32_t addr, uint16_t data)
 {
     //catch unaligned accesses
@@ -193,6 +283,24 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Reads a 8-bit word from the given address
+ * 
+ * TODO: Implement Expansion Region 1.
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to read from
+ * @return uint8_t Data read from the address
+ * 
+ * @throw std::runtime_error If the address is unmapped
+ * 
+ * \b References:
+ * @ref BIOS::read32_cpu
+ * @ref RAM::read8_cpu
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 uint8_t Bus::read8_cpu(uint32_t addr)
 {
     uint32_t addr_og = addr;
@@ -218,6 +326,23 @@ uint8_t Bus::read8_cpu(uint32_t addr)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Writes a 8-bit word to the given address
+ *
+ * TODO: Implement Expansion Region 2.
+ * TODO: Map all addresses.
+ * 
+ * @param addr Address to write to
+ * @param data Data to write to the address
+ * 
+ * @throw std::runtime_error If the address is unmapped
+ * 
+ * \b References:
+ * @ref RAM::write8_cpu
+ * @ref Range::contains
+ * @ref Range::offset
+ * @ref region_mask
+ */
 void Bus::write8_cpu(uint32_t addr, uint8_t data)
 {
     uint32_t addr_og = addr;
@@ -239,6 +364,13 @@ void Bus::write8_cpu(uint32_t addr, uint8_t data)
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Clocks the PSX
+ * 
+ * Clocks all the components of the PSX and serves as a synchronization point between the components.
+ * 
+ * @ref CPU::clock
+ */
 void Bus::clock()
 {
     cpu->clock();
