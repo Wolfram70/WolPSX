@@ -50,6 +50,7 @@ CPU::CPU()
     lookup_op[0b100100] = &CPU::LBU;
     lookup_op[0b000001] = &CPU::BLGE;
     lookup_op[0b001010] = &CPU::SLTI;
+    lookup_op[0b001011] = &CPU::SLTIU;
 
     lookup_special[0b000000] = &CPU::SLL;
     lookup_special[0b100101] = &CPU::OR;
@@ -64,6 +65,9 @@ CPU::CPU()
     lookup_special[0b011010] = &CPU::DIV;
     lookup_special[0b010010] = &CPU::MFLO;
     lookup_special[0b000010] = &CPU::SRL;
+    lookup_special[0b011011] = &CPU::DIVU;
+    lookup_special[0b010000] = &CPU::MFHI;
+    lookup_special[0b101010] = &CPU::SLT;
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
@@ -1192,6 +1196,8 @@ void CPU::DIV()
 /**
  * @brief Move From LO
  * 
+ * TODO: Stall until the mul/div is complete.
+ * 
  * \b References:
  * @ref Instruction::rd
  * @ref set_reg
@@ -1216,4 +1222,94 @@ void CPU::MFLO()
 void CPU::SRL()
 {
     set_reg(ins.rd(), get_reg(ins.rt()) >> ins.shamt());
+}
+
+/**
+ * @brief Set on Less Than Immediate Unsigned
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::imm
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SLTIU()
+{
+    uint32_t arg = ins.imm();
+    //pad argument with bit at 16th position
+    if(arg & 0x8000)
+        arg |= 0xffff0000;
+    if(get_reg(ins.rs()) < arg)
+        set_reg(ins.rt(), 1);
+    else
+        set_reg(ins.rt(), 0);
+}
+
+/**
+ * @brief Divide Unsigned
+ * 
+ * @throw std::runtime_error if division by zero occurs.
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref lo
+ * @ref hi
+ * 
+ */
+void CPU::DIVU()
+{
+    uint32_t op1 = get_reg(ins.rs());
+    uint32_t op2 = get_reg(ins.rt());
+
+    if(op2 == 0)
+    {
+        //throw division by zero error
+        lo = 0xffffffff;
+        hi = op1;
+        std::stringstream ss;
+        ss << "Division by zero in DIVU: " << std::hex << ir;
+        throw std::runtime_error(ss.str());
+    }
+
+    lo = op1 / op2;
+    hi = op1 % op2;
+}
+
+/**
+ * @brief Move From HI
+ * 
+ * TODO: Stall until the mul/div is complete.
+ * 
+ * \b References:
+ * @ref Instruction::rd
+ * @ref set_reg
+ * @ref hi
+ * 
+ */
+void CPU::MFHI()
+{
+    set_reg(ins.rd(), hi);
+}
+
+/**
+ * @brief Set on Less Than
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SLT()
+{
+    if(int32_t(get_reg(ins.rs())) < int32_t(get_reg(ins.rt())))
+        set_reg(ins.rd(), 1);
+    else
+        set_reg(ins.rd(), 0);
 }

@@ -298,6 +298,7 @@ private:
     void BLEZ();
     void LBU();
     void SLTI();
+    void SLTIU();
 
     void SPECIAL();
     void SLL();
@@ -313,6 +314,9 @@ private:
     void DIV();
     void MFLO();
     void SRL();
+    void DIVU();
+    void MFHI();
+    void SLT();
 
     void BLGE();
     void BLTZ();
