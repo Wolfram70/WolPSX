@@ -268,6 +268,11 @@ void CPU::copy_regs()
 
 //INSTRUCTIONS
 
+/**
+ * @brief Looks up and executes the appropriate coprocessor 1 instruction.
+ * 
+ * @throw std::runtime_error if the instruction is not mapped in the lookup_cop0 table.
+ */
 void CPU::COP0()
 {
     if(lookup_cop0.find(ins.rs()) != lookup_cop0.end())
@@ -281,20 +286,37 @@ void CPU::COP0()
     throw std::runtime_error(ss.str());
 }
 
+/**
+ * @brief Looks up and executes the appropriate coprocessor 1 instruction. (UNUSED)
+ * 
+ */
 void CPU::COP1()
 {
     //Not used in PSX
 }
 
+/**
+ * @brief Looks up and executes the appropriate coprocessor 2 (Graphics) instruction.
+ * 
+ */
 void CPU::COP2()
 {
 }   
 
+/**
+ * @brief Looks up and executes the appropriate coprocessor 3 instruction. (UNUSED)
+ * 
+ */
 void CPU::COP3()
 {
     //Not used in PSX
 }
 
+/**
+ * @brief Looks up and executes the appropriate SPECIAL instruction.
+ * 
+ * @throw std::runtime_error if the instruction is not mapped in the lookup_special table.
+ */
 void CPU::SPECIAL()
 {
     if(lookup_special.find(ins.funct()) != lookup_special.end())
@@ -308,17 +330,47 @@ void CPU::SPECIAL()
     throw std::runtime_error(ss.str());
 }
 
-void CPU::LUI() //Load Upper Immediate
+/**
+ * @brief Load Upper Immediate
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref Instruction::rt
+ * @ref Instruction::imm
+ */
+void CPU::LUI()
 {
     set_reg(ins.rt(), ins.imm() << 16);
 }
 
+/**
+ * @brief Bitwise OR Immediate
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref get_reg
+ * @ref Instruction::rs
+ * @ref Instruction::imm
+ */
 void CPU::ORI() //Bitwise OR Immediate
 {
     set_reg(ins.rt(), get_reg(ins.rs()) | ins.imm());
 }
 
-void CPU::SW() //Store Word
+/**
+ * @brief Store Word
+ * 
+ * TODO: Implement Cache
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref get_reg
+ * @ref write_32
+ * @ref Instruction::rt
+ * @ref Instruction::rs
+ * @ref cop0_status
+ */
+void CPU::SW()
 {
     //if cache is isolated
     if(cop0_status & 0x00010000)
@@ -337,12 +389,32 @@ void CPU::SW() //Store Word
     write32(get_reg(ins.rs()) + offset, get_reg(ins.rt()));
 }
 
-void CPU::SLL() //Shift Left Logical
+/**
+ * @brief Shift Left Logical
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref Instruction::rd
+ * @ref Instruction::rt
+ * @ref Instruction::shamt
+ */
+void CPU::SLL()
 {
     set_reg(ins.rd(), get_reg(ins.rt()) << ins.shamt());
 }
 
-void CPU::ADDIU() //Add Immediate Unsigned
+/**
+ * @brief Add Immediate Unsigned
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref get_reg
+ * @ref Instruction::rt
+ * @ref Instruction::rs
+ * @ref Instruction::imm
+ * 
+ */
+void CPU::ADDIU()
 {
     uint32_t data_se = ins.imm();
     //pad offset with bit at 16th position
@@ -353,17 +425,47 @@ void CPU::ADDIU() //Add Immediate Unsigned
     set_reg(ins.rt(), get_reg(ins.rs()) + data_se);
 }
 
-void CPU::J() //Unconditional Jump
+/**
+ * @brief Unconditional Jump
+ * 
+ * \b References:
+ * @ref Instruction::addr
+ */
+void CPU::J()
 {
     pc = (pc & 0xf0000000) | (ins.addr() << 2);
 }
 
-void CPU::OR() //Bitwise OR
+/**
+ * @brief Bitwise OR
+ * 
+ * \b References:
+ * @ref set_reg
+ * @ref get_reg
+ * @ref Instruction::rd
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ */
+void CPU::OR()
 {
     set_reg(ins.rd(), get_reg(ins.rs()) | get_reg(ins.rt()));
 }
 
-void CPU::MTC0() //Move to Coprocessor 0
+/**
+ * @brief Move to Coprocessor 0
+ * 
+ * @throw std::runtime_error if nonzero value is written to any register other than status. (TODO: Handle these cases)
+ * @throw std::runtime_error if an unhandled register is written to. (Not one of the following: status, cause, bda, bpcm, bpc, dcic, bdam).
+ * 
+ * \b References:
+ * @ref Instruction::rd
+ * @ref Instruction::rt
+ * @ref cop0_status
+ * @ref cop0_cause
+ * @ref get_reg
+ * @ref set_reg
+ */
+void CPU::MTC0()
 {
     switch(ins.rd())
     {
@@ -402,7 +504,17 @@ void CPU::MTC0() //Move to Coprocessor 0
     }
 }
 
-void CPU::BNE() //Branch on Not Equal
+/**
+ * @brief Branch on Not Equal
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref branch
+ */
+void CPU::BNE()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -416,7 +528,21 @@ void CPU::BNE() //Branch on Not Equal
     }
 }
 
-void CPU::ADDI() //Add Immediate
+/**
+ * @brief Add Immediate
+ * 
+ * Signed addition.
+ * 
+ * @throw std::runtime_error if signed overflow occurs.
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref set_reg
+ */
+void CPU::ADDI()
 {
     uint32_t extended_imm = ins.imm();
     //pad offset with bit at 16th position
@@ -438,7 +564,21 @@ void CPU::ADDI() //Add Immediate
     set_reg(ins.rt(), get_reg(ins.rs()) + extended_imm);
 }
 
-void CPU::LW() // Load Word
+/**
+ * @brief Load Word
+ * 
+ * Sign extends the immediate value read from memory.
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref read32
+ * @ref LoadDelay
+ * 
+ */
+void CPU::LW()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -450,17 +590,53 @@ void CPU::LW() // Load Word
     pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + offset));
 }
 
-void CPU::SLTU() //Set on Less Than Unsigned
+/**
+ * @brief Set on Less Than Unsigned
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SLTU()
 {
     set_reg(ins.rd(), get_reg(ins.rs()) < get_reg(ins.rt()));
 }
 
-void CPU::ADDU() //Add Unsigned
+/**
+ * @brief Add Unsigned
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::ADDU()
 {
     set_reg(ins.rd(), get_reg(ins.rs()) + get_reg(ins.rt()));
 }
 
-void CPU::SH() //Store Halfword
+/**
+ * @brief Store Halfword
+ * 
+ * TODO: Implement Cache
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref write16
+ * @ref cop0_status
+ * 
+ */
+void CPU::SH()
 {
     //if cache is isolated
     if(cop0_status & 0x00010000)
@@ -479,19 +655,54 @@ void CPU::SH() //Store Halfword
     write16(get_reg(ins.rs()) + offset, get_reg(ins.rt()) & 0xffff);
 }
 
-void CPU::JAL() //Jump and Link
+/**
+ * @brief Jump and Link
+ * 
+ * Stores the address of the next instruction in register 31 and jumps to the address given by the instruction.
+ * 
+ * \b References:
+ * @ref Instruction::addr
+ * @ref set_reg
+ * 
+ */
+void CPU::JAL()
 {
     uint32_t ra = pc;
     pc = (pc & 0xf0000000) | (ins.addr() << 2);
     set_reg(31, ra);
 }
 
-void CPU::ANDI() //Bitwise AND Immediate
+/**
+ * @brief Bitwise AND Immediate
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::imm
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::ANDI()
 {
     set_reg(ins.rt(), get_reg(ins.rs()) & ins.imm());
 }
 
-void CPU::SB() //Store Byte
+/**
+ * @brief Store Byte
+ *
+ * TODO: Implement Cache
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref write8
+ * @ref cop0_status
+ * 
+ */
+void CPU::SB()
 {
     //if cache is isolated
     if(cop0_status & 0x00010000)
@@ -510,12 +721,34 @@ void CPU::SB() //Store Byte
     write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()) & 0xff);
 }
 
-void CPU::JR() //Jump Register
+/**
+ * @brief Jump Register
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref get_reg
+ * 
+ */
+void CPU::JR()
 {
     pc = get_reg(ins.rs());
 }
 
-void CPU::LB() //Load Byte
+/**
+ * @brief Load Byte
+ * 
+ * Sign extends the byte read from memory.
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref read8
+ * @ref LoadDelay
+ * 
+ */
+void CPU::LB()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -531,7 +764,18 @@ void CPU::LB() //Load Byte
     pending_load = LoadDelay(ins.rt(), data_s);
 }
 
-void CPU::BEQ() //Branch on Equal
+/**
+ * @brief Branch on Equal
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref branch
+ * 
+ */
+void CPU::BEQ()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -545,7 +789,21 @@ void CPU::BEQ() //Branch on Equal
     }
 }
 
-void CPU::MFC0() //Move from Coprocessor 0
+/**
+ * @brief Move From Coprocessor 0
+ * 
+ * @throw std::runtime_error if an unhandled register is read from. (Not one of the following: status, cause).
+ * 
+ * \b References:
+ * @ref Instruction::rd
+ * @ref Instruction::rt
+ * @ref cop0_status
+ * @ref cop0_cause
+ * @ref set_reg
+ * @ref LoadDelay
+ * 
+ */
+void CPU::MFC0()
 {
     switch(ins.rd())
     {
@@ -563,12 +821,39 @@ void CPU::MFC0() //Move from Coprocessor 0
     }
 }
 
-void CPU::AND() //Bitwise AND
+/**
+ * @brief Bitwise AND
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::AND()
 {
     set_reg(ins.rd(), get_reg(ins.rs()) & get_reg(ins.rt()));
 }
 
-void CPU::ADD() //Add
+/**
+ * @brief Add
+ * 
+ * Signed addition.
+ * TODO: Handle signed overflow exception
+ * 
+ * @throw std::runtime_error if signed overflow occurs.
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::ADD()
 {
     uint32_t extended_op1 = get_reg(ins.rt());
     uint32_t extended_op2 = get_reg(ins.rs());
@@ -587,7 +872,17 @@ void CPU::ADD() //Add
     set_reg(ins.rd(), extended_op1 + extended_op2);
 }
 
-void CPU::BGTZ() //Branch on Greater Than Zero
+/**
+ * @brief Branch on Greater Than Zero
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * 
+ */
+void CPU::BGTZ()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -601,7 +896,17 @@ void CPU::BGTZ() //Branch on Greater Than Zero
     }
 }
 
-void CPU::BLEZ() //Branch on Less Than or Equal to Zero
+/**
+ * @brief Branch on Less Than or Equal to Zero
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * 
+ */
+void CPU::BLEZ()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -615,7 +920,21 @@ void CPU::BLEZ() //Branch on Less Than or Equal to Zero
     }
 }
 
-void CPU::LBU() //Load Byte Unsigned
+/**
+ * @brief Load Byte Unsigned
+ * 
+ * Unsigned load. Zero extends the byte read from memory.
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref read8
+ * @ref LoadDelay
+ * 
+ */
+void CPU::LBU()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -627,13 +946,34 @@ void CPU::LBU() //Load Byte Unsigned
     pending_load = LoadDelay(ins.rt(), data);
 }
 
-void CPU::JALR() //Jump and Link Register
+/**
+ * @brief Jump and Link Register
+ * 
+ * Use a register (specified by the instruction in rd) to store the address of the next instruction and jump to the address given by the register specified by the instruction in rs.
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rd
+ * @ref set_reg
+ * 
+ */
+void CPU::JALR()
 {
     uint32_t ra = pc;
     pc = get_reg(ins.rs());
     set_reg(ins.rd(), ra);
 }
 
+/**
+ * @brief Choose between BLTZAL, BGEZAL, BLTZ, BGEZ
+ * 
+ * \b References:
+ * @ref BLTZAL
+ * @ref BGEZAL
+ * @ref BLTZ
+ * @ref BGEZ
+ * 
+ */
 void CPU::BLGE() //Choose between BLTZAL, BGEZAL, BLTZ, BGEZ
 {
     //check if the 16th bit of the instruction is set
@@ -655,7 +995,17 @@ void CPU::BLGE() //Choose between BLTZAL, BGEZAL, BLTZ, BGEZ
     }
 }
 
-void CPU::BLTZ() //Branch on Less Than Zero
+/**
+ * @brief Branch on Less Than Zero
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * 
+ */
+void CPU::BLTZ()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -665,7 +1015,18 @@ void CPU::BLTZ() //Branch on Less Than Zero
         branch(offset);
 }
 
-void CPU::BLTZAL() //Branch on Less Than Zero And Link
+/**
+ * @brief Branch on Less Than Zero And Link
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * @ref set_reg
+ * 
+ */
+void CPU::BLTZAL()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -679,7 +1040,17 @@ void CPU::BLTZAL() //Branch on Less Than Zero And Link
     }
 }
 
-void CPU::BGEZ() //Branch on Greater Than or Equal to Zero
+/**
+ * @brief Branch on Greater Than or Equal to Zero
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * 
+ */
+void CPU::BGEZ()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -689,7 +1060,18 @@ void CPU::BGEZ() //Branch on Greater Than or Equal to Zero
         branch(offset);
 }
 
-void CPU::BGEZAL() //Branch on Greater Than or Equal to Zero And Link
+/**
+ * @brief Branch on Greater Than or Equal to Zero And Link
+ * 
+ * \b References:
+ * @ref Instruction::imm
+ * @ref Instruction::rs
+ * @ref get_reg
+ * @ref branch
+ * @ref set_reg
+ * 
+ */
+void CPU::BGEZAL()
 {
     uint32_t offset = ins.imm();
     //pad offset with bit at 16th position
@@ -703,7 +1085,18 @@ void CPU::BGEZAL() //Branch on Greater Than or Equal to Zero And Link
     }
 }
 
-void CPU::SLTI() //Set on Less Than Immediate
+/**
+ * @brief Set on Less Than Immediate
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::imm
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SLTI()
 {
     uint32_t imm_se = ins.imm();
     //pad offset with bit at 16th position
@@ -713,7 +1106,17 @@ void CPU::SLTI() //Set on Less Than Immediate
     set_reg(ins.rt(), val);
 }
 
-void CPU::SRA() //Shift Right Arithmetic
+/**
+ * @brief Shift Right Arithmetic
+ * 
+ * \b References:
+ * @ref Instruction::rt
+ * @ref Instruction::shamt
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SRA()
 {
     uint32_t data = get_reg(ins.rt());
     uint32_t shamt = ins.shamt();
@@ -726,12 +1129,36 @@ void CPU::SRA() //Shift Right Arithmetic
     set_reg(ins.rd(), data);
 }
 
-void CPU::SUBU() //Subtract Unsigned
+/**
+ * @brief Subtract Unsigned
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref Instruction::rd
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
+void CPU::SUBU()
 {
     set_reg(ins.rd(), get_reg(ins.rs()) - get_reg(ins.rt()));
 }
 
-void CPU::DIV() //Division
+/**
+ * @brief Divide
+ * 
+ * @throw std::runtime_error if division by zero occurs.
+ * 
+ * \b References:
+ * @ref Instruction::rs
+ * @ref Instruction::rt
+ * @ref get_reg
+ * @ref lo
+ * @ref hi
+ * 
+ */
+void CPU::DIV()
 {
     uint32_t op1 = get_reg(ins.rs());
     uint32_t op2 = get_reg(ins.rt());
@@ -762,11 +1189,30 @@ void CPU::DIV() //Division
     hi = int32_t(op1) % int32_t(op2);
 }
 
+/**
+ * @brief Move From LO
+ * 
+ * \b References:
+ * @ref Instruction::rd
+ * @ref set_reg
+ * @ref lo
+ * 
+ */
 void CPU::MFLO()
 {
     set_reg(ins.rd(), lo);
 }
 
+/**
+ * @brief Shift Right Logical
+ * 
+ * \b References:
+ * @ref Instruction::rt
+ * @ref Instruction::shamt
+ * @ref get_reg
+ * @ref set_reg
+ * 
+ */
 void CPU::SRL()
 {
     set_reg(ins.rd(), get_reg(ins.rt()) >> ins.shamt());

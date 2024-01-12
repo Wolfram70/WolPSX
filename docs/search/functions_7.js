@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['load_5fnext_5fins_0',['load_next_ins',['../classCPU.html#a46e0c7d9dfbef53618fddaf9cdbb10fc',1,'CPU']]],
-  ['loaddelay_1',['LoadDelay',['../structLoadDelay.html#ac8d0f7b1e8b060d95c7ad7cf04af85b6',1,'LoadDelay::LoadDelay()'],['../structLoadDelay.html#a583497393fc38bd7b2fc9591ee04fa6a',1,'LoadDelay::LoadDelay(uint32_t reg, uint32_t data)']]]
+  ['j_0',['J',['../classCPU.html#a78f7ff283af9fc242364ee5cdee20e2b',1,'CPU']]],
+  ['jal_1',['JAL',['../classCPU.html#a1c57492867f41ff76b7998587b5bd9fc',1,'CPU']]],
+  ['jalr_2',['JALR',['../classCPU.html#a7caf46d9d783af4588f2d0d6a6ba5f49',1,'CPU']]],
+  ['jr_3',['JR',['../classCPU.html#a1c503c6a145c74e64d39d4897b192af0',1,'CPU']]]
 ];

@@ -8,10 +8,8 @@ var searchData=
   ['slti_5',['SLTI',['../classCPU.html#a5685228e04e2b427ace8235c3cefc750',1,'CPU']]],
   ['sltu_6',['SLTU',['../classCPU.html#a1e7a107753d184c4665a4242d2289afd',1,'CPU']]],
   ['special_7',['SPECIAL',['../classCPU.html#ae4740bbafaa3e9184c17ead248ba06d3',1,'CPU']]],
-  ['spu_5frange_8',['spu_range',['../classBus.html#aee8a0b71b854b8f196ab34ba482af4e5',1,'Bus']]],
-  ['sra_9',['SRA',['../classCPU.html#a2885a2846f082ea543ad652954f369ac',1,'CPU']]],
-  ['srl_10',['SRL',['../classCPU.html#a6d0babdfb866ab3a35681fb4d55742c6',1,'CPU']]],
-  ['start_11',['start',['../structRange.html#a939daf7501e42cf0614b14158f3f9fc0',1,'Range']]],
-  ['subu_12',['SUBU',['../classCPU.html#a3b227ef9d0413738d55a9f62a85ecfa1',1,'CPU']]],
-  ['sw_13',['SW',['../classCPU.html#ab47dd0bc7f54a507ba7ecf54e8411609',1,'CPU']]]
+  ['sra_8',['SRA',['../classCPU.html#a2885a2846f082ea543ad652954f369ac',1,'CPU']]],
+  ['srl_9',['SRL',['../classCPU.html#a6d0babdfb866ab3a35681fb4d55742c6',1,'CPU']]],
+  ['subu_10',['SUBU',['../classCPU.html#a3b227ef9d0413738d55a9f62a85ecfa1',1,'CPU']]],
+  ['sw_11',['SW',['../classCPU.html#ab47dd0bc7f54a507ba7ecf54e8411609',1,'CPU']]]
 ];
