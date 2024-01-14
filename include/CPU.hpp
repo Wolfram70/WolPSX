@@ -107,7 +107,7 @@ struct RegisterLoad
     uint32_t data;
 
     /**
-     * @brief Delay
+     * @brief Delay in clock cycles
      * 
      */
     uint32_t delay;
@@ -368,6 +368,7 @@ private:
     void set_reg(uint8_t reg, uint32_t data);
     uint32_t get_reg(uint8_t reg);
     void load_regs();
+    void show_regs();
 };
 
 #endif

@@ -326,6 +326,24 @@ void CPU::load_regs()
     regs[0] = 0; // $zero register
 }
 
+/**
+ * @brief Shows the values of the registers.
+ * 
+ * Used for debugging.
+ */
+void CPU::show_regs()
+{
+    std::cout << "Registers:\n";
+    for(int i = 0; i < 32; i++)
+    {
+        std::cout << "R" << i << ": " << std::hex << regs[i] << "\t";
+        if(i % 4 == 3)
+            std::cout << "\n";
+    }
+    std::cout << "HI: " << std::hex << hi << "\tLO: " << std::hex << lo << "\n";
+
+}
+
 //INSTRUCTIONS
 
 /**
@@ -650,7 +668,6 @@ void CPU::LW()
         offset |= 0xffff0000;
     }
 
-    // pending_load = Load(ins.rt(), read32(get_reg(ins.rs()) + offset));
     load_queue.push(RegisterLoad(ins.rt(), read32(get_reg(ins.rs()) + offset), 1));
 }
 
@@ -829,7 +846,7 @@ void CPU::LB()
     {
         data_s |= 0xffffff00;
     }
-    // pending_load = Load(ins.rt(), data_s);
+
     load_queue.push(RegisterLoad(ins.rt(), data_s, 1));
 }
 
@@ -877,11 +894,9 @@ void CPU::MFC0()
     switch(ins.rd())
     {
         case 12: //Status
-            // pending_load = Load(ins.rt(), cop0_status);
             load_queue.push(RegisterLoad(ins.rt(), cop0_status, 1));
             break;
         case 13: //Cause
-            // pending_load = Load(ins.rt(), cop0_cause);
             break;
         default:
             //throw unhandled instruction error
@@ -1013,7 +1028,6 @@ void CPU::LBU()
         offset |= 0xffff0000;
     }
     uint32_t data = read8(get_reg(ins.rs()) + offset);
-    // pending_load = Load(ins.rt(), data);
     load_queue.push(RegisterLoad(ins.rt(), data, 1));
 }
 
