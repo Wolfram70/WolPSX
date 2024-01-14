@@ -4,6 +4,7 @@
 #include <stdint.h>
 #include <map>
 #include <string>
+#include <queue>
 
 class Bus;
 
@@ -88,10 +89,10 @@ struct Instruction
 };
 
 /**
- * @brief Struture to store details of load to implement load delay
+ * @brief Struture to store details of loads to the general purpose registers.
  * 
  */
-struct LoadDelay
+struct RegisterLoad
 {
     /**
      * @brief Register ID
@@ -106,18 +107,33 @@ struct LoadDelay
     uint32_t data;
 
     /**
-     * @brief Construct a new Load Delay object
+     * @brief Delay
      * 
      */
-    LoadDelay() {}
+    uint32_t delay;
 
     /**
-     * @brief Construct a new Load Delay object
+     * @brief Construct a new RegisterLoad object
+     * 
+     */
+    RegisterLoad() {}
+
+    /**
+     * @brief Construct a new RegisterLoad object with no delay
      * 
      * @param reg Register ID
      * @param data Data to be loaded
      */
-    LoadDelay(uint32_t reg, uint32_t data): reg(reg), data(data) {}
+    RegisterLoad(uint32_t reg, uint32_t data): reg(reg), data(data) { delay = 0; }
+
+    /**
+     * @brief Construct a new RegisterLoad object with delay
+     * 
+     * @param reg Register ID
+     * @param data Data to be loaded
+     * @param delay Delay
+     */
+    RegisterLoad(uint32_t reg, uint32_t data, uint32_t delay): reg(reg), data(data), delay(delay) {}
 };
 
 /**
@@ -152,9 +168,18 @@ private:
     void write8(uint32_t addr, uint8_t data);
 
 private:
+    /**
+     * @brief Pointer to the Bus object
+     * 
+     */
     Bus* bus;
 
-    LoadDelay pending_load;
+    /**
+     * @brief Queue to store the loads to the general purpose registers.
+     * 
+     * Used to implement load delay.
+     */
+    std::queue<RegisterLoad> load_queue;
 
     /**
      * @brief Program counter
@@ -181,18 +206,10 @@ private:
     Instruction ins;
 
     /**
-     * @brief General purpose registers - input set
+     * @brief General purpose registers.
      * 
-     * Used to store the input values of the general purpose registers for the current instruction. Split into two arrays to implement load delay.
      */
-    uint32_t gpreg_in[32] = {0xdeaddeed};
-
-    /**
-     * @brief General purpose registers - output set
-     * 
-     * Used to store the output values of the general purpose registers for the current instruction. Split into two arrays to implement load delay.
-     */
-    uint32_t gpreg_out[32] = {0xdeaddeed};
+    uint32_t regs[32] = {0xdeaddeed};
 
     /**
      * @brief HI register.
@@ -350,7 +367,7 @@ private:
     void branch(uint32_t offset);
     void set_reg(uint8_t reg, uint32_t data);
     uint32_t get_reg(uint8_t reg);
-    void copy_regs();
+    void load_regs();
 };
 
 #endif

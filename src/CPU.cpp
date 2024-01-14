@@ -11,8 +11,7 @@
  */
 CPU::CPU()
 {
-    gpreg_in[0] = 0; // $zero register
-    gpreg_out[0] = 0; //$zero register
+    regs[0] = 0; //$zero register
     pc = 0xbfc00000;
 
     cop0_bda = 0x00000000;
@@ -25,8 +24,6 @@ CPU::CPU()
 
     hi = 0xdeaddeed;
     lo = 0xdeaddeed;
-
-    pending_load = LoadDelay(0, 0);
 
     lookup_op[0b000000] = &CPU::SPECIAL;
     lookup_op[0b010000] = &CPU::COP0;
@@ -246,12 +243,11 @@ void CPU::decode_and_execute()
  * \b References:
  * @ref load_next_ins
  * @ref decode_and_execute
- * @ref copy_regs
+ * @ref load_regs
  * @ref set_reg
  */
 void CPU::clock()
 {
-    //All the reg data req by the instruction is "read already" : Implementation with 2 sets of registers
     std::cout << "PC: " << std::hex << pc - 4 << "\t"; //REMOVE
     load_next_ins();
     std::cout << "Ins: " << std::hex << ir << "\t"; //REMOVE
@@ -261,13 +257,10 @@ void CPU::clock()
         std::cout << "Func: " << lookup_mnemonic_special[ins.funct()] << "\t"; //REMOVE
     }
     std::cout << std::endl; //REMOVE
-    set_reg(pending_load.reg, pending_load.data);
-    pending_load = LoadDelay(0, 0);
+
     decode_and_execute();
-    gpreg_in[0] = 0;
-    gpreg_out[0] = 0; // $zero register
-    copy_regs();
-    //All the reg data to write is written : Implementation with 2 sets of registers
+
+    load_regs();
 }
 
 /**
@@ -295,8 +288,9 @@ void CPU::branch(uint32_t offset)
  */
 void CPU::set_reg(uint8_t reg, uint32_t data)
 {
-    gpreg_out[reg] = data;
-    gpreg_out[0] = 0; // $zero register
+    // gpreg_out[reg] = data;
+    // gpreg_out[0] = 0; // $zero register
+    load_queue.push(RegisterLoad(reg, data));
 }
 
 /**
@@ -307,21 +301,29 @@ void CPU::set_reg(uint8_t reg, uint32_t data)
  */
 uint32_t CPU::get_reg(uint8_t reg)
 {
-    return gpreg_in[reg];
+    // return gpreg_in[reg];
+    return regs[reg];
 }
 
 /**
- * @brief Copies the output registers to the input registers.
+ * @brief Loads the registers from the load queue.
  * 
- * Used to implement the load delay.
+ * Decrements the delay of each load in the load queue. If the delay is 0, the data is written to the register.
  */
-void CPU::copy_regs()
+void CPU::load_regs()
 {
-    //copy output registers to input
-    for(int i = 0; i < 32; i++)
+    uint8_t num_loads = load_queue.size();
+    for(int i = 0; i < num_loads; i++)
     {
-        gpreg_in[i] = gpreg_out[i];
+        RegisterLoad load = load_queue.front();
+        load_queue.pop();
+        load.delay--;
+        if(load.delay == -1)
+            regs[load.reg] = load.data;
+        else
+            load_queue.push(load);
     }
+    regs[0] = 0; // $zero register
 }
 
 //INSTRUCTIONS
@@ -636,7 +638,7 @@ void CPU::ADDI()
  * @ref Instruction::rt
  * @ref get_reg
  * @ref read32
- * @ref LoadDelay
+ * @ref RegisterLoad
  * 
  */
 void CPU::LW()
@@ -648,7 +650,8 @@ void CPU::LW()
         offset |= 0xffff0000;
     }
 
-    pending_load = LoadDelay(ins.rt(), read32(get_reg(ins.rs()) + offset));
+    // pending_load = Load(ins.rt(), read32(get_reg(ins.rs()) + offset));
+    load_queue.push(RegisterLoad(ins.rt(), read32(get_reg(ins.rs()) + offset), 1));
 }
 
 /**
@@ -810,7 +813,7 @@ void CPU::JR()
  * @ref Instruction::rt
  * @ref get_reg
  * @ref read8
- * @ref LoadDelay
+ * @ref RegisterLoad
  * 
  */
 void CPU::LB()
@@ -826,7 +829,8 @@ void CPU::LB()
     {
         data_s |= 0xffffff00;
     }
-    pending_load = LoadDelay(ins.rt(), data_s);
+    // pending_load = Load(ins.rt(), data_s);
+    load_queue.push(RegisterLoad(ins.rt(), data_s, 1));
 }
 
 /**
@@ -865,7 +869,7 @@ void CPU::BEQ()
  * @ref cop0_status
  * @ref cop0_cause
  * @ref set_reg
- * @ref LoadDelay
+ * @ref RegisterLoad
  * 
  */
 void CPU::MFC0()
@@ -873,10 +877,11 @@ void CPU::MFC0()
     switch(ins.rd())
     {
         case 12: //Status
-            pending_load = LoadDelay(ins.rt(), cop0_status);
+            // pending_load = Load(ins.rt(), cop0_status);
+            load_queue.push(RegisterLoad(ins.rt(), cop0_status, 1));
             break;
         case 13: //Cause
-            // pending_load = LoadDelay(ins.rt(), cop0_cause);
+            // pending_load = Load(ins.rt(), cop0_cause);
             break;
         default:
             //throw unhandled instruction error
@@ -996,7 +1001,7 @@ void CPU::BLEZ()
  * @ref Instruction::rt
  * @ref get_reg
  * @ref read8
- * @ref LoadDelay
+ * @ref RegisterLoad
  * 
  */
 void CPU::LBU()
@@ -1008,7 +1013,8 @@ void CPU::LBU()
         offset |= 0xffff0000;
     }
     uint32_t data = read8(get_reg(ins.rs()) + offset);
-    pending_load = LoadDelay(ins.rt(), data);
+    // pending_load = Load(ins.rt(), data);
+    load_queue.push(RegisterLoad(ins.rt(), data, 1));
 }
 
 /**

@@ -102,6 +102,12 @@ uint32_t Bus::read32_cpu(uint32_t addr)
     {
         return ram->read32_cpu(ram_range.offset(addr));
     }
+    else if(interrupt_range.contains(addr))
+    {
+        std::cout << "Unhandled Interrupt Control Read: Just returning 0" << std::endl;
+        // TODO: Implement interrupts
+        return 0;
+    }
 
     //throw a runtime error with the unmapped address converted to hex
     std::stringstream ss;
