@@ -23,6 +23,9 @@ CPU::CPU()
     cop0_status = 0x00000000;
     cop0_cause = 0x00000000;
 
+    hi = 0xdeaddeed;
+    lo = 0xdeaddeed;
+
     pending_load = LoadDelay(0, 0);
 
     lookup_op[0b000000] = &CPU::SPECIAL;
@@ -71,6 +74,50 @@ CPU::CPU()
 
     lookup_cop0[0b00100] = &CPU::MTC0;
     lookup_cop0[0b00000] = &CPU::MFC0;
+
+    lookup_mnemonic_op[0b000000] = "SPECIAL";
+    lookup_mnemonic_op[0b010000] = "COP0";
+    lookup_mnemonic_op[0b010001] = "COP1";
+    lookup_mnemonic_op[0b010010] = "COP2";
+    lookup_mnemonic_op[0b010011] = "COP3";
+    lookup_mnemonic_op[0b001111] = "LUI";
+    lookup_mnemonic_op[0b001101] = "ORI";
+    lookup_mnemonic_op[0b101011] = "SW";
+    lookup_mnemonic_op[0b001001] = "ADDIU";
+    lookup_mnemonic_op[0b000010] = "J";
+    lookup_mnemonic_op[0b000101] = "BNE";
+    lookup_mnemonic_op[0b001000] = "ADDI";
+    lookup_mnemonic_op[0b100011] = "LW";
+    lookup_mnemonic_op[0b101001] = "SH";
+    lookup_mnemonic_op[0b000011] = "JAL";
+    lookup_mnemonic_op[0b001100] = "ANDI";
+    lookup_mnemonic_op[0b101000] = "SB";
+    lookup_mnemonic_op[0b100000] = "LB";
+    lookup_mnemonic_op[0b000100] = "BEQ";
+    lookup_mnemonic_op[0b000111] = "BGTZ";
+    lookup_mnemonic_op[0b000110] = "BLEZ";
+    lookup_mnemonic_op[0b100100] = "LBU";
+    lookup_mnemonic_op[0b000001] = "BLGE";
+    lookup_mnemonic_op[0b001010] = "SLTI";
+    lookup_mnemonic_op[0b001011] = "SLTIU";
+
+    lookup_mnemonic_special[0b000000] = "SLL";
+    lookup_mnemonic_special[0b000000] = "SLL";
+    lookup_mnemonic_special[0b100101] = "OR";
+    lookup_mnemonic_special[0b101011] = "SLTU";
+    lookup_mnemonic_special[0b100001] = "ADDU";
+    lookup_mnemonic_special[0b001000] = "JR";
+    lookup_mnemonic_special[0b100100] = "AND";
+    lookup_mnemonic_special[0b100000] = "ADD";
+    lookup_mnemonic_special[0b001001] = "JALR";
+    lookup_mnemonic_special[0b000011] = "SRA";
+    lookup_mnemonic_special[0b100011] = "SUBU";
+    lookup_mnemonic_special[0b011010] = "DIV";
+    lookup_mnemonic_special[0b010010] = "MFLO";
+    lookup_mnemonic_special[0b000010] = "SRL";
+    lookup_mnemonic_special[0b011011] = "DIVU";
+    lookup_mnemonic_special[0b010000] = "MFHI";
+    lookup_mnemonic_special[0b101010] = "SLT";
 }
 
 /**
@@ -187,6 +234,7 @@ void CPU::decode_and_execute()
     //throw unhandled instruction error
     std::stringstream ss;
     ss << "Unhandled instruction: " << std::hex << ir;
+    std::cout << "Program Counter: " << std::hex << pc - 8 << "\n";
     throw std::runtime_error(ss.str());
 }
 
@@ -204,9 +252,15 @@ void CPU::decode_and_execute()
 void CPU::clock()
 {
     //All the reg data req by the instruction is "read already" : Implementation with 2 sets of registers
-    // std::cout << "PC: " << std::hex << pc << "\n";
+    std::cout << "PC: " << std::hex << pc - 4 << "\t"; //REMOVE
     load_next_ins();
-    // std::cout << "Instruction: " << std::hex << ir << "\n";
+    std::cout << "Ins: " << std::hex << ir << "\t"; //REMOVE
+    std::cout << "Mnem: " << lookup_mnemonic_op[ins.opcode()] << "\t"; //REMOVE
+    if(ins.opcode() == 0b000000)
+    {
+        std::cout << "Func: " << lookup_mnemonic_special[ins.funct()] << "\t"; //REMOVE
+    }
+    std::cout << std::endl; //REMOVE
     set_reg(pending_load.reg, pending_load.data);
     pending_load = LoadDelay(0, 0);
     decode_and_execute();
@@ -224,7 +278,7 @@ void CPU::clock()
  */
 void CPU::branch(uint32_t offset)
 {
-    pc -= 4; //undo pc increment to point to current instruction
+    pc -= 4; //undo pc increment to point to next instruction
     uint32_t multiplied = offset << 2;
     if((multiplied & 0x80000000) != (offset & 0x80000000))
     {
@@ -331,6 +385,7 @@ void CPU::SPECIAL()
     //throw unhandled instruction error
     std::stringstream ss;
     ss << "Unhandled instruction (SPECIAL): " << std::hex << ir;
+    std::cout << "Program Counter: " << std::hex << pc << "\n";
     throw std::runtime_error(ss.str());
 }
 
@@ -427,6 +482,8 @@ void CPU::ADDIU()
         data_se |= 0xffff0000;
     }
     set_reg(ins.rt(), get_reg(ins.rs()) + data_se);
+
+    // std::cout << "Added " << std::hex << data_se << " to " << get_reg(ins.rs()) << " to get " << get_reg(ins.rt()) << "\n"; //REMOVE
 }
 
 /**
@@ -437,7 +494,7 @@ void CPU::ADDIU()
  */
 void CPU::J()
 {
-    pc = (pc & 0xf0000000) | (ins.addr() << 2);
+    pc = ((pc - 4) & 0xf0000000) | (ins.addr() << 2);
 }
 
 /**
@@ -491,7 +548,7 @@ void CPU::MTC0()
             }
             break;
         case 13:
-            cop0_cause = get_reg(ins.rt());
+            // cop0_cause = get_reg(ins.rt());
             //if nonzero value written, throw error
             if(get_reg(ins.rt()) != 0)
             {
@@ -671,8 +728,10 @@ void CPU::SH()
  */
 void CPU::JAL()
 {
+    // std::cout << "Jumped to: " << std::hex << ((pc & 0xf0000000) | (ins.addr() << 2)) << "\n"; //REMOVE
+    // uint32_t ra = pc + 4;
     uint32_t ra = pc;
-    pc = (pc & 0xf0000000) | (ins.addr() << 2);
+    pc = ((pc - 4) & 0xf0000000) | (ins.addr() << 2);
     set_reg(31, ra);
 }
 
@@ -689,7 +748,8 @@ void CPU::JAL()
  */
 void CPU::ANDI()
 {
-    set_reg(ins.rt(), get_reg(ins.rs()) & ins.imm());
+    uint32_t data = ins.imm() & get_reg(ins.rs());
+    set_reg(ins.rt(), data);
 }
 
 /**
@@ -735,6 +795,7 @@ void CPU::SB()
  */
 void CPU::JR()
 {
+    // std::cout << "Jumped to: " << std::hex << get_reg(ins.rs()) << "\n"; //REMOVE
     pc = get_reg(ins.rs());
 }
 
@@ -815,7 +876,7 @@ void CPU::MFC0()
             pending_load = LoadDelay(ins.rt(), cop0_status);
             break;
         case 13: //Cause
-            pending_load = LoadDelay(ins.rt(), cop0_cause);
+            // pending_load = LoadDelay(ins.rt(), cop0_cause);
             break;
         default:
             //throw unhandled instruction error
@@ -963,6 +1024,7 @@ void CPU::LBU()
  */
 void CPU::JALR()
 {
+    // uint32_t ra = pc + 4;
     uint32_t ra = pc;
     pc = get_reg(ins.rs());
     set_reg(ins.rd(), ra);
@@ -985,17 +1047,17 @@ void CPU::BLGE() //Choose between BLTZAL, BGEZAL, BLTZ, BGEZ
     {
         //check if the 20th bit of the instruction is set
         if(ir & 0x00100000)
-            BLTZAL();
+            BGEZAL();
         else
-            BLTZ();
+            BGEZ();
     }
     else
     {
         //check if the 20th bit of the instruction is set
         if(ir & 0x00100000)
-            BGEZAL();
+            BLTZAL();
         else
-            BGEZ();
+            BLTZ();
     }
 }
 
@@ -1015,7 +1077,9 @@ void CPU::BLTZ()
     //pad offset with bit at 16th position
     if(offset & 0x8000)
         offset |= 0xffff0000;
-    if(int32_t(get_reg(ins.rs())) < 0)
+    int32_t op1 = get_reg(ins.rs());
+    uint8_t val = op1 < 0;
+    if(val)
         branch(offset);
 }
 
@@ -1036,8 +1100,11 @@ void CPU::BLTZAL()
     //pad offset with bit at 16th position
     if(offset & 0x8000)
         offset |= 0xffff0000;
-    if(int32_t(get_reg(ins.rs())) < 0)
+    int32_t op1 = get_reg(ins.rs());
+    uint8_t val = op1 < 0;
+    if(val)
     {
+        // uint32_t ra = pc + 4;
         uint32_t ra = pc;
         branch(offset);
         set_reg(31, ra);
@@ -1060,7 +1127,9 @@ void CPU::BGEZ()
     //pad offset with bit at 16th position
     if(offset & 0x8000)
         offset |= 0xffff0000;
-    if(int32_t(get_reg(ins.rs())) >= 0)
+    int32_t op1 = get_reg(ins.rs());
+    uint8_t val = op1 >= 0;
+    if(val)
         branch(offset);
 }
 
@@ -1081,8 +1150,11 @@ void CPU::BGEZAL()
     //pad offset with bit at 16th position
     if(offset & 0x8000)
         offset |= 0xffff0000;
-    if(int32_t(get_reg(ins.rs())) >= 0)
+    int32_t op1 = get_reg(ins.rs());
+    uint8_t val = op1 >= 0;
+    if(val)
     {
+        // uint32_t ra = pc + 4;
         uint32_t ra = pc;
         branch(offset);
         set_reg(31, ra);
@@ -1106,8 +1178,9 @@ void CPU::SLTI()
     //pad offset with bit at 16th position
     if(imm_se & 0x8000)
         imm_se |= 0xffff0000;
-    uint32_t val = int32_t(get_reg(ins.rs())) < int32_t(imm_se);
-    set_reg(ins.rt(), val);
+    int32_t op1 = get_reg(ins.rs());
+    int32_t op2 = imm_se;
+    set_reg(ins.rt(), op1 < op2);
 }
 
 /**
@@ -1169,7 +1242,7 @@ void CPU::DIV()
     if(op2 == 0)
     {
         //throw division by zero error
-        if(op1 < 0)
+        if(int32_t(op1) < 0)
         {
             lo = 1;
             hi = op1;
@@ -1221,7 +1294,8 @@ void CPU::MFLO()
  */
 void CPU::SRL()
 {
-    set_reg(ins.rd(), get_reg(ins.rt()) >> ins.shamt());
+    uint32_t data = get_reg(ins.rt()) >> ins.shamt();
+    set_reg(ins.rd(), data);
 }
 
 /**
@@ -1241,10 +1315,9 @@ void CPU::SLTIU()
     //pad argument with bit at 16th position
     if(arg & 0x8000)
         arg |= 0xffff0000;
-    if(get_reg(ins.rs()) < arg)
-        set_reg(ins.rt(), 1);
-    else
-        set_reg(ins.rt(), 0);
+
+    uint32_t val = (get_reg(ins.rs()) < arg);
+    set_reg(ins.rt(), val);
 }
 
 /**
@@ -1308,8 +1381,7 @@ void CPU::MFHI()
  */
 void CPU::SLT()
 {
-    if(int32_t(get_reg(ins.rs())) < int32_t(get_reg(ins.rt())))
-        set_reg(ins.rd(), 1);
-    else
-        set_reg(ins.rd(), 0);
+    int32_t op1 = get_reg(ins.rs());
+    int32_t op2 = get_reg(ins.rt());
+    set_reg(ins.rd(), op1 < op2);
 }

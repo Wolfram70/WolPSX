@@ -3,6 +3,7 @@
 
 #include <stdint.h>
 #include <map>
+#include <string>
 
 class Bus;
 
@@ -279,6 +280,18 @@ private:
      * 
      */
     std::map<uint8_t, void (CPU::*)()> lookup_cop2;
+
+    /**
+     * @brief Lookup table for the mnemonics of instructions.
+     * 
+     */
+    std::map<uint8_t, std::string> lookup_mnemonic_op;
+
+    /**
+     * @brief Lookup table for the mnemonics of special instructions.
+     * 
+     */
+    std::map<uint8_t, std::string> lookup_mnemonic_special;
 
     void LUI();
     void ORI();

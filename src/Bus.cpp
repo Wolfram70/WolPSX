@@ -100,7 +100,7 @@ uint32_t Bus::read32_cpu(uint32_t addr)
     }
     else if(ram_range.contains(addr))
     {
-        return ram->read32_cpu(ram_range.offset(addr) & 0x001fffff);
+        return ram->read32_cpu(ram_range.offset(addr));
     }
 
     //throw a runtime error with the unmapped address converted to hex
@@ -181,7 +181,7 @@ void Bus::write32_cpu(uint32_t addr, uint32_t data)
     }
     else if(ram_range.contains(addr))
     {
-        ram->write32_cpu(ram_range.offset(addr) & 0x001fffff, data);
+        ram->write32_cpu(ram_range.offset(addr), data);
         return;
     }
     else if(interrupt_range.contains(addr))
@@ -317,7 +317,7 @@ uint8_t Bus::read8_cpu(uint32_t addr)
     }
     else if(ram_range.contains(addr))
     {
-        return ram->read8_cpu(ram_range.offset(addr) & 0x001fffff);
+        return ram->read8_cpu(ram_range.offset(addr));
     }
 
     //throw a runtime error with the unmapped address converted to hex
@@ -355,7 +355,7 @@ void Bus::write8_cpu(uint32_t addr, uint8_t data)
     }
     else if(ram_range.contains(addr))
     {
-        return ram->write8_cpu(ram_range.offset(addr) & 0x001fffff, data);
+        return ram->write8_cpu(ram_range.offset(addr), data);
     }
 
     //throw a runtime error with the unmapped address converted to hex
