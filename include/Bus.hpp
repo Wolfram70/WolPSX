@@ -13,6 +13,7 @@
 #define EXPANSION2_RANGE 0x1f802000, 0x1f803fff
 #define EXPANSION1_RANGE 0x1f000000, 0x1f7fffff
 #define INTERRUPT_RANGE 0x1f801070, 0x1f801077
+#define TIMER_RANGE 0x1f801100, 0x1f801131
 
 class CPU;
 class BIOS;
@@ -164,6 +165,12 @@ private:
      * 
      */
     Range interrupt_range = Range(INTERRUPT_RANGE);
+
+    /**
+     * @brief Range of the Timer Registers
+     * 
+     */
+    Range timer_range = Range(TIMER_RANGE);
 };
 
 #endif

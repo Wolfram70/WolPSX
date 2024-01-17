@@ -231,7 +231,6 @@ void CPU::decode_and_execute()
     //throw unhandled instruction error
     std::stringstream ss;
     ss << "Unhandled instruction: " << std::hex << ir;
-    std::cout << "Program Counter: " << std::hex << pc - 8 << "\n";
     throw std::runtime_error(ss.str());
 }
 
@@ -248,15 +247,15 @@ void CPU::decode_and_execute()
  */
 void CPU::clock()
 {
-    std::cout << "PC: " << std::hex << pc - 4 << "\t"; //REMOVE
+    // std::cout << "PC: " << std::hex << pc - 4 << "\t"; //REMOVE
     load_next_ins();
-    std::cout << "Ins: " << std::hex << ir << "\t"; //REMOVE
-    std::cout << "Mnem: " << lookup_mnemonic_op[ins.opcode()] << "\t"; //REMOVE
+    // std::cout << "Ins: " << std::hex << ir << "\t"; //REMOVE
+    // std::cout << "Mnem: " << lookup_mnemonic_op[ins.opcode()] << "\t"; //REMOVE
     if(ins.opcode() == 0b000000)
     {
-        std::cout << "Func: " << lookup_mnemonic_special[ins.funct()] << "\t"; //REMOVE
+        // std::cout << "Func: " << lookup_mnemonic_special[ins.funct()] << "\t"; //REMOVE
     }
-    std::cout << std::endl; //REMOVE
+    // std::cout << std::endl; //REMOVE
 
     decode_and_execute();
 
@@ -405,7 +404,6 @@ void CPU::SPECIAL()
     //throw unhandled instruction error
     std::stringstream ss;
     ss << "Unhandled instruction (SPECIAL): " << std::hex << ir;
-    std::cout << "Program Counter: " << std::hex << pc << "\n";
     throw std::runtime_error(ss.str());
 }
 

@@ -68,12 +68,11 @@ void RAM::write32_cpu(uint32_t offset, uint32_t data)
 }
 
 /**
- * @brief Reads a 16-bit word from the RAM.
+ * @brief Reads a byte from the RAM.
  * 
  * @param offset Offset to read from
  * @return uint16_t Data read
  * 
- * @throw std::runtime_error If the offset is unaligned
  * @throw std::runtime_error If the offset is out of bounds
  */
 uint8_t RAM::read8_cpu(uint32_t offset)
@@ -88,12 +87,11 @@ uint8_t RAM::read8_cpu(uint32_t offset)
 }
 
 /**
- * @brief Writes a 16-bit word to the RAM.
+ * @brief Writes a byte to the RAM.
  * 
  * @param offset Offset to write to
  * @param data Data to write
  * 
- * @throw std::runtime_error If the offset is unaligned
  * @throw std::runtime_error If the offset is out of bounds
  */
 void RAM::write8_cpu(uint32_t offset, uint8_t data)
@@ -105,4 +103,56 @@ void RAM::write8_cpu(uint32_t offset, uint8_t data)
         throw std::runtime_error(ss.str());
     }
     this->data[offset] = data;
+}
+
+/**
+ * @brief Reads a 16-bit word from the RAM.
+ * 
+ * @param offset Offset to read from
+ * @return uint16_t Data read
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
+uint16_t RAM::read16_cpu(uint32_t offset)
+{
+    if(offset >= data.size())
+    {
+        std::stringstream ss;
+        ss << "Size exceeded for read16_cpu (RAM): 0x" << std::hex << offset;
+        throw std::runtime_error(ss.str());
+    }
+    if(offset % 2 != 0)
+    {
+        std::stringstream ss;
+        ss << "Unaligned read16_cpu (RAM): 0x" << std::hex << offset;
+        throw std::runtime_error(ss.str());
+    }
+    return *(uint16_t*)&data[offset];
+}
+
+/**
+ * @brief Writes a 16-bit word to the RAM.
+ * 
+ * @param offset Offset to write to
+ * @param data Data to write
+ * 
+ * @throw std::runtime_error If the offset is unaligned
+ * @throw std::runtime_error If the offset is out of bounds
+ */
+void RAM::write16_cpu(uint32_t offset, uint16_t data)
+{
+    if(offset >= this->data.size())
+    {
+        std::stringstream ss;
+        ss << "Size exceeded for write16_cpu (RAM): 0x" << std::hex << offset;
+        throw std::runtime_error(ss.str());
+    }
+    if(offset % 2 != 0)
+    {
+        std::stringstream ss;
+        ss << "Unaligned write16_cpu (RAM): 0x" << std::hex << offset;
+        throw std::runtime_error(ss.str());
+    }
+    *(uint16_t*)&this->data[offset] = data;
 }

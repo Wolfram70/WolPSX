@@ -271,6 +271,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
 
     if(spu_range.contains(addr))
     {
+        //TODO: Implement SPU
         switch(spu_range.offset(addr))
         {
             default:
@@ -280,6 +281,12 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
                 break;
         }
 
+        return;
+    }
+    else if(timer_range.contains(addr))
+    {
+        //TODO implement timer
+        std::cout << "Ignoring write16 to Timer Register" << std::endl;
         return;
     }
 
