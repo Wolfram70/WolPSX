@@ -1,8 +1,8 @@
 #include <iostream>
 #include <sstream>
 
-#include "../include/CPU.hpp"
-#include "../include/Bus.hpp"
+#include "core/cpu/cpu.hpp"
+#include "core/interconnect/bus.hpp"
 
 /**
  * @brief Construct a new CPU object
@@ -317,7 +317,7 @@ void CPU::load_regs()
         RegisterLoad load = load_queue.front();
         load_queue.pop();
         load.delay--;
-        if(load.delay == -1)
+        if(load.delay == 0xffffffff)
             regs[load.reg] = load.data;
         else
             load_queue.push(load);
@@ -390,24 +390,6 @@ void CPU::COP3()
 }
 
 /**
- * @brief Looks up and executes the appropriate SPECIAL instruction.
- * 
- * @throw std::runtime_error if the instruction is not mapped in the lookup_special table.
- */
-void CPU::SPECIAL()
-{
-    if(lookup_special.find(ins.funct()) != lookup_special.end())
-    {
-        (this->*lookup_special[ins.funct()])();
-        return;
-    }
-    //throw unhandled instruction error
-    std::stringstream ss;
-    ss << "Unhandled instruction (SPECIAL): " << std::hex << ir;
-    throw std::runtime_error(ss.str());
-}
-
-/**
  * @brief Load Upper Immediate
  * 
  * \b References:
@@ -467,20 +449,6 @@ void CPU::SW()
 }
 
 /**
- * @brief Shift Left Logical
- * 
- * \b References:
- * @ref set_reg
- * @ref Instruction::rd
- * @ref Instruction::rt
- * @ref Instruction::shamt
- */
-void CPU::SLL()
-{
-    set_reg(ins.rd(), get_reg(ins.rt()) << ins.shamt());
-}
-
-/**
  * @brief Add Immediate Unsigned
  * 
  * \b References:
@@ -513,21 +481,6 @@ void CPU::ADDIU()
 void CPU::J()
 {
     pc = ((pc - 4) & 0xf0000000) | (ins.addr() << 2);
-}
-
-/**
- * @brief Bitwise OR
- * 
- * \b References:
- * @ref set_reg
- * @ref get_reg
- * @ref Instruction::rd
- * @ref Instruction::rs
- * @ref Instruction::rt
- */
-void CPU::OR()
-{
-    set_reg(ins.rd(), get_reg(ins.rs()) | get_reg(ins.rt()));
 }
 
 /**
@@ -670,38 +623,6 @@ void CPU::LW()
 }
 
 /**
- * @brief Set on Less Than Unsigned
- * 
- * \b References:
- * @ref Instruction::rs
- * @ref Instruction::rt
- * @ref Instruction::rd
- * @ref get_reg
- * @ref set_reg
- * 
- */
-void CPU::SLTU()
-{
-    set_reg(ins.rd(), get_reg(ins.rs()) < get_reg(ins.rt()));
-}
-
-/**
- * @brief Add Unsigned
- * 
- * \b References:
- * @ref Instruction::rs
- * @ref Instruction::rt
- * @ref Instruction::rd
- * @ref get_reg
- * @ref set_reg
- * 
- */
-void CPU::ADDU()
-{
-    set_reg(ins.rd(), get_reg(ins.rs()) + get_reg(ins.rt()));
-}
-
-/**
  * @brief Store Halfword
  * 
  * TODO: Implement Cache
@@ -801,20 +722,6 @@ void CPU::SB()
         offset |= 0xffff0000;
     }
     write8(get_reg(ins.rs()) + offset, get_reg(ins.rt()) & 0xff);
-}
-
-/**
- * @brief Jump Register
- * 
- * \b References:
- * @ref Instruction::rs
- * @ref get_reg
- * 
- */
-void CPU::JR()
-{
-    // std::cout << "Jumped to: " << std::hex << get_reg(ins.rs()) << "\n"; //REMOVE
-    pc = get_reg(ins.rs());
 }
 
 /**
@@ -1216,7 +1123,7 @@ void CPU::SRA()
     uint32_t data = get_reg(ins.rt());
     uint32_t shamt = ins.shamt();
     uint32_t sign_bit = data & 0x80000000;
-    for(int i = 0; i < shamt; i++)
+    for(uint32_t i = 0; i < shamt; i++)
     {
         data >>= 1;
         data |= sign_bit;

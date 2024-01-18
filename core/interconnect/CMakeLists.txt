@@ -1,0 +1,2 @@
+add_library(interconnect bus.cpp)
+target_link_libraries(interconnect PUBLIC compile_options)

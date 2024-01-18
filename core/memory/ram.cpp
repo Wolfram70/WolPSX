@@ -1,7 +1,7 @@
 #include <iostream>
 #include <sstream>
 
-#include "../include/RAM.hpp"
+#include "core/memory/ram.hpp"
 
 /**
  * @brief Construct a new RAM:: RAM object

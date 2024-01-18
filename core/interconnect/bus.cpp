@@ -1,10 +1,10 @@
 #include <iostream>
 #include <sstream>
 
-#include "../include/Bus.hpp"
-#include "../include/BIOS.hpp"
-#include "../include/CPU.hpp"
-#include "../include/RAM.hpp"
+#include "core/interconnect/bus.hpp"
+#include "core/bios/bios.hpp"
+#include "core/cpu/cpu.hpp"
+#include "core/memory/ram.hpp"
 
 /**
  * @brief Construct a new Bus:: Bus object
@@ -276,7 +276,7 @@ void Bus::write16_cpu(uint32_t addr, uint16_t data)
         {
             default:
                 std::stringstream ss;
-                ss << "Unhandled write16 to SPU register: " << addr_og;
+                ss << "Unhandled write16 (" << data << ") to SPU register: " << addr_og;
                 // throw std::runtime_error(ss.str());
                 break;
         }

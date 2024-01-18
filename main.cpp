@@ -1,4 +1,4 @@
-#include "../include/Bus.hpp"
+#include "core/interconnect/bus.hpp"
 
 int main()
 {

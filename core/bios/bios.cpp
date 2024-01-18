@@ -1,6 +1,6 @@
 #include <fstream>
 
-#include "../include/BIOS.hpp"
+#include "core/bios/bios.hpp"
 
 /**
  * @brief Construct a new BIOS:: BIOS object
