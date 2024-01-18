@@ -274,6 +274,18 @@ private:
     uint32_t cop0_cause;
 
 private:
+    void branch(uint32_t offset);
+    void set_reg(uint8_t reg, uint32_t data);
+    uint32_t get_reg(uint8_t reg);
+    void load_regs();
+    void conf_ins_lookup();
+    void conf_mnemonic_lookup();
+
+public:
+    void show_regs();
+    void reset();
+
+private:
     /**
      * @brief Lookup table for instructions
      * 
@@ -363,12 +375,6 @@ private:
     void COP2();
 
     void COP3();
-
-    void branch(uint32_t offset);
-    void set_reg(uint8_t reg, uint32_t data);
-    uint32_t get_reg(uint8_t reg);
-    void load_regs();
-    void show_regs();
 };
 
 #endif
