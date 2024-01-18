@@ -83,19 +83,25 @@ $(function() {
 <p>Class to emulate the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a2fdd8153d0979ccad9ed8452897267f4" id="r_a2fdd8153d0979ccad9ed8452897267f4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2fdd8153d0979ccad9ed8452897267f4">CPU</a> ()</td></tr>
 <tr class="memdesc:a2fdd8153d0979ccad9ed8452897267f4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> object.  <br /></td></tr>
 <tr class="separator:a2fdd8153d0979ccad9ed8452897267f4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a6ad37f139c5c79987fe34c485ae7b79c" id="r_a6ad37f139c5c79987fe34c485ae7b79c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad37f139c5c79987fe34c485ae7b79c">connectBus</a> (<a class="el" href="classBus.html">Bus</a> *bus)</td></tr>
+<tr class="memitem:a6ad37f139c5c79987fe34c485ae7b79c" id="r_a6ad37f139c5c79987fe34c485ae7b79c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6ad37f139c5c79987fe34c485ae7b79c">connectBus</a> (<a class="el" href="classBus.html">Bus</a> *<a class="el" href="#a3c182e18fe91d88405085df7d5b2ec85">bus</a>)</td></tr>
 <tr class="memdesc:a6ad37f139c5c79987fe34c485ae7b79c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Connects <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> to the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>.  <br /></td></tr>
 <tr class="separator:a6ad37f139c5c79987fe34c485ae7b79c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a17c6f0ab00a41d6d3b3e2a94a0eee506" id="r_a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a17c6f0ab00a41d6d3b3e2a94a0eee506">clock</a> ()</td></tr>
 <tr class="memdesc:a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clocks the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> once.  <br /></td></tr>
 <tr class="separator:a17c6f0ab00a41d6d3b3e2a94a0eee506"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa76bead39d037278897e254ab3413b06" id="r_aa76bead39d037278897e254ab3413b06"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aa76bead39d037278897e254ab3413b06">show_regs</a> ()</td></tr>
+<tr class="memdesc:aa76bead39d037278897e254ab3413b06"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shows the values of the registers.  <br /></td></tr>
+<tr class="separator:aa76bead39d037278897e254ab3413b06"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a56cd79f5f27f0528f46582c4fe977278" id="r_a56cd79f5f27f0528f46582c4fe977278"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a56cd79f5f27f0528f46582c4fe977278">reset</a> ()</td></tr>
+<tr class="memdesc:a56cd79f5f27f0528f46582c4fe977278"><td class="mdescLeft">&#160;</td><td class="mdescRight">Resets the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> to its initial state.  <br /></td></tr>
+<tr class="separator:a56cd79f5f27f0528f46582c4fe977278"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-methods" name="pri-methods"></a>
 Private Member Functions</h2></td></tr>
@@ -123,6 +129,24 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a82b230bda021dfcb57afc030a7f0bade" id="r_a82b230bda021dfcb57afc030a7f0bade"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a82b230bda021dfcb57afc030a7f0bade">write8</a> (uint32_t addr, uint8_t data)</td></tr>
 <tr class="memdesc:a82b230bda021dfcb57afc030a7f0bade"><td class="mdescLeft">&#160;</td><td class="mdescRight">Write a 8 bit word to the bus.  <br /></td></tr>
 <tr class="separator:a82b230bda021dfcb57afc030a7f0bade"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a46ff929ffe55c2a5fe0c378a83514224" id="r_a46ff929ffe55c2a5fe0c378a83514224"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> (uint32_t offset)</td></tr>
+<tr class="memdesc:a46ff929ffe55c2a5fe0c378a83514224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branches to the given offset.  <br /></td></tr>
+<tr class="separator:a46ff929ffe55c2a5fe0c378a83514224"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad1650e075b6793c1eb05e3315b98d0c8" id="r_ad1650e075b6793c1eb05e3315b98d0c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> (uint8_t reg, uint32_t data)</td></tr>
+<tr class="memdesc:ad1650e075b6793c1eb05e3315b98d0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the given register from the general purpose registers.  <br /></td></tr>
+<tr class="separator:ad1650e075b6793c1eb05e3315b98d0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad579814ee89c273284768f6a3892f29a" id="r_ad579814ee89c273284768f6a3892f29a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> (uint8_t reg)</td></tr>
+<tr class="memdesc:ad579814ee89c273284768f6a3892f29a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value of the given register from the general purpose registers.  <br /></td></tr>
+<tr class="separator:ad579814ee89c273284768f6a3892f29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7bb77d87e91c256bc57efad6101d39e4" id="r_a7bb77d87e91c256bc57efad6101d39e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7bb77d87e91c256bc57efad6101d39e4">load_regs</a> ()</td></tr>
+<tr class="memdesc:a7bb77d87e91c256bc57efad6101d39e4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads the registers from the load queue.  <br /></td></tr>
+<tr class="separator:a7bb77d87e91c256bc57efad6101d39e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a59c5db865a57ae913cb05994b70c35bd" id="r_a59c5db865a57ae913cb05994b70c35bd"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a59c5db865a57ae913cb05994b70c35bd">conf_ins_lookup</a> ()</td></tr>
+<tr class="memdesc:a59c5db865a57ae913cb05994b70c35bd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the instruction lookup table.  <br /></td></tr>
+<tr class="separator:a59c5db865a57ae913cb05994b70c35bd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a42a33c2a85390dbcedd2c391734d1442" id="r_a42a33c2a85390dbcedd2c391734d1442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a42a33c2a85390dbcedd2c391734d1442">conf_mnemonic_lookup</a> ()</td></tr>
+<tr class="memdesc:a42a33c2a85390dbcedd2c391734d1442"><td class="mdescLeft">&#160;</td><td class="mdescRight">Configures the mnemonic lookup table. (for debugging)  <br /></td></tr>
+<tr class="separator:a42a33c2a85390dbcedd2c391734d1442"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a210bcdcbb2d0c23889f96b9557c70423" id="r_a210bcdcbb2d0c23889f96b9557c70423"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a210bcdcbb2d0c23889f96b9557c70423">LUI</a> ()</td></tr>
 <tr class="memdesc:a210bcdcbb2d0c23889f96b9557c70423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load Upper Immediate.  <br /></td></tr>
 <tr class="separator:a210bcdcbb2d0c23889f96b9557c70423"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -177,6 +201,9 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a5685228e04e2b427ace8235c3cefc750" id="r_a5685228e04e2b427ace8235c3cefc750"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5685228e04e2b427ace8235c3cefc750">SLTI</a> ()</td></tr>
 <tr class="memdesc:a5685228e04e2b427ace8235c3cefc750"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set on Less Than Immediate.  <br /></td></tr>
 <tr class="separator:a5685228e04e2b427ace8235c3cefc750"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0aca1be6b878e268e1da133492b42cf3" id="r_a0aca1be6b878e268e1da133492b42cf3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0aca1be6b878e268e1da133492b42cf3">SLTIU</a> ()</td></tr>
+<tr class="memdesc:a0aca1be6b878e268e1da133492b42cf3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set on Less Than Immediate Unsigned.  <br /></td></tr>
+<tr class="separator:a0aca1be6b878e268e1da133492b42cf3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ae4740bbafaa3e9184c17ead248ba06d3" id="r_ae4740bbafaa3e9184c17ead248ba06d3"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4740bbafaa3e9184c17ead248ba06d3">SPECIAL</a> ()</td></tr>
 <tr class="memdesc:ae4740bbafaa3e9184c17ead248ba06d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up and executes the appropriate SPECIAL instruction.  <br /></td></tr>
 <tr class="separator:ae4740bbafaa3e9184c17ead248ba06d3"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -219,6 +246,15 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:a6d0babdfb866ab3a35681fb4d55742c6" id="r_a6d0babdfb866ab3a35681fb4d55742c6"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a6d0babdfb866ab3a35681fb4d55742c6">SRL</a> ()</td></tr>
 <tr class="memdesc:a6d0babdfb866ab3a35681fb4d55742c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Shift Right Logical.  <br /></td></tr>
 <tr class="separator:a6d0babdfb866ab3a35681fb4d55742c6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a94a8ab880ca57a32fd9fe650e41aa96e" id="r_a94a8ab880ca57a32fd9fe650e41aa96e"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a94a8ab880ca57a32fd9fe650e41aa96e">DIVU</a> ()</td></tr>
+<tr class="memdesc:a94a8ab880ca57a32fd9fe650e41aa96e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Divide Unsigned.  <br /></td></tr>
+<tr class="separator:a94a8ab880ca57a32fd9fe650e41aa96e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2f93f7ff397390e76835a3fc2012663c" id="r_a2f93f7ff397390e76835a3fc2012663c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a2f93f7ff397390e76835a3fc2012663c">MFHI</a> ()</td></tr>
+<tr class="memdesc:a2f93f7ff397390e76835a3fc2012663c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Move From HI.  <br /></td></tr>
+<tr class="separator:a2f93f7ff397390e76835a3fc2012663c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a61fe517bdd59d80e204f891374eed6b8" id="r_a61fe517bdd59d80e204f891374eed6b8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a61fe517bdd59d80e204f891374eed6b8">SLT</a> ()</td></tr>
+<tr class="memdesc:a61fe517bdd59d80e204f891374eed6b8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Set on Less Than.  <br /></td></tr>
+<tr class="separator:a61fe517bdd59d80e204f891374eed6b8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1677b594d237662f305640386eb128b7" id="r_a1677b594d237662f305640386eb128b7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a1677b594d237662f305640386eb128b7">BLGE</a> ()</td></tr>
 <tr class="memdesc:a1677b594d237662f305640386eb128b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Choose between BLTZAL, BGEZAL, BLTZ, BGEZ.  <br /></td></tr>
 <tr class="separator:a1677b594d237662f305640386eb128b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -252,25 +288,15 @@ Private Member Functions</h2></td></tr>
 <tr class="memitem:aee0f5fa66c88346512b9b62cfdd5186f" id="r_aee0f5fa66c88346512b9b62cfdd5186f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aee0f5fa66c88346512b9b62cfdd5186f">COP3</a> ()</td></tr>
 <tr class="memdesc:aee0f5fa66c88346512b9b62cfdd5186f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Looks up and executes the appropriate coprocessor 3 instruction. (UNUSED)  <br /></td></tr>
 <tr class="separator:aee0f5fa66c88346512b9b62cfdd5186f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a46ff929ffe55c2a5fe0c378a83514224" id="r_a46ff929ffe55c2a5fe0c378a83514224"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> (uint32_t offset)</td></tr>
-<tr class="memdesc:a46ff929ffe55c2a5fe0c378a83514224"><td class="mdescLeft">&#160;</td><td class="mdescRight">Branches to the given offset.  <br /></td></tr>
-<tr class="separator:a46ff929ffe55c2a5fe0c378a83514224"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad1650e075b6793c1eb05e3315b98d0c8" id="r_ad1650e075b6793c1eb05e3315b98d0c8"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> (uint8_t reg, uint32_t data)</td></tr>
-<tr class="memdesc:ad1650e075b6793c1eb05e3315b98d0c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the value of the given register from the general purpose registers.  <br /></td></tr>
-<tr class="separator:ad1650e075b6793c1eb05e3315b98d0c8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ad579814ee89c273284768f6a3892f29a" id="r_ad579814ee89c273284768f6a3892f29a"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> (uint8_t reg)</td></tr>
-<tr class="memdesc:ad579814ee89c273284768f6a3892f29a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Gets the value of the given register from the general purpose registers.  <br /></td></tr>
-<tr class="separator:ad579814ee89c273284768f6a3892f29a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5042f5a33ad4cac1f0092d6c546608a7" id="r_a5042f5a33ad4cac1f0092d6c546608a7"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a5042f5a33ad4cac1f0092d6c546608a7">copy_regs</a> ()</td></tr>
-<tr class="memdesc:a5042f5a33ad4cac1f0092d6c546608a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copies the output registers to the input registers.  <br /></td></tr>
-<tr class="separator:a5042f5a33ad4cac1f0092d6c546608a7"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
 <tr class="memitem:a3c182e18fe91d88405085df7d5b2ec85" id="r_a3c182e18fe91d88405085df7d5b2ec85"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classBus.html">Bus</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3c182e18fe91d88405085df7d5b2ec85">bus</a></td></tr>
+<tr class="memdesc:a3c182e18fe91d88405085df7d5b2ec85"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pointer to the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> object.  <br /></td></tr>
 <tr class="separator:a3c182e18fe91d88405085df7d5b2ec85"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ae4e3c73c854a5ee5fc6986be6f8a090d" id="r_ae4e3c73c854a5ee5fc6986be6f8a090d"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structLoadDelay.html">LoadDelay</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae4e3c73c854a5ee5fc6986be6f8a090d">pending_load</a></td></tr>
-<tr class="separator:ae4e3c73c854a5ee5fc6986be6f8a090d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:afbad485c3baa9564fcf147bc6b84fe4d" id="r_afbad485c3baa9564fcf147bc6b84fe4d"><td class="memItemLeft" align="right" valign="top">std::queue&lt; <a class="el" href="structRegisterLoad.html">RegisterLoad</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#afbad485c3baa9564fcf147bc6b84fe4d">load_queue</a></td></tr>
+<tr class="memdesc:afbad485c3baa9564fcf147bc6b84fe4d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Queue to store the loads to the general purpose registers.  <br /></td></tr>
+<tr class="separator:afbad485c3baa9564fcf147bc6b84fe4d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9fcec591aed527ecf591d6b32b9516b7" id="r_a9fcec591aed527ecf591d6b32b9516b7"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a9fcec591aed527ecf591d6b32b9516b7">pc</a> = 0</td></tr>
 <tr class="memdesc:a9fcec591aed527ecf591d6b32b9516b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Program counter.  <br /></td></tr>
 <tr class="separator:a9fcec591aed527ecf591d6b32b9516b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -283,12 +309,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a7af887994d1e35ce0e6df4e9ee45e3fe" id="r_a7af887994d1e35ce0e6df4e9ee45e3fe"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structInstruction.html">Instruction</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7af887994d1e35ce0e6df4e9ee45e3fe">ins</a></td></tr>
 <tr class="memdesc:a7af887994d1e35ce0e6df4e9ee45e3fe"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> in the form of the <a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> structure.  <br /></td></tr>
 <tr class="separator:a7af887994d1e35ce0e6df4e9ee45e3fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a7692478832114105a110e0d3c10f319d" id="r_a7692478832114105a110e0d3c10f319d"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7692478832114105a110e0d3c10f319d">gpreg_in</a> [32] = {0xdeaddeed}</td></tr>
-<tr class="memdesc:a7692478832114105a110e0d3c10f319d"><td class="mdescLeft">&#160;</td><td class="mdescRight">General purpose registers - input set.  <br /></td></tr>
-<tr class="separator:a7692478832114105a110e0d3c10f319d"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a0364018b2bb0be6ba40078c044e55423" id="r_a0364018b2bb0be6ba40078c044e55423"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0364018b2bb0be6ba40078c044e55423">gpreg_out</a> [32] = {0xdeaddeed}</td></tr>
-<tr class="memdesc:a0364018b2bb0be6ba40078c044e55423"><td class="mdescLeft">&#160;</td><td class="mdescRight">General purpose registers - output set.  <br /></td></tr>
-<tr class="separator:a0364018b2bb0be6ba40078c044e55423"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a902c7f0a61b8a6651cb6575107c8176b" id="r_a902c7f0a61b8a6651cb6575107c8176b"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a902c7f0a61b8a6651cb6575107c8176b">regs</a> [32] = {0xdeaddeed}</td></tr>
+<tr class="memdesc:a902c7f0a61b8a6651cb6575107c8176b"><td class="mdescLeft">&#160;</td><td class="mdescRight">General purpose registers.  <br /></td></tr>
+<tr class="separator:a902c7f0a61b8a6651cb6575107c8176b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3b9b71aeece8cb5ed64caad8e6706007" id="r_a3b9b71aeece8cb5ed64caad8e6706007"><td class="memItemLeft" align="right" valign="top">uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3b9b71aeece8cb5ed64caad8e6706007">hi</a> = 0</td></tr>
 <tr class="memdesc:a3b9b71aeece8cb5ed64caad8e6706007"><td class="mdescLeft">&#160;</td><td class="mdescRight">HI register.  <br /></td></tr>
 <tr class="separator:a3b9b71aeece8cb5ed64caad8e6706007"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -328,12 +351,18 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:ac49e2c8d4ecd460c02c00ae88f631d54" id="r_ac49e2c8d4ecd460c02c00ae88f631d54"><td class="memItemLeft" align="right" valign="top">std::map&lt; uint8_t, void(CPU::*)()&gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac49e2c8d4ecd460c02c00ae88f631d54">lookup_cop2</a></td></tr>
 <tr class="memdesc:ac49e2c8d4ecd460c02c00ae88f631d54"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup table for cop1 instructions (opcode = 0b010001)  <br /></td></tr>
 <tr class="separator:ac49e2c8d4ecd460c02c00ae88f631d54"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0145d56a3157ed2370b7d0706a22715a" id="r_a0145d56a3157ed2370b7d0706a22715a"><td class="memItemLeft" align="right" valign="top">std::map&lt; uint8_t, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0145d56a3157ed2370b7d0706a22715a">lookup_mnemonic_op</a></td></tr>
+<tr class="memdesc:a0145d56a3157ed2370b7d0706a22715a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup table for the mnemonics of instructions.  <br /></td></tr>
+<tr class="separator:a0145d56a3157ed2370b7d0706a22715a"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3cf2a5ba64aa63b98e0d5f96445ea2ba" id="r_a3cf2a5ba64aa63b98e0d5f96445ea2ba"><td class="memItemLeft" align="right" valign="top">std::map&lt; uint8_t, std::string &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a3cf2a5ba64aa63b98e0d5f96445ea2ba">lookup_mnemonic_special</a></td></tr>
+<tr class="memdesc:a3cf2a5ba64aa63b98e0d5f96445ea2ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lookup table for the mnemonics of special instructions.  <br /></td></tr>
+<tr class="separator:a3cf2a5ba64aa63b98e0d5f96445ea2ba"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to emulate the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>. </p>
 <p>Implements the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> of the PSX (The MIPS R3000A <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>). </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00127">127</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00144">144</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a2fdd8153d0979ccad9ed8452897267f4" name="a2fdd8153d0979ccad9ed8452897267f4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a2fdd8153d0979ccad9ed8452897267f4">&#9670;&#160;</a></span>CPU()</h2>
@@ -351,9 +380,10 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Construct a new <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> object. </p>
-<p>Sets the initial values of the registers and the initializes the opcode lookup tables. </p>
+<p>Sets the initial values of the registers and the initializes the opcode lookup tables.</p>
+<p><b>References:</b> <a class="el" href="#a56cd79f5f27f0528f46582c4fe977278">reset</a> <a class="el" href="#a59c5db865a57ae913cb05994b70c35bd">conf_ins_lookup</a> <a class="el" href="#a42a33c2a85390dbcedd2c391734d1442">conf_mnemonic_lookup</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00012">12</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8cpp_source.html#l00016">16</a> of file <a class="el" href="cpu_8cpp_source.html">cpu.cpp</a>.</p>
 
 </div>
 </div>
@@ -391,7 +421,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00856">856</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00130">130</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -428,7 +458,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00545">545</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00137">137</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -458,7 +488,7 @@ Private Attributes</h2></td></tr>
 <p>Add Immediate Unsigned. </p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00417">417</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00075">75</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -488,7 +518,7 @@ Private Attributes</h2></td></tr>
 <p>Add Unsigned. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00620">620</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00079">79</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -518,7 +548,7 @@ Private Attributes</h2></td></tr>
 <p>Bitwise AND. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00835">835</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00109">109</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -548,7 +578,7 @@ Private Attributes</h2></td></tr>
 <p>Bitwise AND Immediate. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00686">686</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00248">248</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -578,7 +608,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Equal. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00778">778</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00329">329</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -608,7 +638,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Greater Than or Equal to Zero. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01053">1053</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00508">508</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -638,7 +668,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Greater Than or Equal to Zero And Link. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01074">1074</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00531">531</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -668,7 +698,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Greater Than Zero. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00885">885</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00353">353</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -698,7 +728,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Less Than or Equal to Zero. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00909">909</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00377">377</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -728,7 +758,7 @@ Private Attributes</h2></td></tr>
 <p>Choose between BLTZAL, BGEZAL, BLTZ, BGEZ. </p>
 <p><b>References:</b> <a class="el" href="#a9b0a40c8406eb47535404c49ad688a32">BLTZAL</a> <a class="el" href="#a4b5579398356f707b66dd74c37d9bef3">BGEZAL</a> <a class="el" href="#ae54e1d7a1dfcec00d3373ddeaa59fa7b">BLTZ</a> <a class="el" href="#ad6755f04cc87192a4b78b1b65e5d9357">BGEZ</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00977">977</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00427">427</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -758,7 +788,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Less Than Zero. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01008">1008</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00458">458</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -788,7 +818,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Less Than Zero And Link. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01029">1029</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00481">481</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -818,7 +848,7 @@ Private Attributes</h2></td></tr>
 <p>Branch on Not Equal. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a46ff929ffe55c2a5fe0c378a83514224">branch</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00517">517</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00109">109</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -853,7 +883,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00221">221</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00044">44</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -874,9 +904,67 @@ Private Attributes</h2></td></tr>
 
 <p>Clocks the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> once. </p>
 <p>Executes the load_next_ins and decode_and_execute functions. Implements the load delay by copying the output registers to the input registers after the instruction is executed.</p>
-<p><b>References:</b> <a class="el" href="#a46e0c7d9dfbef53618fddaf9cdbb10fc">load_next_ins</a> <a class="el" href="#ac4a2851f95a8fbc41a6c5b8084d7983a">decode_and_execute</a> <a class="el" href="#a5042f5a33ad4cac1f0092d6c546608a7">copy_regs</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
+<p><b>References:</b> <a class="el" href="#a46e0c7d9dfbef53618fddaf9cdbb10fc">load_next_ins</a> <a class="el" href="#ac4a2851f95a8fbc41a6c5b8084d7983a">decode_and_execute</a> <a class="el" href="#a7bb77d87e91c256bc57efad6101d39e4">load_regs</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00200">200</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8cpp_source.html#l00033">33</a> of file <a class="el" href="cpu_8cpp_source.html">cpu.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a59c5db865a57ae913cb05994b70c35bd" name="a59c5db865a57ae913cb05994b70c35bd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a59c5db865a57ae913cb05994b70c35bd">&#9670;&#160;</a></span>conf_ins_lookup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::conf_ins_lookup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configures the instruction lookup table. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu__conf_8cpp_source.html#l00036">36</a> of file <a class="el" href="cpu__conf_8cpp_source.html">cpu_conf.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a42a33c2a85390dbcedd2c391734d1442" name="a42a33c2a85390dbcedd2c391734d1442"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a42a33c2a85390dbcedd2c391734d1442">&#9670;&#160;</a></span>conf_mnemonic_lookup()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::conf_mnemonic_lookup </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Configures the mnemonic lookup table. (for debugging) </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu__conf_8cpp_source.html#l00090">90</a> of file <a class="el" href="cpu__conf_8cpp_source.html">cpu_conf.cpp</a>.</p>
 
 </div>
 </div>
@@ -911,7 +999,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00138">138</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00155">155</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -946,7 +1034,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00276">276</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__cop0_8cpp_source.html#l00010">10</a> of file <a class="el" href="ins__cop0_8cpp_source.html">ins_cop0.cpp</a>.</p>
 
 </div>
 </div>
@@ -975,7 +1063,7 @@ Private Attributes</h2></td></tr>
 
 <p>Looks up and executes the appropriate coprocessor 1 instruction. (UNUSED) </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00293">293</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8cpp_source.html#l00046">46</a> of file <a class="el" href="cpu_8cpp_source.html">cpu.cpp</a>.</p>
 
 </div>
 </div>
@@ -1004,7 +1092,7 @@ Private Attributes</h2></td></tr>
 
 <p>Looks up and executes the appropriate coprocessor 2 (Graphics) instruction. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00302">302</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__cop2_8cpp_source.html#l00007">7</a> of file <a class="el" href="ins__cop2_8cpp_source.html">ins_cop2.cpp</a>.</p>
 
 </div>
 </div>
@@ -1033,37 +1121,7 @@ Private Attributes</h2></td></tr>
 
 <p>Looks up and executes the appropriate coprocessor 3 instruction. (UNUSED) </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00310">310</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
-
-</div>
-</div>
-<a id="a5042f5a33ad4cac1f0092d6c546608a7" name="a5042f5a33ad4cac1f0092d6c546608a7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5042f5a33ad4cac1f0092d6c546608a7">&#9670;&#160;</a></span>copy_regs()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void CPU::copy_regs </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Copies the output registers to the input registers. </p>
-<p>Used to implement the load delay. </p>
-
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00260">260</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8cpp_source.html#l00055">55</a> of file <a class="el" href="cpu_8cpp_source.html">cpu.cpp</a>.</p>
 
 </div>
 </div>
@@ -1099,7 +1157,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00176">176</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00025">25</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1135,7 +1193,43 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#afde033adb5b1d2e80ddb3764ce8dea02">lo</a> <a class="el" href="#a3b9b71aeece8cb5ed64caad8e6706007">hi</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01161">1161</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00220">220</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a94a8ab880ca57a32fd9fe650e41aa96e" name="a94a8ab880ca57a32fd9fe650e41aa96e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a94a8ab880ca57a32fd9fe650e41aa96e">&#9670;&#160;</a></span>DIVU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::DIVU </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Divide Unsigned. </p>
+<dl class="exception"><dt>Exceptions</dt><dd>
+  <table class="exception">
+    <tr><td class="paramname">std::runtime_error</td><td>if division by zero occurs.</td></tr>
+  </table>
+  </dd>
+</dl>
+<p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#afde033adb5b1d2e80ddb3764ce8dea02">lo</a> <a class="el" href="#a3b9b71aeece8cb5ed64caad8e6706007">hi</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00296">296</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1171,7 +1265,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>uint32_t Value of the register </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00250">250</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00074">74</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1201,7 +1295,7 @@ Private Attributes</h2></td></tr>
 <p>Unconditional Jump. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a667bc4653c7a98d3f69546c919036408">Instruction::addr</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00434">434</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00094">94</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1232,7 +1326,7 @@ Private Attributes</h2></td></tr>
 <p>Stores the address of the next instruction in register 31 and jumps to the address given by the instruction.</p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a667bc4653c7a98d3f69546c919036408">Instruction::addr</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00668">668</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00228">228</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1263,7 +1357,7 @@ Private Attributes</h2></td></tr>
 <p>Use a register (specified by the instruction in rd) to store the address of the next instruction and jump to the address given by the register specified by the instruction in rs.</p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00960">960</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00160">160</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1293,7 +1387,7 @@ Private Attributes</h2></td></tr>
 <p>Jump Register. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00732">732</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00092">92</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1322,9 +1416,9 @@ Private Attributes</h2></td></tr>
 
 <p>Load Byte. </p>
 <p>Sign extends the byte read from memory.</p>
-<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a044be55e407ed2f59d2dddc6d59e8d32">read8</a> <a class="el" href="structLoadDelay.html">LoadDelay</a> </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a044be55e407ed2f59d2dddc6d59e8d32">read8</a> <a class="el" href="structRegisterLoad.html">RegisterLoad</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00751">751</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00301">301</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1353,9 +1447,9 @@ Private Attributes</h2></td></tr>
 
 <p>Load Byte Unsigned. </p>
 <p>Unsigned load. Zero extends the byte read from memory.</p>
-<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a044be55e407ed2f59d2dddc6d59e8d32">read8</a> <a class="el" href="structLoadDelay.html">LoadDelay</a> </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a044be55e407ed2f59d2dddc6d59e8d32">read8</a> <a class="el" href="structRegisterLoad.html">RegisterLoad</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00937">937</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00405">405</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1385,7 +1479,37 @@ Private Attributes</h2></td></tr>
 <p>Load the next instruction into the instruction register. </p>
 <p>Executes a read32 at the address given by the program counter and increments the program counter by 4. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00077">77</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00010">10</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a7bb77d87e91c256bc57efad6101d39e4" name="a7bb77d87e91c256bc57efad6101d39e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7bb77d87e91c256bc57efad6101d39e4">&#9670;&#160;</a></span>load_regs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::load_regs </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Loads the registers from the load queue. </p>
+<p>Decrements the delay of each load in the load queue. If the delay is 0, the data is written to the register. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00085">85</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1415,7 +1539,7 @@ Private Attributes</h2></td></tr>
 <p>Load Upper Immediate. </p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00341">341</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00013">13</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1444,9 +1568,9 @@ Private Attributes</h2></td></tr>
 
 <p>Load Word. </p>
 <p>Sign extends the immediate value read from memory.</p>
-<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a1e166ae7ac2b9e9c22fe5ea3aca9edc2">read32</a> <a class="el" href="structLoadDelay.html">LoadDelay</a> </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a1e166ae7ac2b9e9c22fe5ea3aca9edc2">read32</a> <a class="el" href="structRegisterLoad.html">RegisterLoad</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00581">581</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00173">173</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1480,9 +1604,40 @@ Private Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p><b>References:</b> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> <a class="el" href="#aca3c130b476746cb11f48d55dea52a2f">cop0_cause</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="structLoadDelay.html">LoadDelay</a> </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> <a class="el" href="#aca3c130b476746cb11f48d55dea52a2f">cop0_cause</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="structRegisterLoad.html">RegisterLoad</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00806">806</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__cop0_8cpp_source.html#l00090">90</a> of file <a class="el" href="ins__cop0_8cpp_source.html">ins_cop0.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a2f93f7ff397390e76835a3fc2012663c" name="a2f93f7ff397390e76835a3fc2012663c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2f93f7ff397390e76835a3fc2012663c">&#9670;&#160;</a></span>MFHI()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::MFHI </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Move From HI. </p>
+<p>TODO: Stall until the mul/div is complete.</p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#a3b9b71aeece8cb5ed64caad8e6706007">hi</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00326">326</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1510,9 +1665,10 @@ Private Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Move From LO. </p>
+<p>TODO: Stall until the mul/div is complete.</p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#afde033adb5b1d2e80ddb3764ce8dea02">lo</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01201">1201</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00262">262</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1549,7 +1705,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> <a class="el" href="#aca3c130b476746cb11f48d55dea52a2f">cop0_cause</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00468">468</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__cop0_8cpp_source.html#l00037">37</a> of file <a class="el" href="ins__cop0_8cpp_source.html">ins_cop0.cpp</a>.</p>
 
 </div>
 </div>
@@ -1579,7 +1735,7 @@ Private Attributes</h2></td></tr>
 <p>Bitwise OR. </p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00449">449</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00047">47</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1609,7 +1765,7 @@ Private Attributes</h2></td></tr>
 <p>Bitwise OR Immediate. </p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00355">355</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00027">27</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1646,7 +1802,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>uint16_t Data read from the bus</dd></dl>
 <p><b>References:</b> <a class="el" href="classBus.html#a4801b3d9d03e161bb18703a9d4a61cd0">Bus::read16_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00122">122</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00041">41</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
 
 </div>
 </div>
@@ -1683,7 +1839,7 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>uint32_t Data read from the bus</dd></dl>
 <p><b>References:</b> <a class="el" href="classBus.html#a57c689a11fda317e358d751a1fe5b232">Bus::read32_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00094">94</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00013">13</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
 
 </div>
 </div>
@@ -1720,7 +1876,29 @@ Private Attributes</h2></td></tr>
 <dl class="section return"><dt>Returns</dt><dd>uint8_t Data read from the bus</dd></dl>
 <p><b>References</b> <a class="el" href="classBus.html#af50e85c6235cd848005af1753f5a3477">Bus::read8_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00150">150</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00069">69</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a56cd79f5f27f0528f46582c4fe977278" name="a56cd79f5f27f0528f46582c4fe977278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a56cd79f5f27f0528f46582c4fe977278">&#9670;&#160;</a></span>reset()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::reset </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Resets the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> to its initial state. </p>
+<p>Sets all the general purpose registers (except the zero register) to 0xdeadbeef, the HI and LO registers to 0xdeadbeef, the PC to 0xbfc00000, and the coprocessor 0 registers to 0x00000000. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu__conf_8cpp_source.html#l00009">9</a> of file <a class="el" href="cpu__conf_8cpp_source.html">cpu_conf.cpp</a>.</p>
 
 </div>
 </div>
@@ -1751,7 +1929,7 @@ Private Attributes</h2></td></tr>
 <p>TODO: Implement Cache</p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a82b230bda021dfcb57afc030a7f0bade">write8</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00705">705</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00268">268</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1791,7 +1969,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00238">238</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00061">61</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1822,7 +2000,29 @@ Private Attributes</h2></td></tr>
 <p>TODO: Implement Cache</p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#a1345567cd40a3a662a0e663a67eab439">write16</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00639">639</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00199">199</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
+
+</div>
+</div>
+<a id="aa76bead39d037278897e254ab3413b06" name="aa76bead39d037278897e254ab3413b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa76bead39d037278897e254ab3413b06">&#9670;&#160;</a></span>show_regs()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::show_regs </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Shows the values of the registers. </p>
+<p>Used for debugging. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu__utils_8cpp_source.html#l00106">106</a> of file <a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -1852,7 +2052,37 @@ Private Attributes</h2></td></tr>
 <p>Shift Left Logical. </p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#aec991428bfce571dc4e3ed6f7cf956c8">Instruction::shamt</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00401">401</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00032">32</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a61fe517bdd59d80e204f891374eed6b8" name="a61fe517bdd59d80e204f891374eed6b8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a61fe517bdd59d80e204f891374eed6b8">&#9670;&#160;</a></span>SLT()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::SLT </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set on Less Than. </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00342">342</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1882,7 +2112,37 @@ Private Attributes</h2></td></tr>
 <p>Set on Less Than Immediate. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01099">1099</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00559">559</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
+
+</div>
+</div>
+<a id="a0aca1be6b878e268e1da133492b42cf3" name="a0aca1be6b878e268e1da133492b42cf3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0aca1be6b878e268e1da133492b42cf3">&#9670;&#160;</a></span>SLTIU()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void CPU::SLTIU </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Set on Less Than Immediate Unsigned. </p>
+<p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a5092ee46f43051290b2841aa28ddb211">Instruction::imm</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00581">581</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -1912,7 +2172,7 @@ Private Attributes</h2></td></tr>
 <p>Set on Less Than Unsigned. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00604">604</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00063">63</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1947,7 +2207,7 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00320">320</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00010">10</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -1977,7 +2237,7 @@ Private Attributes</h2></td></tr>
 <p>Shift Right Arithmetic. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#aec991428bfce571dc4e3ed6f7cf956c8">Instruction::shamt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01119">1119</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00178">178</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -2007,7 +2267,7 @@ Private Attributes</h2></td></tr>
 <p>Shift Right Logical. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#aec991428bfce571dc4e3ed6f7cf956c8">Instruction::shamt</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01216">1216</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00277">277</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -2037,7 +2297,7 @@ Private Attributes</h2></td></tr>
 <p>Subtract Unsigned. </p>
 <p><b>References:</b> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#a8902bb0c07fc4a8546fd67d23096a738">Instruction::rd</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l01143">1143</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins__special_8cpp_source.html#l00202">202</a> of file <a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a>.</p>
 
 </div>
 </div>
@@ -2068,7 +2328,7 @@ Private Attributes</h2></td></tr>
 <p>TODO: Implement Cache</p>
 <p><b>References:</b> <a class="el" href="#ad1650e075b6793c1eb05e3315b98d0c8">set_reg</a> <a class="el" href="#ad579814ee89c273284768f6a3892f29a">get_reg</a> write_32 <a class="el" href="structInstruction.html#a5153b174feb9e58b191bd6311e1313e8">Instruction::rt</a> <a class="el" href="structInstruction.html#acee268c67c62aa780def021e1e750fae">Instruction::rs</a> <a class="el" href="#a7b42a1fa27ef9608e3252ecb2a30ed51">cop0_status</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00373">373</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="ins_8cpp_source.html#l00045">45</a> of file <a class="el" href="ins_8cpp_source.html">ins.cpp</a>.</p>
 
 </div>
 </div>
@@ -2109,7 +2369,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References</b> <a class="el" href="classBus.html#ab92c7319231ad7d39a27be51f1272d48">Bus::write16_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00136">136</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00055">55</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
 
 </div>
 </div>
@@ -2150,7 +2410,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classBus.html#a931535ba926927d9b413b04a9fd106f7">Bus::write32_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00108">108</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00027">27</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
 
 </div>
 </div>
@@ -2191,7 +2451,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References</b> <a class="el" href="classBus.html#a793668a14e4a242331ab4fc2568857a8">Bus::write8_cpu</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8cpp_source.html#l00164">164</a> of file <a class="el" href="CPU_8cpp_source.html">CPU.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu__rw_8cpp_source.html#l00083">83</a> of file <a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a>.</p>
 
 </div>
 </div>
@@ -2216,7 +2476,9 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00154">154</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p>Pointer to the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> object. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00175">175</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2243,7 +2505,7 @@ Private Attributes</h2></td></tr>
 <p>COP0 breakpoint exception register (data) </p>
 <p>Generates an exception when address is accessed as a data load/store instead of instruction fetch. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00229">229</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00247">247</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2270,7 +2532,7 @@ Private Attributes</h2></td></tr>
 <p>Bitmask applied to COP0 breakpoint exception register (data) </p>
 <p>Used to trigger exception on a range of addresses. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00243">243</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00261">261</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2297,7 +2559,7 @@ Private Attributes</h2></td></tr>
 <p>COP0 breakpoint exception register. </p>
 <p>Generates an exception when the value of the register is equal to the value of the PC. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00222">222</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00240">240</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2323,7 +2585,7 @@ Private Attributes</h2></td></tr>
 
 <p>Bitmask applied on COP0 breakpoint exception register. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00249">249</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00267">267</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2350,7 +2612,7 @@ Private Attributes</h2></td></tr>
 <p>COP0 cause register. </p>
 <p>Used to store the cause of the exception and is read-only. Apparently only [9:8] bits are writable to force an exception. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00256">256</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00274">274</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2377,7 +2639,7 @@ Private Attributes</h2></td></tr>
 <p>COP0 breakpoint exception register (hardware) </p>
 <p>TODO: Figure out what exactly this does. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00236">236</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00254">254</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2404,61 +2666,7 @@ Private Attributes</h2></td></tr>
 <p>COP0 status register. </p>
 <p>Used to store the status of the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00215">215</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a7692478832114105a110e0d3c10f319d" name="a7692478832114105a110e0d3c10f319d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7692478832114105a110e0d3c10f319d">&#9670;&#160;</a></span>gpreg_in</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t CPU::gpreg_in[32] = {0xdeaddeed}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>General purpose registers - input set. </p>
-<p>Used to store the input values of the general purpose registers for the current instruction. Split into two arrays to implement load delay. </p>
-
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00187">187</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
-
-</div>
-</div>
-<a id="a0364018b2bb0be6ba40078c044e55423" name="a0364018b2bb0be6ba40078c044e55423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0364018b2bb0be6ba40078c044e55423">&#9670;&#160;</a></span>gpreg_out</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">uint32_t CPU::gpreg_out[32] = {0xdeaddeed}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">private</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>General purpose registers - output set. </p>
-<p>Used to store the output values of the general purpose registers for the current instruction. Split into two arrays to implement load delay. </p>
-
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00194">194</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00233">233</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2485,7 +2693,7 @@ Private Attributes</h2></td></tr>
 <p>HI register. </p>
 <p>Used to store the higher 32 bits of the result of multiplication and remainder of division. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00201">201</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00219">219</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2511,7 +2719,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> in the form of the <a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> structure. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00180">180</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00206">206</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2537,7 +2745,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> register. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00168">168</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00194">194</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2563,7 +2771,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structInstruction.html" title="Structure to access different parts of an instruction by value.">Instruction</a> immediately after the current instruction in the memory. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00174">174</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00200">200</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2590,7 +2798,34 @@ Private Attributes</h2></td></tr>
 <p>LO register. </p>
 <p>Used to store the lower 32 bits of the result of multiplication and quotient of division. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00208">208</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00226">226</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
+
+</div>
+</div>
+<a id="afbad485c3baa9564fcf147bc6b84fe4d" name="afbad485c3baa9564fcf147bc6b84fe4d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#afbad485c3baa9564fcf147bc6b84fe4d">&#9670;&#160;</a></span>load_queue</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::queue&lt;<a class="el" href="structRegisterLoad.html">RegisterLoad</a>&gt; CPU::load_queue</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Queue to store the loads to the general purpose registers. </p>
+<p>Used to implement load delay. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00182">182</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2616,7 +2851,7 @@ Private Attributes</h2></td></tr>
 
 <p>Lookup table for cop0 instructions (opcode = 0b010000) </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00275">275</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00305">305</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2642,7 +2877,59 @@ Private Attributes</h2></td></tr>
 
 <p>Lookup table for cop1 instructions (opcode = 0b010001) </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00281">281</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00311">311</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a0145d56a3157ed2370b7d0706a22715a" name="a0145d56a3157ed2370b7d0706a22715a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0145d56a3157ed2370b7d0706a22715a">&#9670;&#160;</a></span>lookup_mnemonic_op</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;uint8_t, std::string&gt; CPU::lookup_mnemonic_op</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lookup table for the mnemonics of instructions. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00317">317</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a3cf2a5ba64aa63b98e0d5f96445ea2ba" name="a3cf2a5ba64aa63b98e0d5f96445ea2ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a3cf2a5ba64aa63b98e0d5f96445ea2ba">&#9670;&#160;</a></span>lookup_mnemonic_special</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">std::map&lt;uint8_t, std::string&gt; CPU::lookup_mnemonic_special</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Lookup table for the mnemonics of special instructions. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00323">323</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2668,7 +2955,7 @@ Private Attributes</h2></td></tr>
 
 <p>Lookup table for instructions. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00263">263</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00293">293</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2694,7 +2981,7 @@ Private Attributes</h2></td></tr>
 
 <p>Lookup table for special instructions (opcode = 0b000000) </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00269">269</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00299">299</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
@@ -2720,12 +3007,12 @@ Private Attributes</h2></td></tr>
 
 <p>Program counter. </p>
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00162">162</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00188">188</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
-<a id="ae4e3c73c854a5ee5fc6986be6f8a090d" name="ae4e3c73c854a5ee5fc6986be6f8a090d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae4e3c73c854a5ee5fc6986be6f8a090d">&#9670;&#160;</a></span>pending_load</h2>
+<a id="a902c7f0a61b8a6651cb6575107c8176b" name="a902c7f0a61b8a6651cb6575107c8176b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a902c7f0a61b8a6651cb6575107c8176b">&#9670;&#160;</a></span>regs</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2734,7 +3021,7 @@ Private Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structLoadDelay.html">LoadDelay</a> CPU::pending_load</td>
+          <td class="memname">uint32_t CPU::regs[32] = {0xdeaddeed}</td>
         </tr>
       </table>
   </td>
@@ -2744,13 +3031,22 @@ Private Attributes</h2></td></tr>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="CPU_8hpp_source.html#l00156">156</a> of file <a class="el" href="CPU_8hpp_source.html">CPU.hpp</a>.</p>
+<p>General purpose registers. </p>
+
+<p class="definition">Definition at line <a class="el" href="cpu_8hpp_source.html#l00212">212</a> of file <a class="el" href="cpu_8hpp_source.html">cpu.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="CPU_8hpp_source.html">CPU.hpp</a></li>
-<li>src/<a class="el" href="CPU_8cpp_source.html">CPU.cpp</a></li>
+<li>include/core/cpu/<a class="el" href="cpu_8hpp_source.html">cpu.hpp</a></li>
+<li>core/cpu/<a class="el" href="cpu_8cpp_source.html">cpu.cpp</a></li>
+<li>core/cpu/<a class="el" href="cpu__conf_8cpp_source.html">cpu_conf.cpp</a></li>
+<li>core/cpu/<a class="el" href="cpu__rw_8cpp_source.html">cpu_rw.cpp</a></li>
+<li>core/cpu/<a class="el" href="cpu__utils_8cpp_source.html">cpu_utils.cpp</a></li>
+<li>core/cpu/<a class="el" href="ins_8cpp_source.html">ins.cpp</a></li>
+<li>core/cpu/<a class="el" href="ins__cop0_8cpp_source.html">ins_cop0.cpp</a></li>
+<li>core/cpu/<a class="el" href="ins__cop2_8cpp_source.html">ins_cop2.cpp</a></li>
+<li>core/cpu/<a class="el" href="ins__special_8cpp_source.html">ins_special.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

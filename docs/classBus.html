@@ -83,7 +83,7 @@ $(function() {
 <p>Class to implement the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a>.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;<a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>&gt;</code></p>
+<p><code>#include &lt;<a class="el" href="bus_8hpp_source.html">bus.hpp</a>&gt;</code></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
@@ -156,12 +156,15 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:ae967bce4643d2319c1e95fc8ec4848f5" id="r_ae967bce4643d2319c1e95fc8ec4848f5"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRange.html">Range</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ae967bce4643d2319c1e95fc8ec4848f5">interrupt_range</a> = <a class="el" href="structRange.html">Range</a>(INTERRUPT_RANGE)</td></tr>
 <tr class="memdesc:ae967bce4643d2319c1e95fc8ec4848f5"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Interrupt Registers.  <br /></td></tr>
 <tr class="separator:ae967bce4643d2319c1e95fc8ec4848f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a60a1d9081efb7a20a1dc2409288cde32" id="r_a60a1d9081efb7a20a1dc2409288cde32"><td class="memItemLeft" align="right" valign="top"><a class="el" href="structRange.html">Range</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a60a1d9081efb7a20a1dc2409288cde32">timer_range</a> = <a class="el" href="structRange.html">Range</a>(TIMER_RANGE)</td></tr>
+<tr class="memdesc:a60a1d9081efb7a20a1dc2409288cde32"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Timer Registers.  <br /></td></tr>
+<tr class="separator:a60a1d9081efb7a20a1dc2409288cde32"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Class to implement the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a>. </p>
 <p>Implements the <a class="el" href="classBus.html" title="Class to implement the Bus.">Bus</a> of the PSX. This is the central class that glues all the other components together. All communication between components (classes) is done through this class. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00076">76</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00077">77</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a5bc8704e522e9cfabf534176c51d9e1e" name="a5bc8704e522e9cfabf534176c51d9e1e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a5bc8704e522e9cfabf534176c51d9e1e">&#9670;&#160;</a></span>Bus()</h2>
@@ -187,7 +190,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classCPU.html#a2fdd8153d0979ccad9ed8452897267f4">CPU::CPU</a> <a class="el" href="classBIOS.html#afb60e7b997c15283e2e2fb350ff69ba3">BIOS::BIOS</a> <a class="el" href="classRAM.html#a5f1b2ae8fceb690e83e3d8a1c4a6c815">RAM::RAM</a> <a class="el" href="classCPU.html#a6ad37f139c5c79987fe34c485ae7b79c">CPU::connectBus</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00020">20</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00020">20</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -211,7 +214,7 @@ Private Attributes</h2></td></tr>
 <p>Clocks all the components of the PSX and serves as a synchronization point between the components.</p>
 <p><a class="el" href="classCPU.html#a17c6f0ab00a41d6d3b3e2a94a0eee506">CPU::clock</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00374">374</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus__utils_8cpp_source.html#l00047">47</a> of file <a class="el" href="bus__utils_8cpp_source.html">bus_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -248,7 +251,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00216">216</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00186">186</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -285,7 +288,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classBIOS.html#a057ca25d68cfb358a3ed7854d6158d48">BIOS::read32_cpu</a> <a class="el" href="classRAM.html#aa264b5558db9db5989df0a89b461be26">RAM::read32_cpu</a> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00083">83</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00047">47</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -321,7 +324,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classBIOS.html#a057ca25d68cfb358a3ed7854d6158d48">BIOS::read32_cpu</a> <a class="el" href="classRAM.html#ac99e7c10c07be06ac9045da26312baeb">RAM::read8_cpu</a> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00304">304</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00281">281</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -368,7 +371,7 @@ Private Attributes</h2></td></tr>
 </li>
 </ul>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00040">40</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus__utils_8cpp_source.html#l00015">15</a> of file <a class="el" href="bus__utils_8cpp_source.html">bus_utils.cpp</a>.</p>
 
 </div>
 </div>
@@ -409,7 +412,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00252">252</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00222">222</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -451,7 +454,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classRAM.html#a3ae25b3beb7a4022937f84b70e6054dd">RAM::write32_cpu</a> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00130">130</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00100">100</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -491,7 +494,7 @@ Private Attributes</h2></td></tr>
 </dl>
 <p><b>References:</b> <a class="el" href="classRAM.html#a03bc4179804dae073d37b62b7c6f8fef">RAM::write8_cpu</a> <a class="el" href="structRange.html#a89361f5228f180cb5ec8a32f709c9c01">Range::contains</a> <a class="el" href="structRange.html#a8f74c8b25411a39b548e41e350fe4426">Range::offset</a> <a class="el" href="#a7decce8fc10e20f54fc2cbaf270633fd">region_mask</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8cpp_source.html#l00346">346</a> of file <a class="el" href="Bus_8cpp_source.html">Bus.cpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8cpp_source.html#l00323">323</a> of file <a class="el" href="bus_8cpp_source.html">bus.cpp</a>.</p>
 
 </div>
 </div>
@@ -518,7 +521,7 @@ Private Attributes</h2></td></tr>
 
 <p>Pointer to the <a class="el" href="classBIOS.html" title="Class to emulate the BIOS.">BIOS</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00106">106</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00107">107</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -544,7 +547,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the <a class="el" href="classBIOS.html" title="Class to emulate the BIOS.">BIOS</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00118">118</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00119">119</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -570,7 +573,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Cache Control Register. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00136">136</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00137">137</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -596,7 +599,7 @@ Private Attributes</h2></td></tr>
 
 <p>Pointer to the <a class="el" href="classCPU.html" title="Class to emulate the CPU.">CPU</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00100">100</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00101">101</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -622,7 +625,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Expansion 1. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00160">160</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00161">161</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -648,7 +651,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Expansion 2. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00154">154</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00155">155</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -674,7 +677,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Interrupt Registers. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00166">166</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00167">167</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -700,7 +703,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Memory Control Registers. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00124">124</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00125">125</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -726,7 +729,7 @@ Private Attributes</h2></td></tr>
 
 <p>Pointer to the <a class="el" href="classRAM.html" title="Class to emulate the RAM.">RAM</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00112">112</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00113">113</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -752,7 +755,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the <a class="el" href="classRAM.html" title="Class to emulate the RAM.">RAM</a>. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00142">142</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00143">143</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -778,7 +781,7 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the <a class="el" href="classRAM.html" title="Class to emulate the RAM.">RAM</a> Size Register. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00130">130</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00131">131</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
@@ -804,13 +807,40 @@ Private Attributes</h2></td></tr>
 
 <p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the SPU (Sound Processing Unit) Registers. </p>
 
-<p class="definition">Definition at line <a class="el" href="Bus_8hpp_source.html#l00148">148</a> of file <a class="el" href="Bus_8hpp_source.html">Bus.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00149">149</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
+
+</div>
+</div>
+<a id="a60a1d9081efb7a20a1dc2409288cde32" name="a60a1d9081efb7a20a1dc2409288cde32"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a60a1d9081efb7a20a1dc2409288cde32">&#9670;&#160;</a></span>timer_range</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structRange.html">Range</a> Bus::timer_range = <a class="el" href="structRange.html">Range</a>(TIMER_RANGE)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structRange.html" title="Structure to store a range of addresses to allow easy checking.">Range</a> of the Timer Registers. </p>
+
+<p class="definition">Definition at line <a class="el" href="bus_8hpp_source.html#l00173">173</a> of file <a class="el" href="bus_8hpp_source.html">bus.hpp</a>.</p>
 
 </div>
 </div>
 <hr/>The documentation for this class was generated from the following files:<ul>
-<li>include/<a class="el" href="Bus_8hpp_source.html">Bus.hpp</a></li>
-<li>src/<a class="el" href="Bus_8cpp_source.html">Bus.cpp</a></li>
+<li>include/core/interconnect/<a class="el" href="bus_8hpp_source.html">bus.hpp</a></li>
+<li>core/interconnect/<a class="el" href="bus_8cpp_source.html">bus.cpp</a></li>
+<li>core/interconnect/<a class="el" href="bus__utils_8cpp_source.html">bus_utils.cpp</a></li>
 </ul>
 </div><!-- contents -->
 <!-- start footer part -->

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['mem_5fctrl_5frange_0',['mem_ctrl_range',['../classBus.html#a0b548cb5a9010706996d1a48e6932deb',1,'Bus']]]
+  ['pc_0',['pc',['../classCPU.html#a9fcec591aed527ecf591d6b32b9516b7',1,'CPU']]]
 ];

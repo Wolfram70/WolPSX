@@ -13,5 +13,7 @@ var searchData=
   ['bltzal_10',['BLTZAL',['../classCPU.html#a9b0a40c8406eb47535404c49ad688a32',1,'CPU']]],
   ['bne_11',['BNE',['../classCPU.html#aae1a08849a33a7115a4ea55f087b27d5',1,'CPU']]],
   ['branch_12',['branch',['../classCPU.html#a46ff929ffe55c2a5fe0c378a83514224',1,'CPU']]],
-  ['bus_13',['Bus',['../classBus.html',1,'Bus'],['../classBus.html#a5bc8704e522e9cfabf534176c51d9e1e',1,'Bus::Bus()']]]
+  ['bus_13',['Bus',['../classBus.html',1,'']]],
+  ['bus_14',['bus',['../classCPU.html#a3c182e18fe91d88405085df7d5b2ec85',1,'CPU']]],
+  ['bus_15',['Bus',['../classBus.html#a5bc8704e522e9cfabf534176c51d9e1e',1,'Bus']]]
 ];
