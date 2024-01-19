@@ -150,3 +150,34 @@ CPUState* CPU::get_state()
 
     cpu_state->load_queue = load_queue;
 }
+
+/**
+ * @brief Sets the state of the CPU from a CPUState object.
+ * 
+ * @param cpu_state CPUState object to set the state from
+ */
+void CPU::set_state(CPUState* cpu_state)
+{
+    for(int i = 0; i < 32; i++)
+    {
+        regs[i] = cpu_state->reg_gen[i];
+    }
+    hi = cpu_state->reg_hi;
+    lo = cpu_state->reg_lo;
+
+    pc = cpu_state->program_counter;
+
+    cop0_status = cpu_state->reg_cop0_status;
+    cop0_bda = cpu_state->reg_cop0_bda;
+    cop0_bpc = cpu_state->reg_cop0_bpc;
+    cop0_dcic = cpu_state->reg_cop0_dcic;
+    cop0_bdam = cpu_state->reg_cop0_bdam;
+    cop0_bpcm = cpu_state->reg_cop0_bpcm;
+    cop0_cause = cpu_state->reg_cop0_cause;
+
+    ins = cpu_state->ins_current;
+    ir = ins.ins;
+    ir_next = cpu_state->ins_next.ins;
+
+    load_queue = cpu_state->load_queue;
+}
