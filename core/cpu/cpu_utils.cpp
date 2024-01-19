@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <core/cpu/cpu.hpp>
+#include <queue>
 
 /**
  * @brief Load the next instruction into the instruction register
@@ -114,4 +115,38 @@ void CPU::show_regs()
     }
     std::cout << "HI: " << std::hex << hi << "\tLO: " << std::hex << lo << "\n";
 
+}
+
+/**
+ * @brief Returns the state of the CPU as a CPUState object.
+ * 
+ * Ownership of the returned object is transferred to the caller.
+ * 
+ * @return CPUState* 
+ */
+CPUState* CPU::get_state()
+{
+    CPUState* cpu_state = new CPUState();
+
+    for(int i = 0; i < 32; i++)
+    {
+        cpu_state->reg_gen[i] = regs[i];
+    }
+    cpu_state->reg_hi = hi;
+    cpu_state->reg_lo = lo;
+
+    cpu_state->program_counter = pc;
+    
+    cpu_state->reg_cop0_status = cop0_status;
+    cpu_state->reg_cop0_bda = cop0_bda;
+    cpu_state->reg_cop0_bpc = cop0_bpc;
+    cpu_state->reg_cop0_dcic = cop0_dcic;
+    cpu_state->reg_cop0_bdam = cop0_bdam;
+    cpu_state->reg_cop0_bpcm = cop0_bpcm;
+    cpu_state->reg_cop0_cause = cop0_cause;
+
+    cpu_state->ins_current = ins;
+    cpu_state->ins_next = Instruction(ir_next);
+
+    cpu_state->load_queue = load_queue;
 }
