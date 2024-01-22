@@ -311,6 +311,7 @@ public:
     void reset();
     CPUState* get_state();
     void set_state(CPUState* cpu_state);
+    void clock_nofetch();
 
 private:
     /**

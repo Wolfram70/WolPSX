@@ -149,6 +149,8 @@ CPUState* CPU::get_state()
     cpu_state->ins_next = Instruction(ir_next);
 
     cpu_state->load_queue = load_queue;
+
+    return cpu_state;
 }
 
 /**
@@ -180,4 +182,15 @@ void CPU::set_state(CPUState* cpu_state)
     ir_next = cpu_state->ins_next.ins;
 
     load_queue = cpu_state->load_queue;
+}
+
+/**
+ * @brief Clocks the CPU without fetching the next instruction.
+ * 
+ * Used for debugging and testing purposes.
+ */
+void CPU::clock_nofetch()
+{
+    decode_and_execute();
+    load_regs();
 }
