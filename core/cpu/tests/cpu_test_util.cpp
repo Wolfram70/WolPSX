@@ -141,17 +141,3 @@ int RWLog::size()
 {
     return log.size();
 }
-
-//REMOVE
-
-#include <core/cpu/cpu.hpp>
-#include <iostream>
-
-int main()
-{
-    CPU cpu;
-    cpu.reset();
-    cpu.show_regs();
-    std::cout << RWLog::get_instance()->get_read_count() << std::endl;
-    return 0;
-}
