@@ -124,10 +124,8 @@ void CPU::show_regs()
  * 
  * @return CPUState* 
  */
-CPUState* CPU::get_state()
+CPUState* CPU::get_state(CPUState* cpu_state)
 {
-    CPUState* cpu_state = new CPUState();
-
     for(int i = 0; i < 32; i++)
     {
         cpu_state->reg_gen[i] = regs[i];

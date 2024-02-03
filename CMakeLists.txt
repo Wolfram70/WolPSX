@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 3.15)
 
 project(WolPSX)
 
+enable_testing()
+
 add_library(compile_options INTERFACE)
 target_compile_features(compile_options INTERFACE cxx_std_17)
 target_include_directories(compile_options INTERFACE include)

@@ -309,7 +309,7 @@ private:
 public:
     void show_regs();
     void reset();
-    CPUState* get_state();
+    CPUState* get_state(CPUState* cpu_state);
     void set_state(CPUState* cpu_state);
     void clock_nofetch();
 
