@@ -137,6 +137,31 @@ struct RegisterLoad
 };
 
 /**
+ * @brief Structure to store and transfer the state of the CPU for debugging purposes.
+ * 
+ * All the register values, instruction details and load queue are stored in this structure.
+ */
+struct CPUState
+{
+    uint32_t reg_gen[32];
+    uint32_t reg_hi;
+    uint32_t reg_lo;
+    uint32_t program_counter;
+    uint32_t reg_cop0_status;
+    uint32_t reg_cop0_bda;
+    uint32_t reg_cop0_bpc;
+    uint32_t reg_cop0_dcic;
+    uint32_t reg_cop0_bdam;
+    uint32_t reg_cop0_bpcm;
+    uint32_t reg_cop0_cause;
+
+    Instruction ins_current;
+    Instruction ins_next;
+
+    std::queue<RegisterLoad> load_queue;
+};
+
+/**
  * @brief Class to emulate the CPU.
  * 
  * Implements the CPU of the PSX (The MIPS R3000A CPU).
@@ -284,6 +309,9 @@ private:
 public:
     void show_regs();
     void reset();
+    CPUState* get_state(CPUState* cpu_state);
+    void set_state(CPUState* cpu_state);
+    void clock_nofetch();
 
 private:
     /**

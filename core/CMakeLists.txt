@@ -11,5 +11,3 @@ target_link_libraries(core INTERFACE
     cpu
     memory
 )
-
-target_link_libraries(core INTERFACE compile_options)

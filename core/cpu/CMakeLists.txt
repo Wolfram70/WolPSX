@@ -19,5 +19,7 @@ add_library(cpu_nrw
         cpu_utils.cpp
 )
 
-target_link_libraries(cpu PUBLIC compile_options)
-target_link_libraries(cpu_nrw PUBLIC compile_options)
+target_link_libraries(cpu PRIVATE compile_options)
+target_link_libraries(cpu_nrw PRIVATE compile_options)
+
+add_subdirectory(tests)

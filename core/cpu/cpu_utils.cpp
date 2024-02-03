@@ -1,6 +1,7 @@
 #include <iostream>
 #include <sstream>
 #include <core/cpu/cpu.hpp>
+#include <queue>
 
 /**
  * @brief Load the next instruction into the instruction register
@@ -114,4 +115,80 @@ void CPU::show_regs()
     }
     std::cout << "HI: " << std::hex << hi << "\tLO: " << std::hex << lo << "\n";
 
+}
+
+/**
+ * @brief Returns the state of the CPU as a CPUState object.
+ * 
+ * Ownership of the returned object is transferred to the caller.
+ * 
+ * @return CPUState* 
+ */
+CPUState* CPU::get_state(CPUState* cpu_state)
+{
+    for(int i = 0; i < 32; i++)
+    {
+        cpu_state->reg_gen[i] = regs[i];
+    }
+    cpu_state->reg_hi = hi;
+    cpu_state->reg_lo = lo;
+
+    cpu_state->program_counter = pc;
+    
+    cpu_state->reg_cop0_status = cop0_status;
+    cpu_state->reg_cop0_bda = cop0_bda;
+    cpu_state->reg_cop0_bpc = cop0_bpc;
+    cpu_state->reg_cop0_dcic = cop0_dcic;
+    cpu_state->reg_cop0_bdam = cop0_bdam;
+    cpu_state->reg_cop0_bpcm = cop0_bpcm;
+    cpu_state->reg_cop0_cause = cop0_cause;
+
+    cpu_state->ins_current = ins;
+    cpu_state->ins_next = Instruction(ir_next);
+
+    cpu_state->load_queue = load_queue;
+
+    return cpu_state;
+}
+
+/**
+ * @brief Sets the state of the CPU from a CPUState object.
+ * 
+ * @param cpu_state CPUState object to set the state from
+ */
+void CPU::set_state(CPUState* cpu_state)
+{
+    for(int i = 0; i < 32; i++)
+    {
+        regs[i] = cpu_state->reg_gen[i];
+    }
+    hi = cpu_state->reg_hi;
+    lo = cpu_state->reg_lo;
+
+    pc = cpu_state->program_counter;
+
+    cop0_status = cpu_state->reg_cop0_status;
+    cop0_bda = cpu_state->reg_cop0_bda;
+    cop0_bpc = cpu_state->reg_cop0_bpc;
+    cop0_dcic = cpu_state->reg_cop0_dcic;
+    cop0_bdam = cpu_state->reg_cop0_bdam;
+    cop0_bpcm = cpu_state->reg_cop0_bpcm;
+    cop0_cause = cpu_state->reg_cop0_cause;
+
+    ins = cpu_state->ins_current;
+    ir = ins.ins;
+    ir_next = cpu_state->ins_next.ins;
+
+    load_queue = cpu_state->load_queue;
+}
+
+/**
+ * @brief Clocks the CPU without fetching the next instruction.
+ * 
+ * Used for debugging and testing purposes.
+ */
+void CPU::clock_nofetch()
+{
+    decode_and_execute();
+    load_regs();
 }
